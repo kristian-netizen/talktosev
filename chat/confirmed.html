@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat confirmed · Talk to Sev</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,400&family=Caveat:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles-v2.css">
+
+<style>
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    max-width: 560px;
+    width: 100%;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--ink);
+    padding: 48px 36px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .checkmark {
+    width: 76px;
+    height: 76px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    box-shadow: 4px 4px 0 var(--red);
+  }
+  .checkmark svg { stroke: var(--ink); }
+  .eyebrow {
+    display: inline-flex;
+    justify-content: center;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  p {
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  p strong { color: var(--ink); font-weight: 700; }
+  p + p { margin-top: 14px; }
+  .next-steps {
+    margin: 32px 0 24px;
+    padding: 24px;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    text-align: left;
+  }
+  .next-steps h2 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  .next-steps ul { list-style: none; padding: 0; margin: 0; }
+  .next-steps li {
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.55;
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .next-steps li:last-child { margin-bottom: 0; }
+  .next-steps li::before {
+    content: '→';
+    color: var(--red);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+  .small-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+  .small-note a {
+    color: var(--red);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .home-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .home-link:hover { color: var(--red); border-bottom-color: var(--red); }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="card">
+  <div class="checkmark">
+    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  </div>
+  <div class="eyebrow" id="eyebrow">Free intro call</div>
+  <h1 id="title">Chat locked in.<br>See you soon.</h1>
+  <p>Your slot is confirmed. A calendar invite with the Google Meet link is on its way to your inbox right now.</p>
+
+  <div class="next-steps">
+    <h2>What happens next</h2>
+    <ul>
+      <li>Calendar invite + Google Meet link land in your inbox in the next minute.</li>
+      <li>Sev's confirmation email follows with the session details.</li>
+      <li>Need to reschedule or cancel? Just reply to that email — at least 24 hours before would be amazing.</li>
+    </ul>
+  </div>
+
+  <p class="small-note">
+    Didn't get the emails after a minute or two? Check spam, or message Sev at <a href="mailto:sev@sevspics.com">sev@sevspics.com</a>.
+  </p>
+
+  <a href="/" class="home-link">← Back to talktosev.com</a>
+</div>
+
+<script>
+  // Adapt copy based on ?type=intro|quick
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get('type');
+  if (type === 'quick') {
+    document.getElementById('eyebrow').textContent = 'Free quick chat';
+    document.getElementById('title').innerHTML = 'Quick chat locked in.<br>See you soon.';
+    document.title = 'Quick chat confirmed · Talk to Sev';
+  }
+</script>
+</body>
+</html>

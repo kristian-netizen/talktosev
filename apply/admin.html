@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply · Admin · Talk To Sev</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-0: #0a0a0a;
+  --bg-1: #111111;
+  --bg-2: #161616;
+  --bg-3: #1f1f1f;
+  --fg-0: #ffffff;
+  --fg-1: #e8e8e8;
+  --fg-2: #8a8a8a;
+  --fg-3: #5a5a5a;
+  --accent: #f5a524;
+  --accent-dim: #c88a1f;
+  --green: #4ade80;
+  --orange: #fb923c;
+  --border: #1d1d1d;
+  --border-strong: #2a2a2a;
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Monaco, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg-0);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, textarea, select { font-family: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ============================================================ */
+/* Header                                                       */
+/* ============================================================ */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: var(--bg-0);
+  z-index: 10;
+}
+.site-header .brand {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-0);
+  font-size: 0.85rem;
+}
+.site-header .brand::after { content: "."; color: var(--accent); }
+.site-header .crumb {
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-left: 8px;
+}
+.site-header .right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--fg-2);
+  font-size: 0.85rem;
+}
+.site-header button.logout {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--fg-2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.site-header button.logout:hover { color: var(--fg-0); border-color: var(--fg-2); }
+
+/* ============================================================ */
+/* Login screen                                                 */
+/* ============================================================ */
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 24px;
+}
+.login-card {
+  max-width: 420px;
+  width: 100%;
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 36px 32px;
+  text-align: center;
+}
+.login-card h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--fg-0);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.login-card p {
+  color: var(--fg-2);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+.login-card input {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-0);
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  outline: none;
+}
+.login-card input:focus { border-color: var(--accent); }
+.login-card button {
+  width: 100%;
+  background: var(--accent);
+  color: #1a1100;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.login-card button:hover { background: #ffb742; }
+.login-card button:disabled { opacity: 0.5; cursor: not-allowed; }
+.login-msg {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--fg-2);
+}
+.login-msg.ok { color: var(--green); }
+.login-msg.err { color: #ef4444; }
+
+/* ============================================================ */
+/* Dashboard layout                                             */
+/* ============================================================ */
+
+.dash {
+  display: none;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.dash.is-visible { display: block; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.stat-card .label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 4px;
+}
+.stat-card .value {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--fg-0);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.stat-card .sub {
+  font-size: 0.78rem;
+  color: var(--fg-2);
+  margin-top: 4px;
+}
+.stat-card.accent .value { color: var(--accent); }
+.stat-card.green .value { color: var(--green); }
+.stat-card.orange .value { color: var(--orange); }
+
+/* Insights row */
+.insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.insight-card {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.insight-card h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+}
+.bar-row:last-child { margin-bottom: 0; }
+.bar-label {
+  flex: 1;
+  color: var(--fg-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bar-track {
+  flex: 1.2;
+  height: 6px;
+  background: var(--bg-2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.bar-count {
+  width: 38px;
+  text-align: right;
+  font-family: var(--font-mono);
+  color: var(--fg-2);
+  font-size: 0.82rem;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.toolbar input.search {
+  flex: 1;
+  min-width: 220px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-0);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+.toolbar input.search:focus { border-color: var(--accent); }
+.filters {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-1);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+}
+.filters button {
+  background: transparent;
+  border: none;
+  color: var(--fg-2);
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.filters button.is-active {
+  background: var(--bg-3);
+  color: var(--fg-0);
+}
+.filters button:hover:not(.is-active) { color: var(--fg-1); }
+.toolbar .btn-export {
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-1);
+  padding: 9px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.toolbar .btn-export:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Table */
+.leads-wrap {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.leads-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.leads-table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  border-bottom: 1px solid var(--border-strong);
+  background: var(--bg-1);
+  white-space: nowrap;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+.leads-table thead th:hover { color: var(--fg-1); }
+.leads-table thead th .sort {
+  margin-left: 4px;
+  color: var(--fg-3);
+}
+.leads-table thead th.is-sorted .sort { color: var(--accent); }
+.leads-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.leads-table tbody tr:hover { background: var(--bg-2); }
+.leads-table tbody tr:last-child { border-bottom: none; }
+.leads-table td {
+  padding: 12px 14px;
+  vertical-align: middle;
+  color: var(--fg-1);
+}
+.leads-table td.name { color: var(--fg-0); font-weight: 500; }
+.leads-table td.date { color: var(--fg-2); font-family: var(--font-mono); font-size: 0.82rem; white-space: nowrap; }
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 11px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.badge.qualified { background: rgba(74, 222, 128, 0.13); color: var(--green); }
+.badge.nurture   { background: rgba(245, 165, 36, 0.13); color: var(--accent); }
+.badge.contacted { background: rgba(138, 138, 138, 0.13); color: var(--fg-2); }
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--fg-3);
+}
+
+/* Detail drawer */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 50;
+  display: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.drawer-backdrop.is-open { display: block; opacity: 1; }
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(540px, 100vw);
+  background: var(--bg-1);
+  border-left: 1px solid var(--border-strong);
+  z-index: 51;
+  transform: translateX(100%);
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+.drawer.is-open { transform: translateX(0); }
+.drawer .head {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.drawer .head h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--fg-0);
+  letter-spacing: -0.02em;
+}
+.drawer .head .close {
+  background: transparent;
+  border: none;
+  color: var(--fg-2);
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+}
+.drawer .head .close:hover { color: var(--fg-0); }
+.drawer .body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+.drawer .row {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer .row:last-child { border-bottom: none; }
+.drawer .row .lbl {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 5px;
+}
+.drawer .row .val {
+  color: var(--fg-0);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+.drawer .row .val a { color: var(--accent); }
+.drawer .row.contact-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.drawer .row.contact-actions a {
+  flex: 1;
+  text-align: center;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-1);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+.drawer .row.contact-actions a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.drawer .footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.drawer .footer button {
+  flex: 1;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-1);
+  padding: 10px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.86rem;
+}
+.drawer .footer button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.drawer textarea.notes {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-0);
+  padding: 10px 12px;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+}
+.drawer textarea.notes:focus { border-color: var(--accent); }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .leads-table thead th.hide-sm, .leads-table td.hide-sm { display: none; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .dash { padding: 14px; }
+  .site-header { padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <span class="brand">Talk To Sev</span>
+    <span class="crumb">/ apply / admin</span>
+  </div>
+  <div class="right" id="header-right">
+    <!-- email + logout button injected when authed -->
+  </div>
+</header>
+
+<!-- Login -->
+<section class="login" id="login">
+  <div class="login-card">
+    <h1>Admin sign-in</h1>
+    <p>Enter your email — you'll get a magic link to sign in.</p>
+    <form id="login-form">
+      <input type="email" id="login-email" placeholder="sev@sevspics.com" autocomplete="email" required>
+      <button type="submit" id="login-btn">Send magic link</button>
+    </form>
+    <p class="login-msg" id="login-msg" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- Dashboard -->
+<section class="dash" id="dash">
+
+  <!-- Aggregate stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="label">Total leads</div>
+      <div class="value" id="s-total">—</div>
+    </div>
+    <div class="stat-card green">
+      <div class="label">Qualified ($20k+)</div>
+      <div class="value" id="s-qual">—</div>
+      <div class="sub" id="s-qual-pct"></div>
+    </div>
+    <div class="stat-card accent">
+      <div class="label">Nurture (&lt;$20k)</div>
+      <div class="value" id="s-nurt">—</div>
+      <div class="sub" id="s-nurt-pct"></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Last 7 days</div>
+      <div class="value" id="s-7d">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Last 30 days</div>
+      <div class="value" id="s-30d">—</div>
+    </div>
+  </div>
+
+  <!-- Insights -->
+  <div class="insights">
+    <div class="insight-card">
+      <h3>What stops them from hitting record</h3>
+      <div id="ins-blocker"></div>
+    </div>
+    <div class="insight-card">
+      <h3>6-month vision</h3>
+      <div id="ins-vision"></div>
+    </div>
+    <div class="insight-card">
+      <h3>Acquisition channel</h3>
+      <div id="ins-channel"></div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <input class="search" id="search" type="search" placeholder="Search by name, email, phone, or IG handle…">
+    <div class="filters" role="tablist">
+      <button data-filter="all"       class="is-active">All</button>
+      <button data-filter="qualified">Qualified</button>
+      <button data-filter="nurture">Nurture</button>
+      <button data-filter="uncontacted">Uncontacted</button>
+    </div>
+    <button class="btn-export" id="export-csv">Export CSV</button>
+  </div>
+
+  <!-- Table -->
+  <div class="leads-wrap">
+    <table class="leads-table" id="leads-table">
+      <thead>
+        <tr>
+          <th data-sort="created_at" class="is-sorted">Submitted <span class="sort">▾</span></th>
+          <th data-sort="first_name">Name <span class="sort">▾</span></th>
+          <th data-sort="qualified">Tier <span class="sort">▾</span></th>
+          <th class="hide-sm">Email</th>
+          <th class="hide-sm">Phone</th>
+          <th class="hide-sm">IG</th>
+          <th class="hide-sm">Channel</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="leads-body">
+        <tr><td colspan="8" class="empty">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Drawer -->
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="head">
+    <h2 id="drawer-title">Lead</h2>
+    <button class="close" id="drawer-close" aria-label="Close">×</button>
+  </div>
+  <div class="body" id="drawer-body"></div>
+  <div class="footer">
+    <button id="toggle-contacted">Mark contacted</button>
+    <button id="save-notes">Save notes</button>
+  </div>
+</aside>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
+
+// =============================================================
+// Config — populated at deploy time by replacing these values.
+// They are injected as <script> globals via inline replacement OR
+// can be hard-coded here (Supabase URL + anon key are public-safe).
+// =============================================================
+const SUPABASE_URL  = 'https://ztbrbhfrnpdwbdwyuovo.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_Sc7-vIJ1xkv53G6SRC7omg_aBUoYwt6';
+const ALLOWED_EMAIL = 'sev@sevspics.com';
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON, {
+  auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
+});
+
+// =============================================================
+// State
+// =============================================================
+const state = {
+  leads: [],
+  filtered: [],
+  filter: 'all',
+  search: '',
+  sortKey: 'created_at',
+  sortDir: 'desc',
+  activeLead: null
+};
+
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+// =============================================================
+// Auth flow
+// =============================================================
+async function bootstrap() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session && session.user) {
+    return handleSignIn(session.user);
+  }
+  showLogin();
+}
+
+function showLogin() {
+  $('#login').style.display = 'flex';
+  $('#dash').classList.remove('is-visible');
+  $('#header-right').innerHTML = '';
+}
+
+async function handleSignIn(user) {
+  if (user.email !== ALLOWED_EMAIL) {
+    // Wrong email — sign out and tell them.
+    await supabase.auth.signOut();
+    $('#login-msg').textContent = `${user.email} isn't allowed in here.`;
+    $('#login-msg').className = 'login-msg err';
+    showLogin();
+    return;
+  }
+  $('#login').style.display = 'none';
+  $('#dash').classList.add('is-visible');
+  $('#header-right').innerHTML = `
+    <span>${user.email}</span>
+    <button class="logout" id="logout-btn">Sign out</button>
+  `;
+  $('#logout-btn').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    location.reload();
+  });
+  await loadLeads();
+}
+
+// Login form
+$('#login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = $('#login-email').value.trim();
+  const btn = $('#login-btn');
+  const msg = $('#login-msg');
+  msg.textContent = '';
+  msg.className = 'login-msg';
+
+  if (email !== ALLOWED_EMAIL) {
+    msg.textContent = "That email isn't allowed in here.";
+    msg.className = 'login-msg err';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: 'https://www.talktosev.com/apply/admin'
+    }
+  });
+  btn.disabled = false;
+  btn.textContent = 'Send magic link';
+  if (error) {
+    msg.textContent = error.message;
+    msg.className = 'login-msg err';
+  } else {
+    msg.textContent = 'Magic link sent. Check your inbox.';
+    msg.className = 'login-msg ok';
+  }
+});
+
+// =============================================================
+// Loading + rendering
+// =============================================================
+async function loadLeads() {
+  const { data, error } = await supabase
+    .from('leads')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error(error);
+    $('#leads-body').innerHTML = `<tr><td colspan="8" class="empty">Couldn't load leads: ${escapeHtml(error.message)}</td></tr>`;
+    return;
+  }
+  state.leads = data || [];
+  renderStats();
+  renderInsights();
+  applyFilters();
+}
+
+function renderStats() {
+  const total = state.leads.length;
+  const qual  = state.leads.filter(l => l.qualified).length;
+  const nurt  = total - qual;
+  const now = Date.now();
+  const ms7  = 7  * 86400 * 1000;
+  const ms30 = 30 * 86400 * 1000;
+  const last7  = state.leads.filter(l => now - new Date(l.created_at).getTime() < ms7).length;
+  const last30 = state.leads.filter(l => now - new Date(l.created_at).getTime() < ms30).length;
+
+  $('#s-total').textContent = total;
+  $('#s-qual').textContent  = qual;
+  $('#s-nurt').textContent  = nurt;
+  $('#s-7d').textContent    = last7;
+  $('#s-30d').textContent   = last30;
+
+  const pct = (n) => total ? Math.round((n / total) * 100) + '%' : '0%';
+  $('#s-qual-pct').textContent = pct(qual) + ' of total';
+  $('#s-nurt-pct').textContent = pct(nurt) + ' of total';
+}
+
+function renderInsights() {
+  const LABELS = {
+    record_blocker: {
+      sound_awkward: 'I sound awkward',
+      dont_know_what_to_say: "I don't know what to say",
+      hate_how_i_look: 'I hate how I look on camera',
+      freeze_up: 'I freeze up'
+    },
+    six_month_vision: {
+      grow_business: 'Growing my business',
+      build_brand: 'Building a personal brand',
+      sell_course: 'Selling a course / product',
+      face_of_industry: 'Becoming the face of my industry'
+    },
+    how_found: {
+      ig_content: 'IG content',
+      friend: 'Friend sent me',
+      ad: 'An ad',
+      other: 'Other'
+    }
+  };
+  renderBars('#ins-blocker', state.leads, 'record_blocker',   LABELS.record_blocker);
+  renderBars('#ins-vision',  state.leads, 'six_month_vision', LABELS.six_month_vision);
+  renderBars('#ins-channel', state.leads, 'how_found',        LABELS.how_found);
+}
+
+function renderBars(sel, rows, key, labels) {
+  const counts = {};
+  rows.forEach(r => {
+    const v = r[key];
+    if (!v) return;
+    counts[v] = (counts[v] || 0) + 1;
+  });
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const max = entries.length ? entries[0][1] : 1;
+  const html = entries.map(([k, n]) => {
+    const pct = Math.max(4, Math.round((n / max) * 100));
+    return `<div class="bar-row">
+      <span class="bar-label">${escapeHtml(labels[k] || k)}</span>
+      <span class="bar-track"><span class="bar-fill" style="width:${pct}%"></span></span>
+      <span class="bar-count">${n}</span>
+    </div>`;
+  }).join('');
+  $(sel).innerHTML = html || '<p style="color:var(--fg-3);font-size:0.85rem;">No data yet.</p>';
+}
+
+// =============================================================
+// Filter / sort / search
+// =============================================================
+function applyFilters() {
+  const q = state.search.trim().toLowerCase();
+  let rows = state.leads.slice();
+
+  if (state.filter === 'qualified')   rows = rows.filter(r => r.qualified);
+  if (state.filter === 'nurture')     rows = rows.filter(r => !r.qualified);
+  if (state.filter === 'uncontacted') rows = rows.filter(r => !r.contacted);
+
+  if (q) {
+    rows = rows.filter(r => {
+      const hay = [r.first_name, r.last_name, r.email, r.phone, r.instagram_handle]
+        .filter(Boolean).join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+
+  rows.sort((a, b) => {
+    const av = a[state.sortKey];
+    const bv = b[state.sortKey];
+    let cmp = 0;
+    if (av == null && bv == null) cmp = 0;
+    else if (av == null) cmp = 1;
+    else if (bv == null) cmp = -1;
+    else if (typeof av === 'string') cmp = av.localeCompare(bv);
+    else cmp = av < bv ? -1 : av > bv ? 1 : 0;
+    return state.sortDir === 'asc' ? cmp : -cmp;
+  });
+
+  state.filtered = rows;
+  renderTable();
+}
+
+function renderTable() {
+  const tbody = $('#leads-body');
+  if (state.filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8" class="empty">No leads match.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = state.filtered.map(r => `
+    <tr data-id="${r.id}">
+      <td class="date">${formatDate(r.created_at)}</td>
+      <td class="name">${escapeHtml(r.first_name)} ${escapeHtml(r.last_name)}</td>
+      <td>${r.qualified ? '<span class="badge qualified">$20k+</span>' : '<span class="badge nurture">&lt;$20k</span>'}</td>
+      <td class="hide-sm">${escapeHtml(r.email)}</td>
+      <td class="hide-sm">${escapeHtml(r.phone || '')}</td>
+      <td class="hide-sm">${escapeHtml(r.instagram_handle || '')}</td>
+      <td class="hide-sm">${escapeHtml(channelLabel(r.how_found, r.how_found_other))}</td>
+      <td>${r.contacted ? '<span class="badge contacted">Contacted</span>' : ''}</td>
+    </tr>
+  `).join('');
+  $$('#leads-body tr').forEach(tr => {
+    tr.addEventListener('click', () => openDrawer(tr.dataset.id));
+  });
+
+  // Update sort indicator
+  $$('th[data-sort]').forEach(th => {
+    th.classList.toggle('is-sorted', th.dataset.sort === state.sortKey);
+    const arrow = th.querySelector('.sort');
+    if (arrow) arrow.textContent = th.dataset.sort === state.sortKey
+      ? (state.sortDir === 'asc' ? '▴' : '▾')
+      : '▾';
+  });
+}
+
+// =============================================================
+// Drawer (lead detail)
+// =============================================================
+function openDrawer(id) {
+  const lead = state.leads.find(l => l.id === id);
+  if (!lead) return;
+  state.activeLead = lead;
+
+  $('#drawer-title').textContent = `${lead.first_name} ${lead.last_name}`;
+  const body = $('#drawer-body');
+
+  const igUrl = lead.instagram_handle
+    ? 'https://instagram.com/' + lead.instagram_handle.replace(/^@/, '').replace(/[^A-Za-z0-9._]/g, '')
+    : null;
+
+  body.innerHTML = `
+    <div class="row contact-actions">
+      <a href="mailto:${escapeHtml(lead.email)}">Email</a>
+      <a href="sms:${escapeHtml((lead.phone || '').replace(/\s/g, ''))}">SMS</a>
+      <a href="tel:${escapeHtml((lead.phone || '').replace(/\s/g, ''))}">Call</a>
+      ${igUrl ? `<a href="${escapeHtml(igUrl)}" target="_blank" rel="noopener">Instagram</a>` : ''}
+    </div>
+
+    <div class="row">
+      <div class="lbl">Submitted</div>
+      <div class="val">${formatDateFull(lead.created_at)}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Tier</div>
+      <div class="val">${lead.qualified ? '<span class="badge qualified">$20k+ (qualified)</span>' : '<span class="badge nurture">&lt;$20k (nurture)</span>'}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Email</div>
+      <div class="val">${escapeHtml(lead.email)}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Phone</div>
+      <div class="val">${escapeHtml(lead.phone)} <span style="color:var(--fg-3);">(${escapeHtml(lead.phone_country || '')})</span></div>
+    </div>
+    <div class="row">
+      <div class="lbl">Instagram</div>
+      <div class="val">${igUrl ? `<a href="${escapeHtml(igUrl)}" target="_blank" rel="noopener">${escapeHtml(lead.instagram_handle)}</a>` : escapeHtml(lead.instagram_handle || '')}</div>
+    </div>
+
+    <div class="row">
+      <div class="lbl">Q1 · Record blocker</div>
+      <div class="val">${escapeHtml(LABEL_LOOKUP.record_blocker[lead.record_blocker] || lead.record_blocker)}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Q2 · 6-month vision</div>
+      <div class="val">${escapeHtml(LABEL_LOOKUP.six_month_vision[lead.six_month_vision] || lead.six_month_vision)}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Q3 · Video history</div>
+      <div class="val">${escapeHtml(LABEL_LOOKUP.video_history[lead.video_history] || lead.video_history)}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Q4 · Revenue</div>
+      <div class="val">${lead.revenue_bracket === 'over_20k' ? 'Over $20k/month' : 'Under $20k/month'}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Q7 · Business detail</div>
+      <div class="val">${lead.business_detail ? escapeHtml(lead.business_detail).replace(/\n/g, '<br>') : '<em style="color:var(--fg-3);">(skipped)</em>'}</div>
+    </div>
+    <div class="row">
+      <div class="lbl">Q10 · How they found Sev</div>
+      <div class="val">${escapeHtml(channelLabel(lead.how_found, lead.how_found_other))}</div>
+    </div>
+
+    <div class="row">
+      <div class="lbl">Notes</div>
+      <textarea class="notes" id="notes-input" placeholder="Private notes about this lead…">${escapeHtml(lead.notes || '')}</textarea>
+    </div>
+
+    <div class="row">
+      <div class="lbl">Metadata</div>
+      <div class="val" style="font-size:0.78rem;color:var(--fg-3);">
+        Referrer: ${escapeHtml(lead.referrer || '(direct)')}<br>
+        UA: ${escapeHtml((lead.user_agent || '').slice(0, 100))}${(lead.user_agent || '').length > 100 ? '…' : ''}
+      </div>
+    </div>
+  `;
+
+  $('#toggle-contacted').textContent = lead.contacted ? 'Mark uncontacted' : 'Mark contacted';
+  $('#drawer').classList.add('is-open');
+  $('#drawer').setAttribute('aria-hidden', 'false');
+  $('#drawer-backdrop').classList.add('is-open');
+}
+
+function closeDrawer() {
+  $('#drawer').classList.remove('is-open');
+  $('#drawer').setAttribute('aria-hidden', 'true');
+  $('#drawer-backdrop').classList.remove('is-open');
+  state.activeLead = null;
+}
+
+$('#drawer-close').addEventListener('click', closeDrawer);
+$('#drawer-backdrop').addEventListener('click', closeDrawer);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+
+$('#toggle-contacted').addEventListener('click', async () => {
+  if (!state.activeLead) return;
+  const next = !state.activeLead.contacted;
+  const { error } = await supabase
+    .from('leads')
+    .update({ contacted: next, contacted_at: next ? new Date().toISOString() : null })
+    .eq('id', state.activeLead.id);
+  if (error) { alert('Update failed: ' + error.message); return; }
+  state.activeLead.contacted = next;
+  $('#toggle-contacted').textContent = next ? 'Mark uncontacted' : 'Mark contacted';
+  // Refresh table row badge
+  applyFilters();
+});
+
+$('#save-notes').addEventListener('click', async () => {
+  if (!state.activeLead) return;
+  const notes = $('#notes-input').value.trim();
+  const { error } = await supabase
+    .from('leads')
+    .update({ notes })
+    .eq('id', state.activeLead.id);
+  const btn = $('#save-notes');
+  if (error) {
+    btn.textContent = 'Save failed';
+    setTimeout(() => btn.textContent = 'Save notes', 1500);
+    return;
+  }
+  state.activeLead.notes = notes;
+  btn.textContent = 'Saved ✓';
+  setTimeout(() => btn.textContent = 'Save notes', 1500);
+});
+
+// =============================================================
+// Filter / search / sort handlers
+// =============================================================
+$$('.filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('.filters button').forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    state.filter = btn.dataset.filter;
+    applyFilters();
+  });
+});
+$('#search').addEventListener('input', (e) => {
+  state.search = e.target.value;
+  applyFilters();
+});
+$$('th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sort;
+    if (state.sortKey === key) {
+      state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      state.sortKey = key;
+      state.sortDir = 'desc';
+    }
+    applyFilters();
+  });
+});
+
+// =============================================================
+// CSV export
+// =============================================================
+$('#export-csv').addEventListener('click', () => {
+  if (state.filtered.length === 0) { alert('Nothing to export.'); return; }
+  const cols = [
+    'created_at', 'first_name', 'last_name', 'email', 'phone', 'phone_country',
+    'instagram_handle', 'revenue_bracket', 'qualified',
+    'record_blocker', 'six_month_vision', 'video_history',
+    'how_found', 'how_found_other', 'business_detail',
+    'contacted', 'contacted_at', 'notes', 'referrer'
+  ];
+  const head = cols.join(',');
+  const lines = state.filtered.map(r =>
+    cols.map(c => csvEscape(r[c])).join(',')
+  );
+  const csv = head + '\n' + lines.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `talktosev-leads-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+// =============================================================
+// Helpers
+// =============================================================
+const LABEL_LOOKUP = {
+  record_blocker: {
+    sound_awkward: 'I sound awkward',
+    dont_know_what_to_say: "I don't know what to say",
+    hate_how_i_look: 'I hate how I look on camera',
+    freeze_up: 'I freeze up the second the camera is on'
+  },
+  six_month_vision: {
+    grow_business: 'Growing my business',
+    build_brand: 'Building a personal brand',
+    sell_course: 'Selling a course, product or workshop',
+    face_of_industry: 'Becoming the face of my industry'
+  },
+  video_history: {
+    post_regularly: 'Yes, posts regularly',
+    gave_up: 'Tried, then gave up',
+    never: 'Never tried'
+  }
+};
+
+function channelLabel(how, other) {
+  const map = { ig_content: 'IG content', friend: 'Friend', ad: 'An ad', other: 'Other' };
+  const base = map[how] || how;
+  return how === 'other' && other ? `Other: ${other}` : base;
+}
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  const now = new Date();
+  const diff = (now - d) / 1000;
+  if (diff < 60)        return Math.floor(diff) + 's ago';
+  if (diff < 3600)      return Math.floor(diff / 60) + 'm ago';
+  if (diff < 86400)     return Math.floor(diff / 3600) + 'h ago';
+  if (diff < 7 * 86400) return Math.floor(diff / 86400) + 'd ago';
+  return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
+}
+
+function formatDateFull(iso) {
+  return new Date(iso).toLocaleString('en-AU', {
+    day: 'numeric', month: 'short', year: 'numeric',
+    hour: 'numeric', minute: '2-digit'
+  });
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function csvEscape(v) {
+  if (v == null) return '';
+  const s = String(v);
+  if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+
+// Watch for auth state changes (e.g. after magic-link click)
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' && session && session.user) handleSignIn(session.user);
+  if (event === 'SIGNED_OUT') showLogin();
+});
+
+// Kick it off
+bootstrap();
+</script>
+
+</body>
+</html>

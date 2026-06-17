@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Connect · Talk to Sev</title>
+<meta name="description" content="A free 15-minute call with Sev Mozhaev. Tell me what you're trying to do, I'll tell you who you need. No pitch, no deck.">
+
+<meta property="og:title" content="The Connect · Talk to Sev">
+<meta property="og:description" content="A free 15-minute call. I figure out what you need, I tell you who you need. No pitch.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://talktosev.com/connect">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:opsz,wght@9..40,300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EDE6D6;
+  --paper: #F6F1E4;
+  --ink: #16140F;
+  --ink-soft: #4A453B;
+  --ink-mute: #8A8270;
+  --accent: #7C2D2D;
+  --accent-bright: #A23838;
+  --highlight: #C97B3F;
+  --sage: #8A9579;
+  --rule: #CFC5AC;
+  --rule-soft: #E1D9C2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.paper {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px 56px 100px;
+  background: var(--paper);
+  min-height: 100vh;
+  box-shadow: 0 0 80px rgba(20, 16, 8, 0.06);
+  position: relative;
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .paper { padding: 48px 24px 72px; }
+  body { font-size: 16px; }
+}
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 48px;
+  margin-bottom: 56px;
+}
+
+.meta-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+}
+
+.meta-line .accent { color: var(--accent); font-weight: 500; }
+
+.meta-line a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.meta-line a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.subtitle {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  color: var(--ink-soft);
+  line-height: 1.35;
+  margin-bottom: 28px;
+  letter-spacing: -0.005em;
+}
+
+.byline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+.lede {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 1.18rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+
+/* PULL QUOTE */
+.pullquote {
+  margin: 64px 0;
+  padding: 0 0 0 28px;
+  border-left: 3px solid var(--accent);
+}
+
+.pullquote blockquote {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
+  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+/* SECTION LABELS */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  color: var(--accent);
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-weight: 500;
+}
+
+/* PROSE SECTIONS */
+.prose-section { margin-bottom: 64px; }
+
+.prose-section h2.heading {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 4vw, 2.1rem);
+  line-height: 1.05;
+  margin-bottom: 24px;
+  color: var(--ink);
+  letter-spacing: -0.018em;
+  font-variation-settings: "opsz" 60;
+}
+
+.prose-section p {
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.prose-section p:last-child { margin-bottom: 0; }
+
+.prose-section p strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* CALL STEPS */
+.call-steps {
+  list-style: none;
+  counter-reset: step;
+  margin-top: 32px;
+}
+
+.call-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 18px 0 18px 56px;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.call-steps li:last-child { border-bottom: 1px solid var(--rule-soft); }
+
+.call-steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 18px;
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: "opsz" 144;
+}
+
+.call-steps li strong { color: var(--ink); font-weight: 600; }
+
+/* BOOKING / QUIZ CARD */
+.booking {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 48px 40px;
+  margin: 64px 0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--highlight);
+}
+
+.booking .section-label {
+  color: var(--highlight);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  margin-bottom: 18px;
+}
+
+.booking h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  line-height: 1.15;
+  margin-bottom: 12px;
+  color: var(--paper);
+  letter-spacing: -0.015em;
+}
+
+.booking p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(246, 241, 228, 0.78);
+  font-size: 1.05rem;
+  margin-bottom: 0;
+  line-height: 1.45;
+}
+
+.booking-link {
+  display: inline-block;
+  background: var(--highlight);
+  color: var(--ink);
+  padding: 16px 32px;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  border-radius: 3px;
+  transition: all 0.18s;
+  font-weight: 500;
+  margin-top: 28px;
+}
+
+.booking-link:hover {
+  background: var(--paper);
+  color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(201, 123, 63, 0.35);
+}
+
+.booking .small {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+  font-style: normal;
+  color: rgba(246, 241, 228, 0.5);
+  margin-top: 22px;
+}
+
+/* QUIZ STYLES */
+.quiz-step[hidden] { display: none; }
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.quiz-options button {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  background: rgba(246, 241, 228, 0.05);
+  color: var(--paper);
+  border: 1px solid rgba(246, 241, 228, 0.18);
+  padding: 15px 22px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.16s;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.quiz-options button:hover {
+  background: var(--highlight);
+  color: var(--ink);
+  border-color: var(--highlight);
+}
+
+.quiz-options button:focus-visible {
+  outline: 2px solid var(--highlight);
+  outline-offset: 2px;
+}
+
+/* FALLBACKS */
+.fallbacks { margin-top: 72px; margin-bottom: 56px; }
+
+.fallbacks dl { margin-top: 4px; }
+
+.fallbacks dt {
+  font-family: 'Fraunces', serif;
+  font-size: 1.18rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-top: 28px;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.fallbacks dt:first-of-type { margin-top: 0; }
+
+.fallbacks dt .price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-left: 10px;
+}
+
+.fallbacks dd {
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.fallbacks dd a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.15s, color 0.15s;
+  font-weight: 500;
+}
+
+.fallbacks dd a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* FOOTER */
+footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+footer .meta-line {
+  font-size: 0.62rem;
+  margin-bottom: 0;
+  color: var(--ink-mute);
+}
+
+footer .meta-line .accent { color: var(--ink-mute); }
+
+/* INTRO ANIMATION */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.masthead, .pullquote, .prose-section, .booking, .fallbacks {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.masthead { animation-delay: 0s; }
+.pullquote { animation-delay: 0.08s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+<body>
+<main class="paper">
+
+  <header class="masthead">
+    <div class="meta-line">
+      <span class="accent"><a href="/">Talk to Sev</a></span>
+      <span>Briefing No. 02 / 2026</span>
+    </div>
+    <h1>The <em>Connect</em></h1>
+    <p class="subtitle">A 15-minute call. Tell me what you're trying to do, I'll tell you who you need. No pitch.</p>
+    <div class="byline">By Sev Mozhaev</div>
+    <p class="lede">You finished the GEO Checklist. Thirty actions, five pillars, plenty of homework. The hard part isn't the work. The hard part is finding one operator who actually knows what they're doing without making it your full-time job to manage them. That's what this call is for.</p>
+  </header>
+
+  <div class="pullquote">
+    <blockquote>"Hiring an AI SEO agency in 2026 is paying retail for someone who'll ChatGPT the answer back to you anyway."</blockquote>
+  </div>
+
+  <section class="prose-section">
+    <h2 class="section-label">What I actually do</h2>
+    <h2 class="heading">The strategy, the filter, and the people behind it.</h2>
+    <p>5,000+ videos. 1.6 million followers. Over 500 million views. Seven years figuring out what makes a service business get found, get cited, and get hired.</p>
+    <p>I run marketing advisory for established service businesses doing over $15,000 a month. The kind that can't afford another generic course or another agency that ChatGPTs the playbook back at them.</p>
+    <p>Behind me sits a quietly assembled network of specialists. I don't describe them by job title. I describe them by what they get done. The developers whose work makes you the brand AI search engines cite when buyers in your area ask for what you sell. The writers whose pages turn curious visitors into booked calls. The editors whose podcasts and videos put you in front of buyers your ads can't reach.</p>
+    <p>My role is the filter. <strong>If a freelancer or agency lands in your inbox tomorrow with a pitch, send the proposal to me first.</strong> I'll tell you what I think they're good at, where they're weak, and whether you should hire them. If you'd rather skip the pitch decks entirely, this call is where I just tell you who, from day one, assuming the budget fits.</p>
+  </section>
+
+  <section class="prose-section">
+    <h2 class="section-label">Why I don't run an agency</h2>
+    <h2 class="heading">Agencies sell hours. I care if it gets cited.</h2>
+    <p>Most "AI SEO" shops in 2026 are last year's Google SEO agencies in a fresh t-shirt. They sell you a $5k to $20k retainer, outsource the actual work to a junior on Upwork, and email you a PDF report at month-end with screenshots from someone else's tracker.</p>
+    <p>You don't need that. You need the one developer whose last fifty client sites are the ones AI engines now cite by name when buyers search in their category. Or the one writer whose pages consistently land in ChatGPT's top three answers for buyer-intent questions in their niche. People you'd never find on Google because they don't run agencies, they don't sell SaaS, and they're already full from referrals.</p>
+    <p><strong>I know those people. I'm the referral.</strong></p>
+  </section>
+
+  <section class="prose-section">
+    <h2 class="section-label">How a Connect call goes</h2>
+    <h2 class="heading">15 minutes, free, no deck.</h2>
+    <p>Tell me what you're trying to do. I'll tell you who you need.</p>
+    <ol class="call-steps">
+      <li><strong>Four or five questions.</strong> About your business, what you've tried, where you're stuck on the checklist. I'm not running discovery. I'm calibrating what kind of operator fits.</li>
+      <li><strong>I tell you who.</strong> If I have the right person in my network, I name them and how to reach them. If I don't, I tell you that, and where to actually look instead.</li>
+      <li><strong>If we're a fit, we talk advisory.</strong> Some businesses need an introduction. Others need an ongoing strategist holding the line. Either way, no pressure either direction.</li>
+    </ol>
+  </section>
+
+  <!-- BOOKING / QUALIFIER QUIZ -->
+  <section class="booking" id="quiz-card">
+
+    <div class="quiz-step" id="quiz-step-1">
+      <div class="section-label">Step 1 of 4</div>
+      <h3>What does your business do in monthly revenue?</h3>
+      <p>So I know the pace and the budget you're working with.</p>
+      <div class="quiz-options">
+        <button type="button" data-action="disqualify">Pre-revenue or under $5,000 a month</button>
+        <button type="button" data-action="disqualify">$5,000 to $15,000 a month</button>
+        <button type="button" data-action="next" data-target="quiz-step-2">$15,000 to $50,000 a month</button>
+        <button type="button" data-action="next" data-target="quiz-step-2">$50,000+ a month</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quiz-step-2" hidden>
+      <div class="section-label">Step 2 of 4</div>
+      <h3>What kind of business is it?</h3>
+      <p>Some categories I'm not the right fit for, and I'd rather say so up front.</p>
+      <div class="quiz-options">
+        <button type="button" data-action="disqualify">Real estate, mortgage broking, or financial advice</button>
+        <button type="button" data-action="next" data-target="quiz-step-3">Home service or trades (building, plumbing, electrical, landscaping, etc.)</button>
+        <button type="button" data-action="next" data-target="quiz-step-3">Professional or B2B services (consulting, agency, legal, etc.)</button>
+        <button type="button" data-action="disqualify">E-commerce, SaaS, or product business</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quiz-step-3" hidden>
+      <div class="section-label">Step 3 of 4</div>
+      <h3>What's actually the bottleneck right now?</h3>
+      <p>So I know which kind of operator to point you at.</p>
+      <div class="quiz-options">
+        <button type="button" data-action="next" data-target="quiz-step-4">Buyers can't find me when they search</button>
+        <button type="button" data-action="next" data-target="quiz-step-4">Buyers find me, but they don't hire me</button>
+        <button type="button" data-action="next" data-target="quiz-step-4">I'm growing, but my marketing can't keep up</button>
+        <button type="button" data-action="next" data-target="quiz-step-4">Marketing is the last thing I have time for</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quiz-step-4" hidden>
+      <div class="section-label">Step 4 of 4</div>
+      <h3>Have you got budget set aside to deploy on this?</h3>
+      <p>Recommendations are useless if there's nothing to spend.</p>
+      <div class="quiz-options">
+        <button type="button" data-action="disqualify">Just exploring, nothing earmarked</button>
+        <button type="button" data-action="disqualify">Under $1,000</button>
+        <button type="button" data-action="next" data-target="quiz-pass">$1,000 to $5,000</button>
+        <button type="button" data-action="next" data-target="quiz-pass">$5,000+ ready to go</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" id="quiz-pass" hidden>
+      <div class="section-label">You're in</div>
+      <h3>Book the 15-minute Connect call.</h3>
+      <p>Free. No pitch. Just clarity on who you actually need.</p>
+      <a href="https://calendly.com/sevamozhaev/ask-me-anything" class="booking-link" target="_blank" rel="noopener">Book the call →</a>
+      <span class="small">15 min · Free · Zoom or Google Meet</span>
+    </div>
+
+    <div class="quiz-step" id="quiz-fail" hidden>
+      <div class="section-label">Honest answer</div>
+      <h3>This probably isn't the right fit right now.</h3>
+      <p>I work with established service businesses who've got the revenue and the budget to actually deploy on what we figure out together. If that's not where you're at yet, the GEO Checklist is free, self-paced, and exactly where I'd point you. Build the foundation, come back when the numbers work.</p>
+      <a href="geo-checklist.html" class="booking-link">Read the GEO Checklist</a>
+    </div>
+
+  </section>
+
+  <section class="fallbacks">
+    <h2 class="section-label">Or, if you'd rather work with me directly</h2>
+    <dl>
+      <dt>Claude With Me <span class="price">$350 / one session</span></dt>
+      <dd>One 60-minute call. We build a custom Claude tool live, on your business. You walk away with the recording, the transcript, the prototype, and a tailored playbook so you can keep iterating after. Plus a 7-day Q&amp;A window. <a href="https://sevspics.github.io/run-claude-with-me/" target="_blank" rel="noopener">See the offer →</a></dd>
+
+      <dt>In Your Corner <span class="price">$2,500 / month · no lock-in</span></dt>
+      <dd>Fractional CMO. Weekly 1-hour strategy call, WhatsApp access between calls, your content pipeline optimised alongside your marketing team (or built from scratch with you if you haven't got one yet). Fresh ideas every week, accountability loop. The same setup that took a residential builder to 220k followers and produced the best-performing organic video in the entire hospitality space countrywide with zero ad spend, and that taught a small trades operator how to generate 1,000 quotes averaging $5,000 each. <a href="in-your-corner.html">See what's inside →</a></dd>
+    </dl>
+  </section>
+
+  <footer>
+    <div class="meta-line">
+      <span>Talk to Sev</span>
+      <span>The Connect</span>
+      <span>2026</span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function() {
+  var buttons = document.querySelectorAll('#quiz-card button[data-action]');
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var action = btn.dataset.action;
+      var current = btn.closest('.quiz-step');
+      var next;
+      if (action === 'next') {
+        next = document.getElementById(btn.dataset.target);
+      } else if (action === 'disqualify') {
+        next = document.getElementById('quiz-fail');
+      }
+      if (current && next) {
+        current.hidden = true;
+        next.hidden = false;
+        var card = document.getElementById('quiz-card');
+        if (card && typeof card.scrollIntoView === 'function') {
+          var rect = card.getBoundingClientRect();
+          if (rect.top < 0 || rect.top > window.innerHeight * 0.4) {
+            card.scrollIntoView({behavior: 'smooth', block: 'center'});
+          }
+        }
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

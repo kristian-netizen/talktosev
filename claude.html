@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,400&family=Caveat:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles-v2.css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
       <div class="topbar-links">
         <a href="/">← Back</a>
         <a href="https://enquire.talktosev.com/apply" target="_blank" rel="noopener">Marketing</a>
-        <a class="nav-link-aux" href="learning.html">Learning Hub</a>
+        <a href="learning.html">Learning Hub</a>
       </div>
     </div>
   </div>
@@ -54,8 +54,7 @@
                 <span class="cw-buy-amount">$385</span>
                 <span class="cw-buy-period">60 min / Zoom / 1:1</span>
               </div>
-              <!-- TODO: paste the Stripe Payment Link URL into both hrefs once created. Webhooks (receipt + booking link) configured inside Stripe. -->
-              <a class="cw-buy-cta" href="#stripe" target="_blank" rel="noopener" data-cw-buy>Pay &amp; book <span class="arr">→</span></a>
+              <a class="cw-buy-cta" href="/book" data-cw-buy>Pay &amp; book <span class="arr">→</span></a>
             </div>
             <p class="cw-buy-trust">🔒 Stripe-secured. You'll book your time slot the second payment clears.</p>
           </div>
@@ -190,8 +189,7 @@
       <h2>An hour from now, Claude could be doing <em>the work you've been drowning in.</em></h2>
       <p>$385. Pay, book, show up. One hour with me. Something real, built. If you walk away empty-handed, I refund every cent.</p>
       <div class="cta-ctas">
-        <!-- TODO: paste the Stripe Payment Link URL here too. -->
-        <a class="btn btn-red" href="#stripe" target="_blank" rel="noopener" data-cw-buy>Pay &amp; book your hour / $385 <span class="arr">→</span></a>
+        <a class="btn btn-red" href="/book" data-cw-buy>Pay &amp; book your hour / $385 <span class="arr">→</span></a>
       </div>
       <p class="cta-footnote">stripe-secured · booking link sent instantly · 100% refund if empty-handed ↑</p>
     </div>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat with Sev · Free intro call or quick chat</title>
+<meta name="description" content="Book a free chat with Sev. Pick a 60-minute intro call or a 30-minute quick chat on the next available weekday.">
+<meta property="og:title" content="Chat with Sev · Free intro call or quick chat">
+<meta property="og:description" content="Free 60-min intro call or 30-min quick chat. No payment, no pressure.">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,400&family=Caveat:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles-v2.css">
+
+<style>
+  .container { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+  @media (max-width: 640px) { .container { padding: 32px 16px 56px; } }
+
+  /* ── Hero ── */
+  .booking-hero { text-align: center; margin-bottom: 40px; }
+  .booking-hero .eyebrow {
+    display: inline-flex;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .booking-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(38px, 6.5vw, 66px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin: 0 auto 22px;
+    max-width: 16ch;
+  }
+  .booking-hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "wdth" 78;
+    color: var(--red);
+  }
+  .booking-hero .subtitle {
+    font-size: clamp(16px, 1.8vw, 18px);
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* ── Mode toggle ── */
+  .mode-toggle-wrap { display: flex; justify-content: center; margin-bottom: 8px; }
+  .mode-toggle {
+    display: inline-flex;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .mode-btn {
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease;
+  }
+  .mode-btn + .mode-btn { border-left: 2px solid var(--ink); }
+  .mode-btn:hover:not(.active) { background: rgba(230, 57, 53, 0.08); color: var(--red); }
+  .mode-btn.active { background: var(--ink); color: var(--paper); }
+
+  .mode-desc {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+    min-height: 18px;
+  }
+
+  /* ── Step card ── */
+  .step {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 28px;
+    margin-bottom: 22px;
+    transition: opacity .3s ease;
+  }
+  .step.disabled { opacity: .4; pointer-events: none; }
+  .step-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 30px; height: 30px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .step-meta {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+
+  /* ── Date picker ── */
+  .dates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (min-width: 720px) { .dates { grid-template-columns: repeat(6, 1fr); } }
+  .date-btn {
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 14px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    color: var(--ink);
+    font-family: inherit;
+  }
+  .date-btn:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--ink);
+    background: var(--paper);
+  }
+  .date-btn.selected {
+    background: var(--red);
+    color: var(--paper);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .date-btn:disabled { opacity: .35; cursor: not-allowed; }
+  .date-btn .dow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .date-btn .day-num {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .date-btn .month {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .date-btn .time {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding-top: 6px;
+    border-top: 1px solid currentColor;
+    opacity: 0.85;
+  }
+
+  .loading-inline {
+    text-align: center;
+    padding: 22px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .loading-inline .spinner-sm {
+    display: inline-block; width: 12px; height: 12px;
+    border: 2px solid var(--ink); border-top-color: var(--red);
+    margin-right: 8px; vertical-align: middle;
+    animation: spin 1s linear infinite;
+  }
+  .empty-state {
+    text-align: center; padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px; color: var(--ink-soft);
+  }
+  .tz-note {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tz-note strong { color: var(--ink); font-weight: 700; }
+
+  /* ── Form ── */
+  .form-grid { display: grid; gap: 16px; }
+  .field label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 13px 14px;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    transition: box-shadow .15s ease;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    box-shadow: 3px 3px 0 var(--red);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 92px;
+    line-height: 1.5;
+  }
+  .field.error input, .field.error textarea { border-color: var(--red); }
+  .field .error-msg {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--red);
+    font-weight: 600;
+    display: none;
+    letter-spacing: 0.04em;
+  }
+  .field.error .error-msg { display: block; }
+
+  .summary {
+    margin-top: 28px;
+    padding: 18px;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .summary-row + .summary-row { margin-top: 10px; }
+  .summary-row .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+  .summary-row .value {
+    color: var(--ink);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .book-btn {
+    width: 100%; margin-top: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 18px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 var(--red);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .book-btn:hover:not(:disabled) {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--red);
+  }
+  .book-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+  .form-error {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--paper);
+    border: 2px solid var(--red);
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.55;
+    font-weight: 500;
+  }
+  .form-error.show { display: block; }
+
+  /* Overlay */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(14, 13, 11, 0.94);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; padding: 24px;
+  }
+  .overlay.show { display: flex; }
+  .overlay-card {
+    max-width: 440px; width: 100%;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--red);
+    padding: 36px 28px;
+    text-align: center;
+  }
+  .spinner {
+    width: 38px; height: 38px;
+    border: 3px solid var(--ink);
+    border-top-color: var(--red);
+    margin: 0 auto 22px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .overlay h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+  }
+  .overlay p {
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+
+  .footer {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 2px solid var(--ink);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .footer a { color: var(--red); text-decoration: underline; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+  <div class="booking-hero">
+    <div class="eyebrow">Free with Sev</div>
+    <h1>Have a <em>chat</em>.</h1>
+    <p class="subtitle">Pick a 60-minute intro call or a 30-minute quick chat. No payment, no pressure — just a chance to talk through whatever's on your mind.</p>
+  </div>
+
+  <div class="mode-toggle-wrap">
+    <div class="mode-toggle">
+      <button class="mode-btn active" data-mode="intro">Intro call · 60 min</button>
+      <button class="mode-btn" data-mode="quick">Quick chat · 30 min</button>
+    </div>
+  </div>
+  <p class="mode-desc" id="mode-desc"></p>
+
+  <div class="step" id="step-date">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div class="step-title">Pick a date</div>
+      <div class="step-meta">Next 6 weekdays</div>
+    </div>
+    <div id="dates-wrap">
+      <div class="loading-inline"><span class="spinner-sm"></span>Loading availability…</div>
+    </div>
+    <div class="tz-note" id="tz-note" style="display:none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span id="tz-note-text">Times shown in your local timezone.</span>
+    </div>
+  </div>
+
+  <div class="step disabled" id="step-form">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div class="step-title">Your details</div>
+    </div>
+    <div class="form-grid">
+      <div class="field" id="field-name">
+        <label>Full name</label>
+        <input type="text" id="name" placeholder="Jane Smith" autocomplete="name">
+        <div class="error-msg">Please enter your name.</div>
+      </div>
+      <div class="field" id="field-mobile">
+        <label>Mobile</label>
+        <input type="tel" id="mobile" placeholder="04XX XXX XXX" autocomplete="tel">
+        <div class="error-msg">Enter a valid Australian mobile (04XX XXX XXX or +614XX XXX XXX).</div>
+      </div>
+      <div class="field" id="field-email">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+        <div class="error-msg">Please enter a valid email address.</div>
+      </div>
+      <div class="field" id="field-notes">
+        <label>What would you like to chat about?</label>
+        <textarea id="notes" placeholder="A quick line or two — helps Sev show up prepared."></textarea>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-row"><span class="label">Session</span><span class="value" id="summary-session">Intro call, 60 min</span></div>
+      <div class="summary-row"><span class="label">When</span><span class="value" id="summary-when">Not yet selected</span></div>
+      <div class="summary-row"><span class="label">Cost</span><span class="value">Free · no payment</span></div>
+    </div>
+
+    <div class="form-error" id="form-error"></div>
+    <button class="book-btn" id="book-btn">Confirm booking →</button>
+  </div>
+
+  <div class="footer">
+    Held over Google Meet. Want a paid session instead? <a href="/book">Book Run Claude With Me →</a>
+  </div>
+</div>
+
+<div class="overlay" id="loading-overlay">
+  <div class="overlay-card">
+    <div class="spinner"></div>
+    <h2>Locking it in</h2>
+    <p>Almost there — confirming your slot…</p>
+  </div>
+</div>
+
+<script>
+  // ============ CONFIG ============
+  const TZ = 'Australia/Perth';
+  const TZ_OFFSET_HOURS = 8;
+  const MAX_DATE_CARDS = 6;
+  const LEAD_MS = 24 * 60 * 60 * 1000;
+
+  // Per-mode session shape — must mirror api/create-free-booking.js FREE_TYPES.
+  const MODES = {
+    intro: {
+      label:       'Intro call · 60 min',
+      shortLabel:  'Intro call, 60 min',
+      slot:        '12:00',
+      durationMin: 60,
+      desc:        '60-minute intro call · 12:00 pm AWST (your local time will be calculated)',
+      summary:     'Intro call, 60 min'
+    },
+    quick: {
+      label:       'Quick chat · 30 min',
+      shortLabel:  'Quick chat, 30 min',
+      slot:        '17:00',
+      durationMin: 30,
+      desc:        '30-minute quick chat · 5:00 pm AWST (your local time will be calculated)',
+      summary:     'Quick chat, 30 min'
+    }
+  };
+
+  // ============ STATE ============
+  let mode = 'intro';
+  let dateCards = [];
+  let selectedSlot = null;
+  let busyRanges = [];
+
+  // ============ AWST helpers ============
+  function awstNow() {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: TZ,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hour12: false
+    }).formatToParts(new Date());
+    const o = {}; parts.forEach(p => o[p.type] = p.value);
+    return { date: `${o.year}-${o.month}-${o.day}` };
+  }
+  function dayOfWeekAwst(yyyyMmDd) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    return new Date(Date.UTC(y, m - 1, d, 4)).getUTCDay();
+  }
+  function addDaysAwst(yyyyMmDd, n) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    dt.setUTCDate(dt.getUTCDate() + n);
+    return `${dt.getUTCFullYear()}-${String(dt.getUTCMonth() + 1).padStart(2,'0')}-${String(dt.getUTCDate()).padStart(2,'0')}`;
+  }
+
+  function buildAwstWeekdays(max) {
+    const now = awstNow();
+    let cursor = now.date;
+    const out = [];
+    let safety = 0;
+    while (out.length < max && safety++ < 40) {
+      const dow = dayOfWeekAwst(cursor);
+      if (dow !== 0 && dow !== 6) out.push(cursor);
+      cursor = addDaysAwst(cursor, 1);
+    }
+    return out;
+  }
+
+  function buildCandidateSlots() {
+    const cfg = MODES[mode];
+    const [hh, mm] = cfg.slot.split(':').map(Number);
+    const awstWeekdays = buildAwstWeekdays(10);
+    const out = [];
+    for (const awstDate of awstWeekdays) {
+      const [y, m, d] = awstDate.split('-').map(Number);
+      const startMs = Date.UTC(y, m - 1, d, hh - TZ_OFFSET_HOURS, mm);
+      out.push({
+        awstDate,
+        awstSlot:    cfg.slot,
+        durationMin: cfg.durationMin,
+        startMs,
+        endMs:       startMs + cfg.durationMin * 60 * 1000
+      });
+    }
+    return out;
+  }
+
+  function slotIsAvailable(slot) {
+    if (slot.startMs < Date.now() + LEAD_MS) return false;
+    for (const b of busyRanges) {
+      if (slot.startMs < b.end && slot.endMs > b.start) return false;
+    }
+    return true;
+  }
+
+  function localKey(ms) {
+    const d = new Date(ms);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function buildDateCards() {
+    const all = buildCandidateSlots().filter(slotIsAvailable);
+    // One slot per AWST date → one card per local date (in user's tz).
+    const seen = new Set();
+    const out = [];
+    for (const s of all) {
+      const key = localKey(s.startMs);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ localDate: key, slot: s });
+      if (out.length >= MAX_DATE_CARDS) break;
+    }
+    return out;
+  }
+
+  function userTzShort() {
+    try {
+      return new Intl.DateTimeFormat(undefined, { timeZoneName: 'short' })
+        .formatToParts(new Date())
+        .find(p => p.type === 'timeZoneName').value;
+    } catch { return ''; }
+  }
+  function formatLocalTime(ms) {
+    return new Date(ms).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', hour12: true }).toLowerCase();
+  }
+  function formatLocalDateShort(yyyyMmDd) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    const dt = new Date(y, m - 1, d);
+    return {
+      dow:   new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(dt),
+      day:   String(d),
+      month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(dt)
+    };
+  }
+  function formatLocalDateLong(yyyyMmDd) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    return new Intl.DateTimeFormat(undefined, { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(y, m - 1, d));
+  }
+
+  async function fetchAvailability() {
+    const wrap = document.getElementById('dates-wrap');
+    wrap.innerHTML = '<div class="loading-inline"><span class="spinner-sm"></span>Loading availability…</div>';
+    try {
+      const today = awstNow().date;
+      const r = await fetch(`/api/availability?from=${today}&to=${addDaysAwst(today, 16)}`);
+      if (!r.ok) throw new Error('availability fetch failed');
+      const data = await r.json();
+      busyRanges = (data.busy || []).map(b => ({
+        start: new Date(b.start).getTime(),
+        end:   new Date(b.end).getTime()
+      }));
+      dateCards = buildDateCards();
+      renderDates();
+    } catch (err) {
+      console.error(err);
+      wrap.innerHTML = "<div class=\"empty-state\">Couldn't load availability. Please refresh.</div>";
+    }
+  }
+
+  function renderDates() {
+    const wrap = document.getElementById('dates-wrap');
+    if (dateCards.length === 0) {
+      wrap.innerHTML = '<div class="empty-state">No times available right now. Please check back later.</div>';
+      return;
+    }
+    wrap.innerHTML = '<div class="dates" id="dates"></div>';
+    const grid = document.getElementById('dates');
+    dateCards.forEach(card => {
+      const parts = formatLocalDateShort(card.localDate);
+      const btn = document.createElement('button');
+      btn.className = 'date-btn';
+      btn.dataset.key = card.localDate;
+      btn.innerHTML = `
+        <div class="dow">${parts.dow}</div>
+        <div class="day-num">${parts.day}</div>
+        <div class="month">${parts.month}</div>
+        <div class="time">${formatLocalTime(card.slot.startMs)}</div>
+      `;
+      btn.addEventListener('click', () => selectDate(card));
+      grid.appendChild(btn);
+    });
+    document.getElementById('tz-note').style.display = 'flex';
+    const tz = userTzShort();
+    document.getElementById('tz-note-text').innerHTML = tz
+      ? `Times shown in your local timezone (<strong>${tz}</strong>).`
+      : 'Times shown in your local timezone.';
+  }
+
+  function selectDate(card) {
+    selectedSlot = card.slot;
+    document.querySelectorAll('.date-btn').forEach(b =>
+      b.classList.toggle('selected', b.dataset.key === card.localDate)
+    );
+    document.getElementById('step-form').classList.remove('disabled');
+    updateSummary();
+    document.getElementById('step-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function updateSummary() {
+    document.getElementById('summary-session').textContent = MODES[mode].summary;
+    const el = document.getElementById('summary-when');
+    if (!selectedSlot) { el.textContent = 'Not yet selected'; return; }
+    const tz = userTzShort();
+    const dateLine = new Intl.DateTimeFormat(undefined, { weekday: 'short', day: 'numeric', month: 'short' })
+      .format(new Date(selectedSlot.startMs));
+    const timeLine = `${formatLocalTime(selectedSlot.startMs)} to ${formatLocalTime(selectedSlot.endMs)}`;
+    el.textContent = `${dateLine}, ${timeLine}${tz ? ' ' + tz : ''}`;
+  }
+
+  function validateForm() {
+    let ok = true;
+    const name = document.getElementById('name').value.trim();
+    document.getElementById('field-name').classList.toggle('error', name.length < 2);
+    if (name.length < 2) ok = false;
+    const mobile = document.getElementById('mobile').value.replace(/\s+/g, '');
+    const mobileOk = /^04\d{8}$/.test(mobile) || /^\+614\d{8}$/.test(mobile);
+    document.getElementById('field-mobile').classList.toggle('error', !mobileOk);
+    if (!mobileOk) ok = false;
+    const email = document.getElementById('email').value.trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    document.getElementById('field-email').classList.toggle('error', !emailOk);
+    if (!emailOk) ok = false;
+    const notes = document.getElementById('notes').value.trim();
+    return ok ? { name, mobile, email, notes } : null;
+  }
+
+  function showFormError(msg) {
+    const el = document.getElementById('form-error');
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+  function clearFormError() { document.getElementById('form-error').classList.remove('show'); }
+
+  document.getElementById('book-btn').addEventListener('click', async () => {
+    if (!selectedSlot) { showFormError('Pick a date first.'); return; }
+    clearFormError();
+    const data = validateForm();
+    if (!data) return;
+    document.getElementById('loading-overlay').classList.add('show');
+    try {
+      const r = await fetch('/api/create-free-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type:   mode,
+          date:   selectedSlot.awstDate,
+          name:   data.name,
+          email:  data.email,
+          mobile: data.mobile,
+          notes:  data.notes
+        })
+      });
+      const json = await r.json();
+      if (!r.ok || !json.ok || !json.url) throw new Error(json.error || 'Could not confirm booking');
+      window.location = json.url;
+    } catch (err) {
+      document.getElementById('loading-overlay').classList.remove('show');
+      showFormError(err.message || 'Something went wrong. Please try again.');
+      fetchAvailability();
+    }
+  });
+
+  // Mode toggle
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      mode = btn.dataset.mode;
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b === btn));
+      document.getElementById('mode-desc').textContent = MODES[mode].desc;
+      selectedSlot = null;
+      document.getElementById('step-form').classList.add('disabled');
+      updateSummary();
+      // Rebuild the date grid for the new slot
+      dateCards = buildDateCards();
+      renderDates();
+    });
+  });
+
+  // Hide loading overlay on pageshow (handles bfcache back-nav)
+  window.addEventListener('pageshow', () => {
+    document.getElementById('loading-overlay').classList.remove('show');
+  });
+
+  // Init
+  document.getElementById('mode-desc').textContent = MODES.intro.desc;
+  updateSummary();
+  fetchAvailability();
+</script>
+</body>
+</html>

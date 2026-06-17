@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Availability admin · Talk To Sev</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/styles-v2.css">
+
+<style>
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+  .head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 14px 22px; margin-bottom: 28px; }
+  .head h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .head h1 em { font-style: italic; color: var(--red); font-weight: 300; font-variation-settings: "wdth" 78; }
+  .head .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+  }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 14px 22px;
+    margin-bottom: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+  .legend .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .swatch {
+    width: 14px; height: 14px;
+    border: 2px solid var(--ink);
+  }
+  .swatch.free    { background: var(--paper); }
+  .swatch.blocked { background: var(--ink); }
+  .swatch.booked  { background: var(--yellow); }
+
+  /* Password gate */
+  .gate {
+    max-width: 420px;
+    margin: 80px auto;
+    padding: 36px 30px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--red);
+  }
+  .gate h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .gate p {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .gate input {
+    width: 100%;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 13px 14px;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .gate input:focus { outline: none; box-shadow: 3px 3px 0 var(--red); }
+  .gate button {
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 14px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--red);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .gate button:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--red); }
+  .gate .err {
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    margin-top: 10px;
+    min-height: 14px;
+  }
+
+  /* Grid */
+  .grid-wrap {
+    overflow-x: auto;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  table.grid {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    min-width: 1000px;
+  }
+  table.grid th,
+  table.grid td {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 6px;
+    text-align: center;
+    vertical-align: middle;
+    background: var(--paper);
+  }
+  table.grid th:last-child,
+  table.grid td:last-child { border-right: none; }
+  table.grid tr:last-child td { border-bottom: none; }
+  table.grid th.row-head,
+  table.grid td.row-head {
+    text-align: left;
+    padding-left: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    background: var(--bg-deep);
+    width: 110px;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    border-right: 2px solid var(--ink);
+  }
+  table.grid thead th {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 10px 6px;
+    background: var(--bg-deep);
+  }
+  table.grid thead th.today { color: var(--red); }
+  table.grid thead th .dow { display: block; font-size: 10px; }
+  table.grid thead th .day { display: block; font-family: var(--font-display); font-size: 20px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.2; }
+  table.grid thead th .mon { display: block; font-size: 10px; color: var(--ink-soft); }
+
+  .cell-btn {
+    width: 100%;
+    min-height: 56px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    padding: 8px 6px;
+    transition: background .12s ease, color .12s ease;
+  }
+  .cell-btn:hover:not(.booked) { background: var(--bg-deep); }
+  .cell-btn.blocked {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .cell-btn.blocked:hover { background: var(--red); }
+  .cell-btn.booked {
+    background: var(--yellow);
+    color: var(--ink);
+    cursor: not-allowed;
+    font-weight: 700;
+  }
+  .cell-btn.pending {
+    background: repeating-linear-gradient(
+      45deg, var(--yellow), var(--yellow) 6px,
+      var(--paper) 6px, var(--paper) 10px
+    );
+    color: var(--ink);
+    cursor: not-allowed;
+  }
+  .cell-btn.busy {
+    background: repeating-linear-gradient(
+      45deg, var(--bg-deep), var(--bg-deep) 6px,
+      var(--paper) 6px, var(--paper) 10px
+    );
+    color: var(--ink-soft);
+    cursor: not-allowed;
+  }
+  .cell-btn .state {
+    display: block;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .cell-btn .label {
+    display: block;
+    font-size: 11px;
+    word-break: break-word;
+  }
+  .cell-btn:disabled { cursor: not-allowed; }
+  .cell-btn[aria-busy="true"] { opacity: 0.5; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 18px;
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--red);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    display: none;
+    z-index: 100;
+  }
+  .toast.show { display: block; }
+  .toast.err { background: var(--red); }
+
+  .actions { display: flex; gap: 10px; margin-left: auto; }
+  .actions button {
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 9px 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .12s ease;
+  }
+  .actions button:hover { background: var(--bg-deep); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Password gate -->
+<section class="gate" id="gate">
+  <h2>Availability admin</h2>
+  <p>Locked. Enter the admin password to manage availability blocks.</p>
+  <input type="password" id="pwInput" placeholder="Admin password" autocomplete="current-password">
+  <button id="pwGo" type="button">Unlock</button>
+  <div class="err" id="pwErr"></div>
+</section>
+
+<!-- Main UI -->
+<div class="wrap hidden" id="adminUi">
+  <div class="head">
+    <h1>Availability <em>admin</em></h1>
+    <span class="meta">All times AWST · Mon–Fri</span>
+    <div class="actions">
+      <button id="refreshBtn">Refresh</button>
+      <button id="logoutBtn">Sign out</button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="chip"><span class="swatch free"></span> Available · click to block</span>
+    <span class="chip"><span class="swatch blocked"></span> Blocked · click to unblock</span>
+    <span class="chip"><span class="swatch booked"></span> Booked · read-only</span>
+    <span class="chip">Diagonals = pending hold / Sev's calendar event</span>
+  </div>
+
+  <div class="grid-wrap">
+    <table class="grid" id="grid"></table>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ============ CONFIG ============
+  const TZ = 'Australia/Perth';
+  const TZ_OFFSET_HOURS = 8;
+  const SLOTS = ['04:30', '05:30', '12:00', '15:00', '16:00', '17:00'];
+  const SLOT_DURATIONS = { '04:30': 60, '05:30': 60, '12:00': 60, '15:00': 60, '16:00': 60, '17:00': 30 };
+  const SLOT_LABELS = {
+    '04:30': '4:30 am · paid',
+    '05:30': '5:30 am · paid',
+    '12:00': '12:00 pm · intro',
+    '15:00': '3:00 pm · paid',
+    '16:00': '4:00 pm · paid',
+    '17:00': '5:00 pm · quick'
+  };
+  const DAYS_AHEAD = 14;
+  const STORAGE_KEY = 'tts-admin-pw';
+
+  // ============ STATE ============
+  let password = null;
+  let blocks = [];          // [{id, block_date, block_slot:"HH:MM:SS", duration_min}]
+  let bookings = [];        // [{id, session_date, session_slot, session_end, client_name, status, session_type}]
+  let calBusy = [];         // [{start, end}] from /api/availability minus blocks/bookings (computed)
+  let weekdays = [];        // array of AWST date strings
+
+  // ============ AWST helpers ============
+  function awstToday() {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date());
+    const o = {}; parts.forEach(p => o[p.type] = p.value);
+    return `${o.year}-${o.month}-${o.day}`;
+  }
+  function dayOfWeek(d) {
+    const [y, m, day] = d.split('-').map(Number);
+    return new Date(Date.UTC(y, m - 1, day, 4)).getUTCDay();
+  }
+  function addDays(d, n) {
+    const [y, m, day] = d.split('-').map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, day));
+    dt.setUTCDate(dt.getUTCDate() + n);
+    return `${dt.getUTCFullYear()}-${String(dt.getUTCMonth() + 1).padStart(2,'0')}-${String(dt.getUTCDate()).padStart(2,'0')}`;
+  }
+  function buildWeekdays(count) {
+    const today = awstToday();
+    let cur = today;
+    const out = [];
+    let safety = 0;
+    while (out.length < count && safety++ < 50) {
+      const dow = dayOfWeek(cur);
+      if (dow !== 0 && dow !== 6) out.push(cur);
+      cur = addDays(cur, 1);
+    }
+    return out;
+  }
+  function fmtDateHead(d) {
+    const [y, m, day] = d.split('-').map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, day, 4));
+    return {
+      dow:   new Intl.DateTimeFormat('en-AU', { weekday: 'short', timeZone: 'UTC' }).format(dt),
+      day:   String(day),
+      month: new Intl.DateTimeFormat('en-AU', { month: 'short',  timeZone: 'UTC' }).format(dt)
+    };
+  }
+  function awstToUtcMs(d, hh, mm) {
+    const [y, m, day] = d.split('-').map(Number);
+    return Date.UTC(y, m - 1, day, hh - TZ_OFFSET_HOURS, mm);
+  }
+
+  // ============ Auth helpers ============
+  function loadPw() { try { return sessionStorage.getItem(STORAGE_KEY); } catch { return null; } }
+  function savePw(pw) { try { sessionStorage.setItem(STORAGE_KEY, pw); } catch {} }
+  function clearPw() { try { sessionStorage.removeItem(STORAGE_KEY); } catch {} }
+
+  async function apiCall(method, path, body) {
+    const opts = {
+      method,
+      headers: {
+        'Authorization': 'Bearer ' + password,
+        'Content-Type':  'application/json'
+      }
+    };
+    if (body) opts.body = JSON.stringify(body);
+    const r = await fetch(path, opts);
+    if (r.status === 401) { clearPw(); showGate('Session expired — sign in again.'); throw new Error('Unauthorized'); }
+    const json = await r.json().catch(() => ({}));
+    if (!r.ok || json.ok === false) throw new Error(json.error || ('HTTP ' + r.status));
+    return json;
+  }
+
+  // ============ Data load ============
+  async function loadAll() {
+    weekdays = buildWeekdays(DAYS_AHEAD);
+    const from = weekdays[0];
+    const to   = weekdays[weekdays.length - 1];
+    // Fetch blocks + bookings from admin endpoint, and calendar busy from public availability.
+    const [adminData, availData] = await Promise.all([
+      apiCall('GET', `/api/admin-blocks?from=${from}&to=${to}`),
+      fetch(`/api/availability?from=${from}&to=${to}`).then(r => r.json())
+    ]);
+    blocks   = adminData.blocks   || [];
+    bookings = adminData.bookings || [];
+    const allBusy = (availData && availData.busy) || [];
+    // Strip out ranges that match blocks or bookings — leaves only Sev's calendar events.
+    calBusy = allBusy.filter(r => !isMatchedByBlock(r) && !isMatchedByBooking(r));
+    render();
+  }
+
+  function isMatchedByBlock(range) {
+    const rs = new Date(range.start).getTime();
+    const re = new Date(range.end).getTime();
+    return blocks.some(b => {
+      const [hh, mm] = b.block_slot.split(':').map(Number);
+      const bs = awstToUtcMs(b.block_date, hh, mm);
+      const be = bs + (b.duration_min || 60) * 60 * 1000;
+      return bs === rs && be === re;
+    });
+  }
+  function isMatchedByBooking(range) {
+    const rs = new Date(range.start).getTime();
+    return bookings.some(b => {
+      const [hh, mm] = b.session_slot.split(':').map(Number);
+      const bs = awstToUtcMs(b.session_date, hh, mm);
+      return bs === rs;
+    });
+  }
+
+  function blockFor(date, slot) {
+    return blocks.find(b => b.block_date === date && b.block_slot.startsWith(slot));
+  }
+  function bookingFor(date, slot) {
+    return bookings.find(b => b.session_date === date && b.session_slot.startsWith(slot));
+  }
+  function busyOverlap(date, slot) {
+    const [hh, mm] = slot.split(':').map(Number);
+    const ss = awstToUtcMs(date, hh, mm);
+    const se = ss + (SLOT_DURATIONS[slot] || 60) * 60 * 1000;
+    return calBusy.find(r => {
+      const bs = new Date(r.start).getTime();
+      const be = new Date(r.end).getTime();
+      return ss < be && se > bs;
+    });
+  }
+
+  // ============ Render ============
+  function render() {
+    const table = document.getElementById('grid');
+    const today = awstToday();
+
+    let html = '<thead><tr><th class="row-head">Slot</th>';
+    weekdays.forEach(d => {
+      const parts = fmtDateHead(d);
+      const isToday = d === today;
+      html += `<th class="${isToday ? 'today' : ''}"><span class="dow">${isToday ? 'Today' : parts.dow}</span><span class="day">${parts.day}</span><span class="mon">${parts.month}</span></th>`;
+    });
+    html += '</tr></thead><tbody>';
+
+    SLOTS.forEach(slot => {
+      html += `<tr><td class="row-head">${SLOT_LABELS[slot]}</td>`;
+      weekdays.forEach(date => {
+        const block = blockFor(date, slot);
+        const booking = bookingFor(date, slot);
+        const busy = !block && !booking ? busyOverlap(date, slot) : null;
+
+        let cls = 'cell-btn';
+        let state = 'Available';
+        let label = 'Click to block';
+        let dataset = `data-date="${date}" data-slot="${slot}"`;
+
+        if (booking) {
+          if (booking.status === 'confirmed') {
+            cls += ' booked';
+            state = booking.session_type === 'free_intro' ? 'Free intro' :
+                    booking.session_type === 'free_quick' ? 'Quick chat' : 'Booked';
+            label = booking.client_name.split(' ')[0];
+          } else {
+            cls += ' pending';
+            state = 'Pending hold';
+            label = booking.client_name.split(' ')[0];
+          }
+        } else if (block) {
+          cls += ' blocked';
+          state = 'Blocked';
+          label = 'Click to unblock';
+          dataset += ` data-block-id="${block.id}"`;
+        } else if (busy) {
+          cls += ' busy';
+          state = 'Calendar';
+          label = 'Sev event';
+        }
+
+        html += `<td><button class="${cls}" ${dataset}><span class="state">${state}</span><span class="label">${label}</span></button></td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</tbody>';
+    table.innerHTML = html;
+
+    // wire up click handlers
+    table.querySelectorAll('.cell-btn').forEach(btn => {
+      if (btn.classList.contains('booked') || btn.classList.contains('pending') || btn.classList.contains('busy')) return;
+      btn.addEventListener('click', onCellClick);
+    });
+  }
+
+  async function onCellClick(e) {
+    const btn = e.currentTarget;
+    const date = btn.dataset.date;
+    const slot = btn.dataset.slot;
+    const blockId = btn.dataset.blockId;
+    btn.setAttribute('aria-busy', 'true');
+    btn.disabled = true;
+    try {
+      if (blockId) {
+        await apiCall('DELETE', `/api/admin-blocks?id=${blockId}`);
+        toast(`Unblocked ${slot} on ${date}`);
+      } else {
+        await apiCall('POST', `/api/admin-blocks`, { block_date: date, block_slot: slot });
+        toast(`Blocked ${slot} on ${date}`);
+      }
+      await loadAll();
+    } catch (err) {
+      toast(err.message || 'Failed', true);
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+    }
+  }
+
+  // ============ Toast ============
+  let toastTimer;
+  function toast(msg, isError) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.toggle('err', !!isError);
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+  }
+
+  // ============ Gate flow ============
+  function showGate(err) {
+    document.getElementById('gate').classList.remove('hidden');
+    document.getElementById('adminUi').classList.add('hidden');
+    document.getElementById('pwErr').textContent = err || '';
+    setTimeout(() => document.getElementById('pwInput').focus(), 50);
+  }
+  function showAdmin() {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('adminUi').classList.remove('hidden');
+  }
+
+  async function tryUnlock(pw) {
+    password = pw;
+    try {
+      // Probe with a tiny GET to confirm password works
+      await apiCall('GET', `/api/admin-blocks?from=${awstToday()}&to=${awstToday()}`);
+      savePw(pw);
+      showAdmin();
+      await loadAll();
+      return true;
+    } catch (err) {
+      password = null;
+      if (err.message === 'Unauthorized') showGate('Wrong password.');
+      else                                 showGate(err.message || 'Login failed');
+      return false;
+    }
+  }
+
+  document.getElementById('pwGo').addEventListener('click', () => {
+    const pw = document.getElementById('pwInput').value.trim();
+    if (!pw) return;
+    tryUnlock(pw);
+  });
+  document.getElementById('pwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); document.getElementById('pwGo').click(); }
+  });
+
+  document.getElementById('refreshBtn').addEventListener('click', () => loadAll());
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    clearPw();
+    password = null;
+    showGate('Signed out.');
+  });
+
+  // Init — try saved password silently
+  (async function init() {
+    const saved = loadPw();
+    if (saved) {
+      const ok = await tryUnlock(saved);
+      if (!ok) showGate('Session expired — sign in again.');
+    } else {
+      showGate();
+    }
+  })();
+</script>
+</body>
+</html>

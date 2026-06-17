@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,400&family=Caveat:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles-v2.css">
 
   <style>
     /* ---------- members-specific styles ---------- */
@@ -247,10 +247,13 @@
     var LOGIN_PATH    = '/login';
 
     // Where The Compound app lives (on GitHub Pages).
+    // Session is handed off via URL hash on these targets.
+    //
     // The ?edition=online query is REQUIRED — the Compound app's
     // editions.js resolves the Supabase project from this param.
     // Without it, the app defaults to the in-person Supabase and
-    // rejects the online-issued session token in the URL hash.
+    // rejects the online-issued session token in the URL hash,
+    // bouncing the user back to the in-person login.
     var COMPOUND_BASE = 'https://sevspics.github.io/the-compound/';
     var COMPOUND_APP  = COMPOUND_BASE + 'app.html?edition=online';
     var COMPOUND_ADMIN = COMPOUND_BASE + 'admin.html?edition=online';

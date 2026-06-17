@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Run Claude With Me · Book a session with Sev</title>
+<meta name="description" content="60-minute 1:1 pair-coding session with Sev. Pick a time, pay securely, and we'll jump on a call.">
+<meta property="og:title" content="Run Claude With Me · Book with Sev">
+<meta property="og:description" content="60-minute 1:1 pair-coding session. $385 AUD (inc GST). Or get a 4-session pack and save.">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,400&family=Caveat:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/styles-v2.css">
+
+<style>
+  /* ── /book overrides on top of styles-v2.css ── */
+  .container { max-width: 880px; padding: 48px 24px 80px; }
+  @media (max-width: 640px) {
+    .container { padding: 32px 16px 56px; }
+  }
+
+  /* ── Hero ── */
+  .booking-hero { text-align: center; margin-bottom: 44px; }
+  .booking-hero .eyebrow {
+    display: inline-flex;
+    justify-content: center;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .booking-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(38px, 6.5vw, 68px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin: 0 auto 22px;
+    max-width: 16ch;
+  }
+  .booking-hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "wdth" 78;
+    color: var(--red);
+    display: inline-block;
+  }
+  .booking-hero .subtitle {
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .price-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 22px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    line-height: 1;
+  }
+  .price-pill .amount {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .price-pill .sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── Mode toggle (Single / 4-pack) ── */
+  .mode-toggle-wrap { display: flex; justify-content: center; margin-bottom: 28px; }
+  .mode-toggle {
+    display: inline-flex;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .mode-btn {
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease;
+  }
+  .mode-btn + .mode-btn { border-left: 2px solid var(--ink); }
+  .mode-btn:hover:not(.active) { background: rgba(230, 57, 53, 0.08); color: var(--red); }
+  .mode-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ── "Have a pack code?" link ── */
+  .pack-link-row {
+    text-align: center;
+    margin-bottom: 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .pack-link-row a {
+    background: none; border: none; padding: 0 0 1px;
+    cursor: pointer;
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--red);
+    margin-left: 8px;
+    text-decoration: none;
+    transition: background .15s ease;
+  }
+  .pack-link-row a:hover { background: rgba(230, 57, 53, 0.1); }
+
+  /* ── Inline code prompt ── */
+  .code-prompt {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--red);
+    padding: 26px;
+    margin-bottom: 28px;
+    display: none;
+  }
+  .code-prompt.show { display: block; }
+  .code-prompt h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .code-prompt p {
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .code-prompt p code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--bg-deep);
+    border: 1px solid var(--ink);
+    padding: 1px 6px;
+    font-weight: 600;
+  }
+  .code-prompt input {
+    width: 100%;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 13px 14px;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: box-shadow .15s ease;
+  }
+  .code-prompt input:focus { outline: none; box-shadow: 3px 3px 0 var(--red); }
+  .code-prompt-actions { display: flex; gap: 10px; margin-top: 14px; }
+  .code-prompt button.primary {
+    flex: 1;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 13px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--red);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .code-prompt button.primary:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--red); }
+  .code-prompt button.secondary {
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 13px 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .code-prompt button.secondary:hover { background: var(--bg-deep); }
+  .code-prompt .err {
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 10px;
+    min-height: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Pack-redemption banner ── */
+  .redemption-banner {
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  .redemption-banner .eyebrow { margin-bottom: 10px; color: var(--ink); }
+  .redemption-banner h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .redemption-banner p {
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .redemption-banner .counter {
+    color: var(--red);
+    font-weight: 700;
+    font-family: var(--font-mono);
+    padding: 1px 6px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+  }
+
+  /* ── 4-pack pitch ── */
+  .pack-pitch {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 40px;
+    text-align: center;
+  }
+  .pack-savings {
+    display: inline-block;
+    margin-bottom: 22px;
+    padding: 6px 14px;
+    background: var(--red);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .pack-pitch h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .pack-pitch h2 em {
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "wdth" 78;
+    color: var(--red);
+  }
+  .pack-pitch .lead {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0 auto 28px;
+    max-width: 480px;
+  }
+  .pack-features {
+    list-style: none;
+    margin: 0 auto 28px;
+    text-align: left;
+    max-width: 380px;
+    display: grid;
+    gap: 14px;
+    padding: 0;
+  }
+  .pack-features li {
+    color: var(--ink);
+    font-size: 15px;
+    padding-left: 32px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .pack-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+  }
+  .pack-features li::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    transform: rotate(-45deg);
+  }
+  .pack-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .pack-price .big {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .pack-price .small {
+    font-family: var(--font-mono);
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .pack-buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--red);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 16px 28px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    letter-spacing: -0.005em;
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform .18s ease, box-shadow .18s ease;
+    cursor: pointer;
+  }
+  .pack-buy:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 9px 9px 0 var(--ink);
+    color: var(--paper);
+  }
+
+  /* ── 4-pack intro (context banner above the booking flow when in PACK_PURCHASE mode) ── */
+  .pack-intro {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .pack-intro .pack-savings {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 6px 14px;
+    background: var(--red);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .pack-intro h2 {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .pack-intro h2 em {
+    font-style: italic;
+    font-weight: 300;
+    font-variation-settings: "wdth" 78;
+    color: var(--red);
+  }
+  .pack-intro .lead {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 auto 22px;
+    max-width: 520px;
+  }
+  .pack-features-compact {
+    list-style: none;
+    margin: 0 auto;
+    text-align: left;
+    max-width: 460px;
+    display: grid;
+    gap: 10px;
+    padding: 0;
+  }
+  .pack-features-compact li {
+    color: var(--ink);
+    font-size: 14px;
+    padding-left: 28px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .pack-features-compact li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+  }
+  .pack-features-compact li::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 8px;
+    width: 7px;
+    height: 3px;
+    border-left: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    transform: rotate(-45deg);
+  }
+
+  /* ── Steps ── */
+  .step {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 28px;
+    margin-bottom: 20px;
+    transition: opacity .3s ease, box-shadow .3s ease;
+  }
+  .step.disabled { opacity: 0.42; pointer-events: none; }
+  .step.active { box-shadow: 5px 5px 0 var(--red); }
+  .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .step-meta {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  /* ── Date picker ── */
+  .dates { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  @media (max-width: 720px) { .dates { grid-template-columns: repeat(3, 1fr); } }
+  .date-btn {
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 14px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    color: var(--ink);
+    font-family: var(--font-sans);
+  }
+  .date-btn:hover:not(:disabled) {
+    background: var(--bg-deep);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .date-btn.selected {
+    background: var(--yellow);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--red);
+  }
+  .date-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .date-btn .dow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .date-btn.selected .dow { color: var(--ink); }
+  .date-btn .day-num {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 3px;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+  .date-btn .month {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .date-btn.selected .month { color: var(--ink); }
+
+  /* ── Slot picker ── */
+  .slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  @media (max-width: 640px) { .slots { grid-template-columns: repeat(2, 1fr); } }
+  .slot-btn {
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 14px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .slot-btn:hover:not(:disabled) {
+    background: var(--bg-deep);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .slot-btn.selected {
+    background: var(--yellow);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--red);
+  }
+  .slot-btn:disabled {
+    color: var(--ink-soft);
+    cursor: not-allowed;
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .loading-inline {
+    text-align: center;
+    padding: 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .loading-inline .spinner-sm {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--bg-deep);
+    border-top-color: var(--red);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: spin 1s linear infinite;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .tz-note {
+    margin-top: 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tz-note strong { color: var(--ink); font-weight: 700; }
+
+  /* ── Form ── */
+  .form-grid { display: grid; gap: 16px; }
+  .field label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .field input {
+    width: 100%;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 14px 16px;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    transition: box-shadow .15s ease, border-color .15s ease;
+  }
+  .field input:focus { outline: none; box-shadow: 3px 3px 0 var(--red); }
+  .field.error input { border-color: var(--red); }
+  .field .error-msg {
+    display: none;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--red);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .field.error .error-msg { display: block; }
+
+  /* ── Summary ── */
+  .summary {
+    margin-top: 28px;
+    padding: 20px;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .summary-row .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+  .summary-row .value {
+    color: var(--ink);
+    font-weight: 600;
+    text-align: right;
+  }
+  .summary-row.total {
+    padding-top: 14px;
+    border-top: 2px solid var(--ink);
+    margin-top: 4px;
+    font-size: 18px;
+    align-items: baseline;
+  }
+  .summary-row.total .label { padding-top: 0; }
+  .summary-row.total .value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--red);
+    letter-spacing: -0.025em;
+  }
+
+  /* ── Book button ── */
+  .book-btn {
+    width: 100%;
+    margin-top: 22px;
+    background: var(--red);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 18px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .book-btn:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 9px 9px 0 var(--ink);
+  }
+  .book-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: none;
+  }
+
+  .form-error {
+    display: none;
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 2px solid var(--red);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .form-error.show { display: block; }
+
+  /* ── Pack error state ── */
+  .pack-error {
+    background: var(--paper);
+    border: 2px solid var(--red);
+    box-shadow: 7px 7px 0 var(--ink);
+    padding: 36px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .pack-error h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 12px;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .pack-error p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 auto 20px;
+    max-width: 420px;
+  }
+
+  /* ── Loading overlay ── */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(244, 236, 220, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+  }
+  .overlay.show { display: flex; }
+  .overlay-card {
+    max-width: 460px;
+    width: 100%;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--red);
+    padding: 44px 36px;
+    text-align: center;
+  }
+  .spinner {
+    width: 42px;
+    height: 42px;
+    border: 3px solid var(--bg-deep);
+    border-top-color: var(--red);
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .overlay h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 10px;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .overlay p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── Footer ── */
+  .booking-footer {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 2px solid var(--ink);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    line-height: 1.7;
+  }
+  .booking-footer a {
+    color: var(--red);
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 1px;
+    transition: background .15s ease;
+  }
+  .booking-footer a:hover { background: rgba(230, 57, 53, 0.1); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="container">
+
+  <div class="booking-hero">
+    <div class="eyebrow">Run Claude With Me</div>
+    <h1 id="hero-title">Book a 60-minute <em>1:1 session</em></h1>
+    <p class="subtitle" id="hero-subtitle">One-on-one with Sev. We pair on whatever you're stuck on: building, debugging, scoping, or just shipping faster. Held over Google Meet.</p>
+    <div class="price-pill" id="hero-price">
+      <span class="amount" id="hero-price-amount">$385 AUD</span>
+      <span class="sub" id="hero-price-sub">inc GST</span>
+    </div>
+  </div>
+
+  <!-- Mode toggle (hidden in pack-redemption mode) -->
+  <div class="mode-toggle-wrap" id="mode-toggle-wrap">
+    <div class="mode-toggle">
+      <button class="mode-btn active" data-mode="single">Single session</button>
+      <button class="mode-btn" data-mode="pack">4-pack</button>
+    </div>
+  </div>
+
+  <!-- "Have a pack code?" link (hidden in pack-redemption mode) -->
+  <div class="pack-link-row" id="code-link-row">
+    Already have a pack access code?<a href="#" id="code-link">Use it here →</a>
+  </div>
+
+  <!-- Inline code prompt (toggled by the link above) -->
+  <div class="code-prompt" id="code-prompt">
+    <h3>Enter your pack access code</h3>
+    <p>It's the code from your purchase email. Format: <code>PACK-XXXX-XXXX-XXXX</code></p>
+    <input type="text" id="code-input" placeholder="PACK-XXXX-XXXX-XXXX" maxlength="22" autocomplete="off">
+    <div class="err" id="code-err"></div>
+    <div class="code-prompt-actions">
+      <button class="primary" id="code-submit">Continue</button>
+      <button class="secondary" id="code-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Pack-redemption banner (only in redeem mode) -->
+  <div class="redemption-banner hidden" id="redemption-banner">
+    <div class="eyebrow">4-Session Pack</div>
+    <h2 id="redemption-title">Welcome back.</h2>
+    <p>You have <span class="counter" id="redemption-counter">— of —</span> sessions remaining. Pick a date and time below to book your next one.</p>
+  </div>
+
+  <!-- Pack redemption error (only in redeem mode if pack invalid/expired/exhausted) -->
+  <div class="pack-error hidden" id="pack-error">
+    <h2 id="pack-error-title">Pack unavailable</h2>
+    <p id="pack-error-body">This pack can no longer be redeemed.</p>
+    <a href="/book" class="pack-buy" id="pack-error-cta">Buy a fresh pack →</a>
+  </div>
+
+  <!-- 4-pack intro banner (visible only in PACK_PURCHASE mode) -->
+  <div class="pack-intro hidden" id="pack-intro">
+    <span class="pack-savings">Save A$80 vs single sessions</span>
+    <h2><em>4-Session Pack</em> · $1,320 AUD</h2>
+    <p class="lead">Pay once for 4 × 60-minute sessions. We'll book your first session below and email you an access code to book the other 3 whenever you need them.</p>
+    <ul class="pack-features-compact">
+      <li>4 × 60-minute pair-coding sessions with Sev</li>
+      <li>Sessions 2–4 booked any time via the access code we email you</li>
+      <li>Valid 3 months · Google Meet · calendar invite for each</li>
+    </ul>
+  </div>
+
+  <!-- ===== Booking steps: shared between SINGLE, PACK_PURCHASE, and PACK_REDEEM modes ===== -->
+  <div class="mode-pane" id="pane-single">
+
+    <div class="step active" id="step-date">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div class="step-title">Pick a date</div>
+        <div class="step-meta">Next 6 available days</div>
+      </div>
+      <div id="dates-wrap">
+        <div class="loading-inline"><span class="spinner-sm"></span>Loading availability…</div>
+      </div>
+    </div>
+
+    <div class="step disabled" id="step-time">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div class="step-title">Pick a time</div>
+        <div class="step-meta" id="time-meta">Select a date first</div>
+      </div>
+      <div id="slots-wrap"></div>
+      <div class="tz-note" id="tz-note" style="display:none">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="tz-note-text">Times shown in your local timezone.</span>
+      </div>
+    </div>
+
+    <div class="step disabled" id="step-form">
+      <div class="step-head">
+        <div class="step-num">3</div>
+        <div class="step-title">Your details</div>
+      </div>
+      <div class="form-grid">
+        <div class="field" id="field-name">
+          <label>Full name</label>
+          <input type="text" id="name" placeholder="Jane Smith" autocomplete="name">
+          <div class="error-msg">Please enter your name.</div>
+        </div>
+        <div class="field" id="field-mobile">
+          <label>Mobile</label>
+          <input type="tel" id="mobile" placeholder="04XX XXX XXX" autocomplete="tel">
+          <div class="error-msg">Enter a valid Australian mobile (04XX XXX XXX or +614XX XXX XXX).</div>
+        </div>
+        <div class="field" id="field-email">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+          <div class="error-msg">Please enter a valid email address.</div>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="summary-row"><span class="label">Session</span><span class="value" id="summary-session">Run Claude With Me, 60 min</span></div>
+        <div class="summary-row"><span class="label">When</span><span class="value" id="summary-when">Not yet selected</span></div>
+        <div class="summary-row total"><span class="label" id="summary-total-label">Total</span><span class="value" id="summary-total-value">$385 AUD (inc GST)</span></div>
+      </div>
+
+      <div class="form-error" id="form-error"></div>
+      <button class="book-btn" id="book-btn">Continue to secure payment →</button>
+    </div>
+  </div>
+
+  <div class="booking-footer">
+    <span id="footer-text">By completing the secure payment, you agree to the <a href="/book/terms">Terms &amp; Conditions</a>.</span>
+  </div>
+</div>
+
+<div class="overlay" id="loading-overlay">
+  <div class="overlay-card">
+    <div class="spinner"></div>
+    <h2 id="overlay-title">Creating secure checkout</h2>
+    <p id="overlay-body">Redirecting you to Stripe to complete payment…</p>
+  </div>
+</div>
+
+<script>
+  // ============ CONFIG ============
+  const TZ = 'Australia/Perth';
+  const TZ_OFFSET_HOURS = 8;
+  const AWST_SLOTS = ['04:30', '05:30', '15:00', '16:00'];
+  const MAX_DATE_CARDS = 6;
+  const LEAD_MS = 24 * 60 * 60 * 1000;
+  const SESSION_LEN_MS = 60 * 60 * 1000;
+  const BUFFER_MS = 0;
+
+  // Pack purchase URL is injected at runtime via a server-rendered constant.
+  // For a fully static site we hardcode here from the env var value we know.
+  const PACK_PURCHASE_URL = 'https://buy.stripe.com/5kQaEXftA2Haejm05q6oo05';
+
+  // ============ MODES ============
+  const MODE = { SINGLE: 'single', PACK_PURCHASE: 'pack', PACK_REDEEM: 'redeem' };
+  let mode = MODE.SINGLE;
+  let activePack = null;          // populated in redeem mode after /api/get-pack
+
+  // ============ STATE ============
+  let dateCards = [];
+  let selectedDateKey = null;
+  let selectedSlot    = null;
+  let busyRanges      = [];
+
+  // ============ AWST helpers ============
+  function awstNow() {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: TZ,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hour12: false
+    }).formatToParts(new Date());
+    const o = {}; parts.forEach(p => o[p.type] = p.value);
+    return {
+      date: `${o.year}-${o.month}-${o.day}`,
+      hour: parseInt(o.hour, 10),
+      minute: parseInt(o.minute, 10)
+    };
+  }
+  function dayOfWeekAwst(yyyyMmDd) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    return new Date(Date.UTC(y, m - 1, d, 4)).getUTCDay();
+  }
+  function addDaysAwst(yyyyMmDd, n) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    dt.setUTCDate(dt.getUTCDate() + n);
+    return `${dt.getUTCFullYear()}-${String(dt.getUTCMonth() + 1).padStart(2,'0')}-${String(dt.getUTCDate()).padStart(2,'0')}`;
+  }
+
+  function buildAwstWeekdays(maxCount) {
+    const now = awstNow();
+    let cursor = now.date;
+    const out = [];
+    let safety = 0;
+    while (out.length < maxCount && safety++ < 40) {
+      const dow = dayOfWeekAwst(cursor);
+      if (dow !== 0 && dow !== 6) out.push(cursor);
+      cursor = addDaysAwst(cursor, 1);
+    }
+    return out;
+  }
+
+  function buildCandidateSlots() {
+    const awstWeekdays = buildAwstWeekdays(10);
+    const out = [];
+    for (const awstDate of awstWeekdays) {
+      for (const awstSlot of AWST_SLOTS) {
+        const [y, m, d] = awstDate.split('-').map(Number);
+        const [hh, mm]  = awstSlot.split(':').map(Number);
+        const startMs = Date.UTC(y, m - 1, d, hh - TZ_OFFSET_HOURS, mm);
+        out.push({ awstDate, awstSlot, startMs, endMs: startMs + SESSION_LEN_MS });
+      }
+    }
+    return out;
+  }
+
+  function slotIsAvailable(slot) {
+    if (slot.startMs < Date.now() + LEAD_MS) return false;
+    for (const b of busyRanges) {
+      if (slot.startMs < b.end + BUFFER_MS && slot.endMs > b.start - BUFFER_MS) return false;
+    }
+    return true;
+  }
+
+  function localKey(ms) {
+    const d = new Date(ms);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function buildDateCards() {
+    const all = buildCandidateSlots();
+    const groups = {};
+    for (const s of all) {
+      if (!slotIsAvailable(s)) continue;
+      const k = localKey(s.startMs);
+      if (!groups[k]) groups[k] = [];
+      groups[k].push(s);
+    }
+    const keys = Object.keys(groups).sort();
+    return keys.slice(0, MAX_DATE_CARDS).map(k => ({
+      localDate: k,
+      slots: groups[k].sort((a, b) => a.startMs - b.startMs)
+    }));
+  }
+
+  function userTzShort() {
+    try {
+      return new Intl.DateTimeFormat(undefined, { timeZoneName: 'short' })
+        .formatToParts(new Date())
+        .find(p => p.type === 'timeZoneName').value;
+    } catch { return ''; }
+  }
+  function formatLocalTime(ms) {
+    return new Date(ms).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', hour12: true }).toLowerCase();
+  }
+  function formatLocalDateLong(yyyyMmDd) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    const dt = new Date(y, m - 1, d);
+    return new Intl.DateTimeFormat(undefined, { weekday: 'long', day: 'numeric', month: 'long' }).format(dt);
+  }
+  function formatLocalDateShort(yyyyMmDd) {
+    const [y, m, d] = yyyyMmDd.split('-').map(Number);
+    const dt = new Date(y, m - 1, d);
+    return {
+      dow:   new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(dt),
+      day:   String(d),
+      month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(dt)
+    };
+  }
+
+  async function fetchAvailability() {
+    const wrap = document.getElementById('dates-wrap');
+    try {
+      const today = awstNow().date;
+      const r = await fetch(`/api/availability?from=${today}&to=${addDaysAwst(today, 16)}`);
+      if (!r.ok) throw new Error('availability fetch failed');
+      const data = await r.json();
+      busyRanges = (data.busy || []).map(b => ({
+        start: new Date(b.start).getTime(),
+        end:   new Date(b.end).getTime()
+      }));
+      dateCards = buildDateCards();
+      renderDates();
+    } catch (err) {
+      console.error(err);
+      wrap.innerHTML = '<div class="empty-state">Couldn\'t load availability. Please refresh.</div>';
+    }
+  }
+
+  function renderDates() {
+    const wrap = document.getElementById('dates-wrap');
+    if (dateCards.length === 0) {
+      wrap.innerHTML = '<div class="empty-state">No times available right now. Please check back later.</div>';
+      return;
+    }
+    const localToday = (() => {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    })();
+    wrap.innerHTML = '<div class="dates" id="dates"></div>';
+    const grid = document.getElementById('dates');
+    dateCards.forEach(card => {
+      const parts = formatLocalDateShort(card.localDate);
+      const btn = document.createElement('button');
+      btn.className = 'date-btn';
+      btn.dataset.key = card.localDate;
+      btn.innerHTML = `
+        <div class="dow">${card.localDate === localToday ? 'Today' : parts.dow}</div>
+        <div class="day-num">${parts.day}</div>
+        <div class="month">${parts.month}</div>
+      `;
+      btn.addEventListener('click', () => selectDate(card.localDate));
+      grid.appendChild(btn);
+    });
+  }
+
+  function selectDate(key) {
+    selectedDateKey = key;
+    selectedSlot = null;
+    document.querySelectorAll('.date-btn').forEach(b => b.classList.toggle('selected', b.dataset.key === key));
+    const stepTime = document.getElementById('step-time');
+    stepTime.classList.remove('disabled'); stepTime.classList.add('active');
+    const stepForm = document.getElementById('step-form');
+    stepForm.classList.add('disabled'); stepForm.classList.remove('active');
+    document.getElementById('time-meta').textContent = formatLocalDateLong(key);
+    const note = document.getElementById('tz-note');
+    note.style.display = 'flex';
+    const tz = userTzShort();
+    document.getElementById('tz-note-text').innerHTML =
+      tz ? `Times shown in your local timezone (<strong>${tz}</strong>).` : 'Times shown in your local timezone.';
+    renderSlots();
+    updateSummary();
+    stepTime.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function renderSlots() {
+    const wrap = document.getElementById('slots-wrap');
+    wrap.innerHTML = '<div class="slots" id="slots"></div>';
+    const grid = document.getElementById('slots');
+    const card = dateCards.find(c => c.localDate === selectedDateKey);
+    if (!card) return;
+    card.slots.forEach(slot => {
+      const btn = document.createElement('button');
+      btn.className = 'slot-btn';
+      btn.textContent = formatLocalTime(slot.startMs);
+      btn.addEventListener('click', () => selectSlot(slot));
+      grid.appendChild(btn);
+    });
+  }
+
+  function selectSlot(slot) {
+    selectedSlot = slot;
+    document.querySelectorAll('.slot-btn').forEach(b => b.classList.toggle('selected', b.textContent === formatLocalTime(slot.startMs)));
+    const stepForm = document.getElementById('step-form');
+    stepForm.classList.remove('disabled'); stepForm.classList.add('active');
+    updateSummary();
+    saveBookingState();
+    stepForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function updateSummary() {
+    const el = document.getElementById('summary-when');
+    if (!selectedSlot) { el.textContent = 'Not yet selected'; return; }
+    const startMs = selectedSlot.startMs, endMs = selectedSlot.endMs;
+    const tz = userTzShort();
+    const dateLine = new Intl.DateTimeFormat(undefined, { weekday: 'short', day: 'numeric', month: 'short' }).format(new Date(startMs));
+    const timeLine = `${formatLocalTime(startMs)} to ${formatLocalTime(endMs)}`;
+    el.textContent = `${dateLine}, ${timeLine}${tz ? ' ' + tz : ''}`;
+  }
+
+  function validateForm() {
+    let ok = true;
+    const name = document.getElementById('name').value.trim();
+    document.getElementById('field-name').classList.toggle('error', name.length < 2);
+    if (name.length < 2) ok = false;
+    const mobile = document.getElementById('mobile').value.replace(/\s+/g, '');
+    const mobileOk = /^04\d{8}$/.test(mobile) || /^\+614\d{8}$/.test(mobile);
+    document.getElementById('field-mobile').classList.toggle('error', !mobileOk);
+    if (!mobileOk) ok = false;
+    const email = document.getElementById('email').value.trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    document.getElementById('field-email').classList.toggle('error', !emailOk);
+    if (!emailOk) ok = false;
+    return ok ? { name, mobile, email } : null;
+  }
+
+  function showFormError(msg) {
+    const el = document.getElementById('form-error');
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+  function clearFormError() {
+    document.getElementById('form-error').classList.remove('show');
+  }
+
+  // ============ Submit ============
+  document.getElementById('book-btn').addEventListener('click', async () => {
+    if (!selectedSlot) return;
+    clearFormError();
+    const data = validateForm();
+    if (!data) return;
+
+    saveBookingState();
+    const overlayTitle = document.getElementById('overlay-title');
+    const overlayBody  = document.getElementById('overlay-body');
+    if (mode === MODE.PACK_REDEEM) {
+      overlayTitle.textContent = 'Confirming your booking';
+      overlayBody.textContent  = 'Almost there — locking in your session…';
+    } else if (mode === MODE.PACK_PURCHASE) {
+      overlayTitle.textContent = 'Creating secure checkout';
+      overlayBody.textContent  = 'Redirecting you to Stripe to pay for your 4-pack and lock in your first session…';
+    } else {
+      overlayTitle.textContent = 'Creating secure checkout';
+      overlayBody.textContent  = 'Redirecting you to Stripe to complete payment…';
+    }
+    document.getElementById('loading-overlay').classList.add('show');
+    try {
+      const payload = {
+        date:   selectedSlot.awstDate,
+        slot:   selectedSlot.awstSlot,
+        name:   data.name,
+        email:  data.email,
+        mobile: data.mobile
+      };
+      if (mode === MODE.PACK_REDEEM && activePack) {
+        payload.pack_code = new URLSearchParams(window.location.search).get('code');
+      } else if (mode === MODE.PACK_PURCHASE) {
+        payload.mode = 'pack_purchase';
+      }
+      const r = await fetch('/api/create-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const json = await r.json();
+      if (!r.ok || !json.ok || !json.url) throw new Error(json.error || 'Could not create booking');
+      // Clear booking state so back-nav doesn't show stale data
+      try { sessionStorage.removeItem('rcwm-booking-state'); } catch {}
+      window.location = json.url;
+    } catch (err) {
+      document.getElementById('loading-overlay').classList.remove('show');
+      showFormError(err.message || 'Something went wrong. Please try again.');
+      fetchAvailability();
+    }
+  });
+
+  // ============ Mode switching ============
+  function applyMode(newMode) {
+    mode = newMode;
+    const paneSingle    = document.getElementById('pane-single');
+    const packIntro     = document.getElementById('pack-intro');
+    const toggleWrap    = document.getElementById('mode-toggle-wrap');
+    const codeLinkRow   = document.getElementById('code-link-row');
+    const banner        = document.getElementById('redemption-banner');
+    const footerText    = document.getElementById('footer-text');
+    const bookBtn       = document.getElementById('book-btn');
+    const totalLabel    = document.getElementById('summary-total-label');
+    const totalValue    = document.getElementById('summary-total-value');
+    const heroPrice     = document.getElementById('hero-price');
+    const summarySession = document.getElementById('summary-session');
+
+    // Reset visibility flags. The steps (`pane-single`) are visible in all
+    // three modes — only the intro/banner/toggle chrome changes.
+    paneSingle.classList.remove('hidden');
+    packIntro.classList.add('hidden');
+    toggleWrap.classList.remove('hidden');
+    codeLinkRow.classList.remove('hidden');
+    banner.classList.add('hidden');
+
+    if (newMode === MODE.SINGLE) {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === 'single'));
+      heroPrice.style.display = '';
+      document.getElementById('hero-price-amount').textContent = '$385 AUD';
+      document.getElementById('hero-price-sub').textContent    = 'inc GST · single session';
+      summarySession.textContent = 'Run Claude With Me, 60 min';
+      totalLabel.textContent = 'Total';
+      totalValue.textContent = '$385 AUD (inc GST)';
+      bookBtn.textContent    = 'Continue to secure payment →';
+      footerText.innerHTML   = `By completing the secure payment, you agree to the <a href="/book/terms">Terms &amp; Conditions</a>.`;
+    } else if (newMode === MODE.PACK_PURCHASE) {
+      packIntro.classList.remove('hidden');
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === 'pack'));
+      heroPrice.style.display = '';
+      document.getElementById('hero-price-amount').textContent = '$1,320 AUD';
+      document.getElementById('hero-price-sub').textContent    = 'inc GST · 4-session pack';
+      summarySession.textContent = 'First session of your 4-pack';
+      totalLabel.textContent = 'Total';
+      totalValue.textContent = '$1,320 AUD (4 sessions, inc GST)';
+      bookBtn.textContent    = 'Buy 4-pack + book first session →';
+      footerText.innerHTML   = `By completing the secure payment, you agree to the <a href="/book/terms">Terms &amp; Conditions</a>. Your 4-pack is non-refundable.`;
+    } else if (newMode === MODE.PACK_REDEEM) {
+      toggleWrap.classList.add('hidden');
+      codeLinkRow.classList.add('hidden');
+      banner.classList.remove('hidden');
+      heroPrice.style.display = 'none';
+      summarySession.textContent = 'Run Claude With Me, 60 min';
+      totalLabel.textContent = 'Total';
+      totalValue.textContent = 'Covered by your pack';
+      bookBtn.textContent    = 'Confirm booking';
+      footerText.innerHTML   = `By confirming this booking, you agree to the <a href="/book/terms">Terms &amp; Conditions</a>.`;
+    }
+  }
+
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.mode === 'pack' ? MODE.PACK_PURCHASE : MODE.SINGLE;
+      applyMode(target);
+    });
+  });
+
+  // ============ Pack code redemption ============
+  const codeLink   = document.getElementById('code-link');
+  const codePrompt = document.getElementById('code-prompt');
+  const codeInput  = document.getElementById('code-input');
+  const codeErr    = document.getElementById('code-err');
+
+  codeLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    codePrompt.classList.add('show');
+    setTimeout(() => codeInput.focus(), 50);
+  });
+  document.getElementById('code-cancel').addEventListener('click', () => {
+    codePrompt.classList.remove('show');
+    codeErr.textContent = '';
+  });
+  document.getElementById('code-submit').addEventListener('click', tryCode);
+  codeInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); tryCode(); }
+  });
+
+  function tryCode() {
+    const code = codeInput.value.trim().toUpperCase().replace(/\s+/g, '');
+    if (!/^PACK-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{4}$/.test(code)) {
+      codeErr.textContent = 'That code doesn\'t look right. Format: PACK-XXXX-XXXX-XXXX.';
+      return;
+    }
+    // Just put it on the URL and let the same code path validate
+    window.location = `/book?code=${encodeURIComponent(code)}`;
+  }
+
+  async function tryEnterRedemptionMode() {
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (!code) return false;
+    try {
+      const r = await fetch(`/api/get-pack?code=${encodeURIComponent(code)}`);
+      const json = await r.json();
+      if (!r.ok || !json.ok) {
+        return showPackErrorState(json.error === 'Code not found'
+          ? { title: 'Code not recognised', body: 'We couldn\'t find that pack. Double-check the link in your purchase email, or contact sev@sevspics.com.' }
+          : { title: 'Invalid code', body: json.error || 'That code can\'t be redeemed.' });
+      }
+      const pack = json.pack;
+      activePack = pack;
+      if (!pack.redeemable) {
+        let title = 'Pack unavailable';
+        let body  = 'This pack can no longer be redeemed.';
+        if (pack.status === 'expired')   { title = 'This pack has expired';   body = `Sessions expired on ${new Date(pack.expires_at).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}.`; }
+        if (pack.status === 'exhausted') { title = 'Pack fully used';         body = `All ${pack.total_sessions} sessions of this pack are booked. Need more? Grab another pack below.`; }
+        if (pack.status === 'cancelled') { title = 'Pack cancelled';          body = 'This pack has been cancelled. Contact sev@sevspics.com if this is unexpected.'; }
+        return showPackErrorState({ title, body });
+      }
+      applyMode(MODE.PACK_REDEEM);
+      document.getElementById('redemption-title').textContent =
+        `Welcome${pack.customer_name ? ', ' + pack.customer_name.split(' ')[0] : ''}.`;
+      document.getElementById('redemption-counter').textContent =
+        `${pack.sessions_remaining} of ${pack.total_sessions}`;
+      // Prefill the form
+      if (pack.customer_name)  document.getElementById('name').value  = pack.customer_name;
+      if (pack.customer_email) document.getElementById('email').value = pack.customer_email;
+      return true;
+    } catch (err) {
+      console.error(err);
+      return showPackErrorState({ title: 'Couldn\'t check your pack', body: 'Try refreshing the page. If it keeps happening, contact sev@sevspics.com.' });
+    }
+  }
+
+  function showPackErrorState({ title, body }) {
+    document.getElementById('pack-error-title').textContent = title;
+    document.getElementById('pack-error-body').textContent  = body;
+    document.getElementById('pack-error').classList.remove('hidden');
+    document.getElementById('pane-single').classList.add('hidden');
+    document.getElementById('pack-intro').classList.add('hidden');
+    document.getElementById('mode-toggle-wrap').classList.add('hidden');
+    document.getElementById('code-link-row').classList.add('hidden');
+    return true;
+  }
+
+  // ============ State persistence (Stripe back-nav) ============
+  const STORAGE_KEY  = 'rcwm-booking-state';
+  const STATE_TTL_MS = 60 * 60 * 1000;
+
+  function saveBookingState() {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+        name:     document.getElementById('name').value,
+        mobile:   document.getElementById('mobile').value,
+        email:    document.getElementById('email').value,
+        awstDate: selectedSlot ? selectedSlot.awstDate : null,
+        awstSlot: selectedSlot ? selectedSlot.awstSlot : null,
+        ts:       Date.now()
+      }));
+    } catch {}
+  }
+  function loadBookingState() {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const s = JSON.parse(raw);
+      if (!s || Date.now() - (s.ts || 0) > STATE_TTL_MS) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+      return s;
+    } catch { return null; }
+  }
+  function applyBookingState(s) {
+    if (!s) return;
+    if (s.name)   document.getElementById('name').value   = s.name;
+    if (s.mobile) document.getElementById('mobile').value = s.mobile;
+    if (s.email)  document.getElementById('email').value  = s.email;
+    if (s.awstDate && s.awstSlot) {
+      for (const card of dateCards) {
+        const slot = card.slots.find(x => x.awstDate === s.awstDate && x.awstSlot === s.awstSlot);
+        if (slot) { selectDate(card.localDate); selectSlot(slot); return; }
+      }
+    }
+  }
+
+  ['name', 'mobile', 'email'].forEach(id => {
+    document.getElementById(id).addEventListener('input', saveBookingState);
+  });
+
+  window.addEventListener('pageshow', (event) => {
+    document.getElementById('loading-overlay').classList.remove('show');
+    if (event.persisted) {
+      fetchAvailability().then(() => applyBookingState(loadBookingState()));
+    }
+  });
+
+  // Re-fetch availability when the tab becomes visible again so blocks added
+  // in another tab (e.g. /admin/availability) take effect without a refresh.
+  // Also re-runs if the page has been idle for more than 60s — covers laptops
+  // that wake from sleep mid-booking.
+  let lastFetchAt = Date.now();
+  const refetchFn = () => {
+    lastFetchAt = Date.now();
+    fetchAvailability().then(() => applyBookingState(loadBookingState()));
+  };
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    if (Date.now() - lastFetchAt < 5000) return; // dedupe rapid switches
+    refetchFn();
+  });
+  window.addEventListener('focus', () => {
+    if (Date.now() - lastFetchAt < 5000) return;
+    refetchFn();
+  });
+
+  // ============ Init ============
+  (async () => {
+    const isRedeem = await tryEnterRedemptionMode();
+    if (isRedeem === true) {
+      // In redeem mode we still need availability + slot UI
+      fetchAvailability();
+    } else if (isRedeem === false) {
+      // No code in URL — default to single mode
+      applyMode(MODE.SINGLE);
+      fetchAvailability().then(() => applyBookingState(loadBookingState()));
+    }
+    // (isRedeem returned truthy for error state — no availability fetch needed)
+  })();
+</script>
+</body>
+</html>

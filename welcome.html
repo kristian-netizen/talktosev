@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talk To Sev — Content systems for service businesses that actually want clients</title>
+<meta name="description" content="Most service businesses are creating content that does nothing. Here's how the ones bringing in clients are different — and how to become one in 90 days.">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta property="og:title" content="Talk to Sev — Content systems for service businesses">
+<meta property="og:description" content="Most service businesses are creating content that does nothing. Here's how the ones bringing in clients are different.">
+<meta property="og:image" content="https://talktosev.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://talktosev.com/welcome">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Talk to Sev — Content systems for service businesses">
+<meta name="twitter:description" content="Most service businesses are creating content that does nothing. Here's how the ones bringing in clients are different.">
+<meta name="twitter:image" content="https://talktosev.com/og-image.png">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-2: #0d0d0d;
+    --card: #111111;
+    --card-hover: #161616;
+    --border: #222222;
+    --border-strong: #2e2e2e;
+    --text: #e8e4dc;
+    --text-soft: #b8b3a9;
+    --text-muted: #777;
+    --text-dim: #555;
+    --accent: #c8a96e;
+    --accent-bright: #e8c88a;
+    --accent-dim: rgba(200, 169, 110, .10);
+    --accent-line: rgba(200, 169, 110, .25);
+    --green: #4a9e6a;
+    --green-dim: rgba(74, 158, 106, .10);
+    --blue: #5a8ec8;
+    --blue-dim: rgba(90, 142, 200, .10);
+    --red: #c85a4a;
+    --red-dim: rgba(200, 90, 74, .10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: #0a0a0a; }
+
+  /* ── Sticky top nav ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 10, .82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: .2px;
+    text-decoration: none;
+  }
+  .nav-brand em { color: var(--accent); font-style: italic; }
+  .nav-links {
+    display: flex;
+    gap: 26px;
+    margin-left: auto;
+    font-size: 13px;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent);
+    color: #0a0a0a;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: opacity .2s, transform .15s;
+  }
+  .nav-cta:hover { opacity: .88; transform: translateY(-1px); }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+  }
+
+  /* ── Section frame ── */
+  .section {
+    position: relative;
+    padding: 96px 24px;
+  }
+  .section-tight { padding: 72px 24px; }
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+  .container-narrow {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Section eyebrow + heading system */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 22px;
+  }
+  .eyebrow .num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--accent-bright);
+    letter-spacing: 0;
+  }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.15; }
+  h2 {
+    font-size: clamp(28px, 4.4vw, 44px);
+    margin-bottom: 16px;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+  h3 { font-size: 22px; }
+  .lede {
+    font-size: 17px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    max-width: 620px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 64px 24px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(200, 169, 110, .08) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 80%, rgba(90, 142, 200, .04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    max-width: 1240px;
+    margin: 0 auto;
+    position: relative;
+  }
+  @media (max-width: 920px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero-tag .pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(200, 169, 110, .6); }
+    70% { box-shadow: 0 0 0 8px rgba(200, 169, 110, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0); }
+  }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -.5px;
+    margin-bottom: 22px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    max-width: 540px;
+    margin-bottom: 32px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 26px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: .2px;
+    transition: opacity .2s, transform .15s, background .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0a;
+  }
+  .btn-primary:hover { background: var(--accent-bright); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-arrow { font-size: 14px; }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+  .stack-pics {
+    display: flex;
+    align-items: center;
+  }
+  .stack-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 2px solid var(--bg);
+    margin-left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .stack-pic:first-child { margin-left: 0; }
+
+  /* ── Placeholder system ── */
+  .ph {
+    position: relative;
+    background:
+      linear-gradient(135deg, rgba(200, 169, 110, .035), rgba(200, 169, 110, .005)),
+      repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(200, 169, 110, .025) 22px, rgba(200, 169, 110, .025) 23px);
+    border: 1px dashed rgba(200, 169, 110, .35);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 28px 24px;
+  }
+  .ph-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(200, 169, 110, .12);
+    border: 1px solid rgba(200, 169, 110, .25);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .ph-tag.video-tag { color: var(--blue); background: rgba(90, 142, 200, .12); border-color: rgba(90, 142, 200, .3); }
+  .ph-icon {
+    color: var(--accent);
+    margin-bottom: 14px;
+    opacity: .85;
+  }
+  .ph-tag.video-tag + .ph-icon { color: var(--blue); }
+  .ph-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .ph-suggest {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    max-width: 440px;
+    margin: 0 auto 14px;
+  }
+  .ph-suggest strong { color: var(--text); font-weight: 500; }
+  .ph-spec {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(200, 169, 110, .15);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+  .ph-spec span { color: var(--accent); font-weight: 700; }
+
+  /* size variants */
+  .ph-portrait { aspect-ratio: 4 / 5; }
+  .ph-square { aspect-ratio: 1 / 1; }
+  .ph-landscape { aspect-ratio: 16 / 9; }
+  .ph-tall { aspect-ratio: 3 / 4; }
+  .ph-vertical { aspect-ratio: 9 / 16; }
+  .ph-wide { aspect-ratio: 21 / 9; }
+  .ph-hero {
+    aspect-ratio: 4 / 5;
+    min-height: 480px;
+  }
+
+  .ph-play {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(90, 142, 200, .12);
+    border: 1px solid rgba(90, 142, 200, .3);
+    color: var(--blue);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── Trust bar (logo strip) ── */
+  .trustbar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px;
+    background: var(--bg-2);
+  }
+  .trustbar-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  @media (max-width: 720px) {
+    .trustbar-inner { grid-template-columns: 1fr; gap: 18px; text-align: center; }
+  }
+  .trustbar-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .trustbar-label strong { color: var(--text); }
+  .trustbar-logos {
+    display: flex;
+    gap: 38px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  @media (max-width: 720px) {
+    .trustbar-logos { justify-content: center; gap: 20px; }
+  }
+  .logo-slot {
+    height: 32px;
+    min-width: 110px;
+    background: rgba(255, 255, 255, .03);
+    border: 1px dashed rgba(255, 255, 255, .12);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0 14px;
+  }
+
+  /* ── Founder video section ── */
+  .founder-section {
+    padding: 88px 24px 96px;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 56px;
+    max-width: 1160px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  @media (max-width: 920px) {
+    .founder-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  .founder-text h2 { margin-bottom: 18px; }
+  .founder-text p {
+    font-size: 16.5px;
+    color: var(--text-soft);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .founder-signature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .founder-sig-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--accent);
+  }
+  .founder-sig-role {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ── Pain section ── */
+  .pain-section {
+    padding: 96px 24px;
+    text-align: center;
+  }
+  .pain-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 50px;
+    text-align: left;
+  }
+  @media (max-width: 900px) {
+    .pain-cards { grid-template-columns: 1fr; max-width: 460px; margin: 50px auto 0; }
+  }
+  .pain-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px 24px 24px;
+    transition: border-color .25s, transform .25s;
+  }
+  .pain-card:hover {
+    border-color: rgba(200, 90, 74, .35);
+    transform: translateY(-3px);
+  }
+  .pain-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .pain-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .pain-card p {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+  .pain-tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    background: var(--red-dim);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* ── Cost-of-inaction pull-out ── */
+  .cost-strip {
+    background: linear-gradient(135deg, rgba(200, 90, 74, .06), transparent);
+    border-top: 1px solid rgba(200, 90, 74, .15);
+    border-bottom: 1px solid rgba(200, 90, 74, .15);
+    padding: 56px 24px;
+    text-align: center;
+  }
+  .cost-strip-inner { max-width: 760px; margin: 0 auto; }
+  .cost-strip h2 {
+    font-size: clamp(24px, 3.5vw, 34px);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  .cost-strip h2 em { color: var(--red); font-style: italic; }
+  .cost-strip p {
+    font-size: 16px;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+
+  /* ── Origin / about ── */
+  .origin-section { padding: 100px 24px; }
+  .origin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    max-width: 1160px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  @media (max-width: 920px) {
+    .origin-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  .origin-text p {
+    font-size: 16.5px;
+    color: var(--text-soft);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .origin-text p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    float: left;
+    line-height: .9;
+    color: var(--accent);
+    margin: 4px 12px -4px 0;
+    font-weight: 700;
+  }
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--text);
+    border-left: 3px solid var(--accent);
+    padding: 6px 22px;
+    margin: 28px 0;
+  }
+
+  /* ── Method (Money 7) ── */
+  .method-section {
+    padding: 100px 24px;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .method-head { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+  .method-head .lede { margin: 0 auto; }
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+  @media (max-width: 920px) {
+    .method-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  .money7-list { list-style: none; counter-reset: m7; }
+  .money7-list li {
+    counter-increment: m7;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+  .money7-list li:last-child { border-bottom: 1px solid var(--border); }
+  .money7-list li::before {
+    content: counter(m7, decimal-leading-zero);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent);
+    line-height: 1.3;
+  }
+  .money7-list .m7-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .money7-list .m7-desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .money7-list li.locked {
+    opacity: .55;
+  }
+  .locked-badge {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .method-note {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding: 14px 16px;
+    background: rgba(200, 169, 110, .04);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* ── Featured case study ── */
+  .case-section { padding: 100px 24px; }
+  .case-eyebrow-row {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .case-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    overflow: hidden;
+    max-width: 1160px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 920px) {
+    .case-card { grid-template-columns: 1fr; }
+  }
+  .case-media {
+    background: var(--bg-2);
+    padding: 32px;
+    border-right: 1px solid var(--border);
+  }
+  @media (max-width: 920px) {
+    .case-media { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+  .case-body { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; }
+  .case-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .case-quote::before { content: '“'; color: var(--accent); font-size: 32px; margin-right: 4px; vertical-align: -6px; }
+  .case-quote::after { content: '”'; color: var(--accent); font-size: 32px; margin-left: 4px; vertical-align: -6px; }
+  .case-attrib {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    letter-spacing: .5px;
+  }
+  .case-attrib strong { color: var(--text); font-weight: 700; }
+  .case-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 480px) {
+    .case-stats { grid-template-columns: 1fr 1fr; }
+  }
+  .case-stat {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+  }
+  .case-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .case-stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+  }
+  .case-link {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── Wall of testimonials ── */
+  .wall-section {
+    padding: 100px 24px;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .wall-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+  .wall-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) {
+    .wall-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .wall-grid { grid-template-columns: 1fr; max-width: 460px; }
+  }
+  .wall-tile {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    transition: border-color .2s, transform .25s;
+  }
+  .wall-tile:hover { border-color: var(--accent-line); transform: translateY(-3px); }
+  .wall-tile.video-tile { padding: 0; overflow: hidden; }
+  .wall-tile.video-tile .ph { border: none; border-radius: 0; }
+  .wall-tile blockquote {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .wall-tile blockquote::before { content: '“'; color: var(--accent); font-family: 'Playfair Display', serif; font-size: 24px; margin-right: 2px; }
+  .wall-attrib { display: flex; gap: 12px; align-items: center; }
+  .wall-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(200, 169, 110, .2), rgba(200, 169, 110, .05));
+    border: 1px dashed rgba(200, 169, 110, .35);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: .5px;
+    text-align: center;
+    line-height: 1;
+    padding: 4px;
+  }
+  .wall-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .wall-role { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Marquee ── */
+  .marquee {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 22px 0;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 56px;
+    animation: scroll 50s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    flex-shrink: 0;
+  }
+  .marquee-item::after {
+    content: '✦';
+    color: var(--accent);
+    font-size: 12px;
+    font-style: normal;
+  }
+
+  /* ── PRICING ── */
+  .pricing-section {
+    padding: 100px 24px;
+    text-align: center;
+  }
+  .pricing-head { max-width: 720px; margin: 0 auto 56px; }
+  .pricing-head .lede { margin: 0 auto; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+    max-width: 1160px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; max-width: 440px; }
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s, border-color .25s;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+  .card.featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 48px rgba(200, 169, 110, .07);
+  }
+  .card.featured::before {
+    content: 'Most Popular';
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #0a0a0a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card:nth-child(1) .card-label { color: var(--green); }
+  .card:nth-child(2) .card-label { color: var(--accent); }
+  .card:nth-child(3) .card-label { color: var(--blue); }
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .card .subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .price-block { margin-bottom: 24px; }
+  .price-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .price-suffix {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 2px;
+  }
+  .price-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+  .price-alt {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    padding: 6px 12px;
+    line-height: 1.4;
+  }
+  .price-alt strong { font-weight: 700; }
+  .divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+  .features-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .features { list-style: none; margin-bottom: 28px; flex: 1; }
+  .features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .features li .icon { flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; }
+  .card:nth-child(1) .features li .icon { color: var(--green); }
+  .card:nth-child(2) .features li .icon { color: var(--accent); }
+  .card:nth-child(3) .features li .icon { color: var(--blue); }
+  .callout {
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+  .callout-gold {
+    background: var(--accent-dim);
+    border: 1px solid var(--accent-line);
+    color: var(--accent);
+  }
+  .callout-blue {
+    background: var(--blue-dim);
+    border: 1px solid rgba(90, 142, 200, .2);
+    color: var(--blue);
+  }
+  .callout strong { font-weight: 700; }
+  .cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: .3px;
+  }
+  .cta:hover { opacity: .88; transform: translateY(-1px); }
+  .cta-green { background: var(--green); color: #fff; }
+  .cta-gold { background: var(--accent); color: #0a0a0a; }
+  .cta-blue { background: var(--blue); color: #fff; }
+  .shared { margin-top: 56px; text-align: center; }
+  .shared h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .shared-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .shared-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 7px 16px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* ── Future pacing ── */
+  .future-section {
+    padding: 100px 24px;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  }
+  .future-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 56px;
+    max-width: 1160px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  @media (max-width: 920px) {
+    .future-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  .future-text h2 { margin-bottom: 18px; }
+  .future-text p { font-size: 16px; color: var(--text-soft); line-height: 1.75; margin-bottom: 14px; }
+  .future-bullets { list-style: none; margin-top: 22px; }
+  .future-bullets li {
+    display: flex;
+    gap: 12px;
+    align-items: start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--text);
+  }
+  .future-bullets li::before {
+    content: '→';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── FAQ ── */
+  .faq-section { padding: 100px 24px; }
+  .faq-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+  .faq-head .lede { margin: 0 auto; }
+  .faq-list { max-width: 820px; margin: 0 auto; }
+  details.faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 22px 0;
+  }
+  details.faq-item[open] summary { color: var(--accent); }
+  details.faq-item summary {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    transition: color .2s;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: '+';
+    color: var(--accent);
+    font-size: 26px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform .2s;
+    flex-shrink: 0;
+  }
+  details.faq-item[open] summary::after { transform: rotate(45deg); }
+  details.faq-item p {
+    margin-top: 14px;
+    color: var(--text-soft);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── Final CTA ── */
+  .final-section {
+    padding: 110px 24px 100px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(200, 169, 110, .14) 0%, transparent 65%),
+      var(--bg-2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+  }
+  .final-inner { max-width: 760px; margin: 0 auto; }
+  .final-section h2 {
+    font-size: clamp(32px, 5vw, 50px);
+    line-height: 1.1;
+    margin-bottom: 22px;
+  }
+  .final-section .lede { margin: 0 auto 36px; font-size: 17px; }
+  .final-cohort {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--card);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 16px 22px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .final-cohort .dot-fill {
+    display: flex;
+    gap: 4px;
+  }
+  .final-cohort .dot-fill .d {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-strong);
+  }
+  .final-cohort .dot-fill .d.lit { background: var(--accent); }
+  .final-cohort strong { color: var(--accent); font-weight: 700; }
+  .final-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .final-fineprint {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 14px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    background: var(--bg);
+  }
+  footer p { font-size: 13px; color: var(--text-muted); }
+  footer p + p { margin-top: 6px; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── Modal (preserved from original) ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--card);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 40px 32px 36px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    animation: modalIn .25s ease-out;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color .2s;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .modal .modal-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .modal-option {
+    display: block;
+    width: 100%;
+    padding: 18px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .15s;
+    margin-bottom: 12px;
+  }
+  .modal-option:last-child { margin-bottom: 0; }
+  .modal-option:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    transform: translateY(-2px);
+  }
+  .modal-option .opt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-option .opt-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .modal-option .opt-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .modal-option .opt-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .modal-option .opt-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-dim);
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 6px;
+  }
+  .modal-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+    position: relative;
+  }
+  .modal-divider span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card);
+    padding: 0 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* ── Reveal-on-scroll ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+    will-change: opacity, transform;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ── Mobile sticky CTA bar ── */
+  .mobile-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, .94);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--border);
+    padding: 10px 14px env(safe-area-inset-bottom, 10px);
+    z-index: 90;
+    display: flex;
+    gap: 8px;
+  }
+  .mobile-cta a {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .mobile-cta .mc-primary { background: var(--accent); color: #0a0a0a; }
+  .mobile-cta .mc-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+  @media (max-width: 720px) {
+    .mobile-cta { display: flex; }
+    body { padding-bottom: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────────────────────────────────────────────────────
+     STICKY TOP NAV
+     ───────────────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Talk to <em>Sev</em></a>
+    <div class="nav-links">
+      <a href="#story">Story</a>
+      <a href="#method">Method</a>
+      <a href="#proof">Proof</a>
+      <a href="#pricing">Work with me</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#pricing" class="nav-cta">Book a session</a>
+  </div>
+</nav>
+
+<!-- ─────────────────────────────────────────────────────────
+     HERO — Pattern interrupt headline + Sev portrait
+     ───────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-grid">
+
+    <div class="hero-text">
+      <div class="hero-tag"><span class="pulse"></span>Now booking · May cohort · 4 of 10 spots open</div>
+
+      <h1>Most service businesses are creating content that does <em>nothing</em>.</h1>
+
+      <p class="hero-sub">Here's what the ones bringing in clients are doing differently — and how to become one of them in 90 days. No agency, no ads, no posting hacks. Just a system you actually own.</p>
+
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn btn-primary">Book a strategy session <span class="btn-arrow">→</span></a>
+        <a href="#founder" class="btn btn-ghost">Watch the 90-sec intro</a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="stack-pics">
+          <div class="stack-pic">JM</div>
+          <div class="stack-pic">DC</div>
+          <div class="stack-pic">SR</div>
+          <div class="stack-pic">+</div>
+        </div>
+        <div>Trusted by service-based business owners across AU</div>
+      </div>
+    </div>
+
+    <!-- HERO PHOTO PLACEHOLDER -->
+    <div class="ph ph-hero">
+      <div class="ph-tag">
+        <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 6h2l1.5-2h5L14 6h2a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        Photo · Hero portrait
+      </div>
+      <svg class="ph-icon" width="44" height="44" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 20c1-3.5 4-5 7-5s6 1.5 7 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div class="ph-title">Sev — mid-conversation, candid, eye contact with camera</div>
+      <p class="ph-suggest">
+        <strong>Vibe:</strong> animated, slight lean-in, mid-laugh or mid-thought. Not corporate, not posed. Warm side-light (golden hour or filtered window light). One hand visible, gesturing. Plain or softly textured background — no busy office wall.
+        <br><br>
+        <strong>Why:</strong> the first photo on the page has to make a stranger feel like they already kind of know you. Stiff = scroll. Real = stay.
+      </p>
+      <div class="ph-spec">
+        <span>4:5 portrait</span> · 1600×2000px min · raw + edited
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     TRUST BAR — logo strip
+     ───────────────────────────────────────────────────────── -->
+<div class="trustbar">
+  <div class="trustbar-inner">
+    <div class="trustbar-label"><strong>Service-based businesses I've worked with</strong><br>Concrete · Dental · Trades · Coaches · Studios</div>
+    <div class="trustbar-logos">
+      <div class="logo-slot">Client logo 1</div>
+      <div class="logo-slot">Client logo 2</div>
+      <div class="logo-slot">Client logo 3</div>
+      <div class="logo-slot">Client logo 4</div>
+      <div class="logo-slot">Client logo 5</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     FOUNDER VIDEO — intro to Sev
+     ───────────────────────────────────────────────────────── -->
+<section class="founder-section" id="founder">
+  <div class="founder-grid">
+
+    <!-- FOUNDER VIDEO PLACEHOLDER -->
+    <div class="ph ph-landscape reveal" style="min-height:360px">
+      <div class="ph-tag video-tag">
+        <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 5h12v10H4z" stroke="currentColor" stroke-width="1.6"/><path d="M16 8l3-2v8l-3-2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        Video · 60–90 sec founder intro
+      </div>
+      <svg class="ph-icon" width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M10 8.5v7l6-3.5-6-3.5z" fill="currentColor"/></svg>
+      <div class="ph-title">90 seconds: who you are, what you do, who this is for</div>
+      <p class="ph-suggest">
+        <strong>Open:</strong> "If you're a service business owner posting content but getting nothing back — this is for you."<br>
+        <strong>Middle:</strong> name yourself, what you actually do, who you've helped. <em>One specific result</em>.<br>
+        <strong>End:</strong> a cliff-hanger that makes them want to scroll. "Want to see what every business that fixed this did first? Keep going."
+        <br><br>
+        <strong>Look:</strong> shot on the same camera you'd use day-to-day. Direct to camera. No studio. Slightly slower pace than feels natural.
+      </p>
+      <div class="ph-spec"><span>16:9 landscape</span> · vertical 9:16 cutdown for mobile</div>
+    </div>
+
+    <div class="founder-text reveal">
+      <div class="eyebrow"><span class="num">01</span> Meet Sev</div>
+      <h2>I'm not an agency. I'm the guy you call when the agency stops working.</h2>
+      <p>I work with service-based business owners who are tired of paying retainers for results they can't measure, posting content that doesn't move the needle, or staring at a blank doc trying to figure out what to film next.</p>
+      <p>The system I teach is the same one I built for my own business — and the same one I now use with clients who want a marketing function that doesn't disappear when the contract ends.</p>
+      <div class="founder-signature">
+        <div class="ph" style="width:48px;height:48px;border-radius:50%;padding:0;min-height:0;flex-shrink:0">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 14c1-3 3-5 7-5s6 2 7 5" stroke="currentColor" stroke-width="1.4"/><circle cx="10" cy="6.5" r="2.5" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div>
+          <div class="founder-sig-name">Sev — @talktosev</div>
+          <div class="founder-sig-role">Founder · Content System Builder</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     PAIN — Sound familiar?
+     ───────────────────────────────────────────────────────── -->
+<section class="pain-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow"><span class="num">02</span> If any of this sounds like you</div>
+      <h2>You're not bad at marketing. <em>You're missing a system.</em></h2>
+      <p class="lede" style="margin: 0 auto;">Most service businesses don't have a content problem. They have a <strong>"what do I post next"</strong> problem, a <strong>"why isn't anything working"</strong> problem, and a <strong>"can't tell what's actually moving the dial"</strong> problem. All three are the same problem.</p>
+    </div>
+
+    <div class="pain-cards">
+      <div class="pain-card reveal">
+        <div class="pain-num">01</div>
+        <h3>You post — and the silence is worse than no post at all.</h3>
+        <p>Three reels last week. Twelve likes. Zero leads. You can't tell if it's the content, the timing, or whether your audience even exists on that platform.</p>
+        <span class="pain-tag">No feedback loop</span>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-num">02</div>
+        <h3>The agency was meant to fix this. It didn't.</h3>
+        <p>$3K a month for content you don't recognise as yours, posted at times you never approved, with metrics you can't connect to a single new client.</p>
+        <span class="pain-tag">Outsourced your voice</span>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-num">03</div>
+        <h3>You know the answer is "be on camera". You're avoiding it.</h3>
+        <p>You hate how you look. You don't know what to say. Every video idea sounds dumb in your head before the camera's even on. So nothing gets made.</p>
+        <span class="pain-tag">Camera fear running the show</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     COST OF INACTION
+     ───────────────────────────────────────────────────────── -->
+<div class="cost-strip">
+  <div class="cost-strip-inner reveal">
+    <h2>Every month you don't fix this, <em>a competitor with worse content but a working system</em> takes a client that should've been yours.</h2>
+    <p>That's not a scare line. That's just how this works. The business that publishes consistently — even when the content is average — beats the business with great content posted twice a quarter. Every time.</p>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     ORIGIN — Sev's why
+     ───────────────────────────────────────────────────────── -->
+<section class="origin-section" id="story">
+  <div class="origin-grid">
+
+    <!-- ORIGIN PHOTO PLACEHOLDER -->
+    <div class="ph ph-portrait reveal">
+      <div class="ph-tag">
+        <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 6h2l1.5-2h5L14 6h2a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        Photo · Sev at work
+      </div>
+      <svg class="ph-icon" width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 8h18" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="6.5" r=".7" fill="currentColor"/><circle cx="8.5" cy="6.5" r=".7" fill="currentColor"/></svg>
+      <div class="ph-title">Sev at the desk — scripting, mid-flow, screen visible</div>
+      <p class="ph-suggest">
+        <strong>What's in frame:</strong> you at a desk, laptop open with a real script document on screen, notebook with handwritten notes, coffee, phone with a video draft. Slightly over-the-shoulder angle.
+        <br><br>
+        <strong>Why this shot:</strong> proves you actually do the work — not a guru pose. Earned authority instead of claimed authority.
+      </p>
+      <div class="ph-spec"><span>4:5 portrait</span> · natural light, slight grain</div>
+    </div>
+
+    <div class="origin-text reveal">
+      <div class="eyebrow"><span class="num">03</span> Why this exists</div>
+      <h2>I built this because I watched too many good operators get out-marketed by louder, worse competitors.</h2>
+      <p>I worked with service businesses who were better than every competitor on the block — better trades, better dentistry, better outcomes — but losing leads every week to operators with half the skill and twice the content output.</p>
+      <p>The frustrating part wasn't that the louder people won. It was that the better operators didn't have a system, just a vague intention to "do more on socials". So they'd post a flurry, burn out, stop, and watch their competitor lap them again.</p>
+
+      <blockquote class="pull-quote">"Talent without a system loses to mediocrity with a system. Every time. So I built the system."</blockquote>
+
+      <p>So I built what I wished they had — a content system that's owned by the operator, runs on their voice, and doesn't disappear the moment they stop paying someone.</p>
+      <p>That's what we'll build together. Whether it's a one-hour session, a two-day workshop, or me embedded as your Fractional CMO for the next 90 days.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     METHOD — The Money 7
+     ───────────────────────────────────────────────────────── -->
+<section class="method-section" id="method">
+  <div class="method-head reveal">
+    <div class="eyebrow"><span class="num">04</span> The method</div>
+    <h2>The <em>Money 7</em> — seven videos every service business needs <em>before</em> any other content.</h2>
+    <p class="lede">These aren't trending hooks. They're the seven specific videos that answer the questions every prospect is already Googling about your industry, in your suburb, right now. Get these on your site and channel — everything else compounds.</p>
+  </div>
+
+  <div class="method-grid">
+    <div class="reveal">
+      <ol class="money7-list">
+        <li>
+          <div>
+            <div class="m7-title">The Cost video</div>
+            <div class="m7-desc">"How much does [your service] actually cost?" — the question every prospect Googles before calling. Most businesses refuse to answer it. That's the opening.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="m7-title">The Problem video</div>
+            <div class="m7-desc">The specific failure mode you fix that nobody else is talking about. Specificity over cleverness, every time.</div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="m7-title">The Comparison video</div>
+            <div class="m7-desc">You vs. the alternatives — including the one where the prospect does nothing. Honest comparisons earn the call.</div>
+          </div>
+        </li>
+        <li class="locked">
+          <div>
+            <div class="m7-title">Money 4 <span class="locked-badge">Inside the workshop</span></div>
+            <div class="m7-desc">The video that does 60% of the closing for you before the prospect picks up the phone.</div>
+          </div>
+        </li>
+        <li class="locked">
+          <div>
+            <div class="m7-title">Money 5 <span class="locked-badge">Inside the workshop</span></div>
+            <div class="m7-desc">The objection video most operators are too scared to make.</div>
+          </div>
+        </li>
+        <li class="locked">
+          <div>
+            <div class="m7-title">Money 6 <span class="locked-badge">Inside the workshop</span></div>
+            <div class="m7-desc">The "search-first" video that ranks on Google and YouTube for the exact terms your prospects type.</div>
+          </div>
+        </li>
+        <li class="locked">
+          <div>
+            <div class="m7-title">Money 7 <span class="locked-badge">Inside the workshop</span></div>
+            <div class="m7-desc">The video that turns a stranger into a hot lead in 90 seconds.</div>
+          </div>
+        </li>
+      </ol>
+      <div class="method-note">You leave the workshop with all seven scripted, filmed, and ready to publish. <strong>This isn't a course. It's the system, built with you.</strong></div>
+    </div>
+
+    <!-- METHOD VIDEO PLACEHOLDER -->
+    <div class="ph ph-portrait reveal">
+      <div class="ph-tag video-tag">
+        <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 5h12v10H4z" stroke="currentColor" stroke-width="1.6"/><path d="M16 8l3-2v8l-3-2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        Video · 2–3 min Method walkthrough
+      </div>
+      <svg class="ph-icon" width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M10 8.5v7l6-3.5-6-3.5z" fill="currentColor"/></svg>
+      <div class="ph-title">"Here's exactly what each Money 7 video looks like"</div>
+      <p class="ph-suggest">
+        <strong>Format:</strong> whiteboard or screen-share. You walking through the first three videos with real examples — show actual published Money 7 videos from past clients (with permission).
+        <br><br>
+        <strong>Why a video here:</strong> proves the framework isn't theory. People who watch this self-qualify into the workshop. The ones who say "I need that" book.
+      </p>
+      <div class="ph-spec"><span>9:16 vertical</span> or 16:9 · captioned</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     FEATURED CASE STUDY
+     ───────────────────────────────────────────────────────── -->
+<section class="case-section" id="proof">
+  <div class="case-eyebrow-row reveal">
+    <div class="eyebrow"><span class="num">05</span> The proof</div>
+    <h2>One operator. <em>Sixty days.</em> A whole new pipeline.</h2>
+  </div>
+
+  <div class="case-card reveal">
+
+    <div class="case-media">
+      <!-- CASE STUDY VIDEO PLACEHOLDER -->
+      <div class="ph ph-portrait" style="height:100%;min-height:380px">
+        <div class="ph-tag video-tag">
+          <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 5h12v10H4z" stroke="currentColor" stroke-width="1.6"/><path d="M16 8l3-2v8l-3-2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Video · Client testimonial · 60–90 sec
+        </div>
+        <svg class="ph-icon" width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M10 8.5v7l6-3.5-6-3.5z" fill="currentColor"/></svg>
+        <div class="ph-title">Featured client — direct to camera</div>
+        <p class="ph-suggest">
+          <strong>Brief:</strong> "Where you were before we started → what we built → what changed in 60 days." Don't script word for word. Let them be themselves.
+          <br><br>
+          <strong>Setup:</strong> their workplace if possible (concrete site, dental clinic, studio) — context sells the proof.
+        </p>
+        <div class="ph-spec"><span>9:16 vertical</span> · their setting, not yours</div>
+      </div>
+    </div>
+
+    <div class="case-body">
+      <div class="case-quote">In 60 days I went from making content nobody watched to having a system that actually brings inquiries. The Money 7 videos do the convincing for me before I'm even on the call.</div>
+      <div class="case-attrib"><strong>[ Client name — replace ]</strong> · Concrete contractor · NSW · 60 days into the system</div>
+
+      <div class="case-stats">
+        <div class="case-stat">
+          <div class="case-stat-num">0 → 11</div>
+          <div class="case-stat-label">Inquiries / month</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">17</div>
+          <div class="case-stat-label">Videos published</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">3.4×</div>
+          <div class="case-stat-label">Avg. job value</div>
+        </div>
+      </div>
+
+      <a href="#pricing" class="case-link">See how I'd build this for you →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     WALL OF PROOF — testimonial grid
+     ───────────────────────────────────────────────────────── -->
+<section class="wall-section">
+  <div class="wall-head reveal">
+    <div class="eyebrow"><span class="num">06</span> More stories</div>
+    <h2>Different industries. <em>Same system.</em></h2>
+    <p class="lede">A builder, a dentist, a coach, a studio owner. Different problems, same pattern: a system they own and can run without me when I'm done.</p>
+  </div>
+
+  <div class="wall-grid">
+
+    <div class="wall-tile reveal">
+      <blockquote>I stopped second-guessing every post. I have a list, I film, I publish. The result is leads I can actually attribute to a video.</blockquote>
+      <div class="wall-attrib">
+        <div class="wall-avatar">PHOTO</div>
+        <div>
+          <div class="wall-name">[ Replace — client name ]</div>
+          <div class="wall-role">Dental clinic owner · VIC</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wall-tile video-tile reveal">
+      <div class="ph ph-square" style="border-radius:0">
+        <div class="ph-tag video-tag">
+          <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 5h12v10H4z" stroke="currentColor" stroke-width="1.6"/><path d="M16 8l3-2v8l-3-2" stroke="currentColor" stroke-width="1.6"/></svg>
+          Video testimonial
+        </div>
+        <svg class="ph-icon" width="42" height="42" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M10 8.5v7l6-3.5-6-3.5z" fill="currentColor"/></svg>
+        <div class="ph-title">30-second client clip</div>
+        <p class="ph-suggest"><strong>Brief:</strong> One sentence — "Before Sev I was X. Now I'm Y." That's it. Cut hard.</p>
+        <div class="ph-spec"><span>1:1 square</span> · captioned</div>
+      </div>
+    </div>
+
+    <div class="wall-tile reveal">
+      <blockquote>I'd been "going to start a YouTube channel" for three years. We filmed eleven videos in two days. They're live. People are calling.</blockquote>
+      <div class="wall-attrib">
+        <div class="wall-avatar">PHOTO</div>
+        <div>
+          <div class="wall-name">[ Replace — client name ]</div>
+          <div class="wall-role">Trade business · NSW</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wall-tile reveal">
+      <blockquote>The agency built nothing I could keep. Sev built me a system that runs whether he's around or not. Different category entirely.</blockquote>
+      <div class="wall-attrib">
+        <div class="wall-avatar">PHOTO</div>
+        <div>
+          <div class="wall-name">[ Replace — client name ]</div>
+          <div class="wall-role">Studio founder · QLD</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wall-tile video-tile reveal">
+      <div class="ph ph-square" style="border-radius:0">
+        <div class="ph-tag video-tag">
+          <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 5h12v10H4z" stroke="currentColor" stroke-width="1.6"/><path d="M16 8l3-2v8l-3-2" stroke="currentColor" stroke-width="1.6"/></svg>
+          Behind the scenes
+        </div>
+        <svg class="ph-icon" width="42" height="42" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M10 8.5v7l6-3.5-6-3.5z" fill="currentColor"/></svg>
+        <div class="ph-title">Workshop in action — 30 sec montage</div>
+        <p class="ph-suggest"><strong>What to film:</strong> over-shoulder of you reviewing scripts, a Zoom workshop screen with multiple participants visible, someone holding up a notebook, a phone-on-tripod setup. Quick cuts.</p>
+        <div class="ph-spec"><span>1:1 square</span> · 8–12 cuts</div>
+      </div>
+    </div>
+
+    <div class="wall-tile reveal">
+      <blockquote>The thing I didn't expect — my team picked it up. Now they're filming without me. The system replicates.</blockquote>
+      <div class="wall-attrib">
+        <div class="wall-avatar">PHOTO</div>
+        <div>
+          <div class="wall-name">[ Replace — client name ]</div>
+          <div class="wall-role">Service business · WA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     MARQUEE — fast scrolling testimonial fragments
+     ───────────────────────────────────────────────────────── -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">"Finally have a content system I actually own"</div>
+    <div class="marquee-item">"From 0 to 11 inquiries a month in 60 days"</div>
+    <div class="marquee-item">"Stopped paying my agency the week after the workshop"</div>
+    <div class="marquee-item">"My team is filming without me"</div>
+    <div class="marquee-item">"Closed a $14k job from a single Money 7 video"</div>
+    <div class="marquee-item">"Three years of meaning to start. Done in two days."</div>
+    <!-- duplicated for seamless scroll -->
+    <div class="marquee-item">"Finally have a content system I actually own"</div>
+    <div class="marquee-item">"From 0 to 11 inquiries a month in 60 days"</div>
+    <div class="marquee-item">"Stopped paying my agency the week after the workshop"</div>
+    <div class="marquee-item">"My team is filming without me"</div>
+    <div class="marquee-item">"Closed a $14k job from a single Money 7 video"</div>
+    <div class="marquee-item">"Three years of meaning to start. Done in two days."</div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     PRICING — three offers
+     ───────────────────────────────────────────────────────── -->
+<section class="pricing-section" id="pricing">
+
+  <div class="pricing-head reveal">
+    <div class="eyebrow"><span class="num">07</span> Pick your starting point</div>
+    <h2>Three ways to <em>work with me</em>.</h2>
+    <p class="lede">Whether you want a one-hour brain pick, two days to build the whole system, or me embedded as your CMO for 90 days — pick the door that matches where you actually are.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 ── Strategy Session ── -->
+    <div class="card reveal">
+      <div class="card-label">Entry Point</div>
+      <h2>Strategy Session</h2>
+      <p class="subtitle">One focused hour on your specific business. Walk away with a clear plan — no fluff, no generic advice.</p>
+
+      <div class="price-block">
+        <div class="price-main">$350<span class="price-suffix">+ GST</span></div>
+        <div class="price-note">Single session · 1 hour via Zoom</div>
+        <div class="price-alt"><strong>4-session pack — $1,200 + GST</strong><br>Save $200. Best for accountability.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="features-title">What's included</div>
+      <ul class="features">
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Deep dive into your business, your audience, your gaps
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Exact content system mapped for your situation
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Your first Money 7 videos identified and scripted
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Session recorded and sent to you
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Short intake form beforehand so no time is wasted
+        </li>
+      </ul>
+
+      <div class="callout callout-gold">
+        <strong>Natural next step:</strong> Most session clients move into the online workshop or advisory within 60 days.
+      </div>
+
+      <button class="cta cta-green" onclick="document.getElementById('sessionModal').classList.add('active')">Book a Strategy Session</button>
+    </div>
+
+    <!-- 2 ── Fractional CMO (featured) ── -->
+    <div class="card featured reveal">
+      <div class="card-label">Advisory</div>
+      <h2>Fractional CMO</h2>
+      <p class="subtitle">Sev embedded in your business. Strategy, accountability, and access to someone who actually knows marketing.</p>
+
+      <div class="price-block">
+        <div class="price-main">$2,500<span class="price-suffix">+ GST/mo</span></div>
+        <div class="price-note">3-month minimum · then month-to-month</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="features-title">What's included</div>
+      <ul class="features">
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Weekly 1-hour strategy call via Zoom
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          WhatsApp access during business hours — real-time answers
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Full content system built and integrated into your business
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Oversight and direction of your creative team
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Monthly bottleneck review and next steps
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Shared content folder on Instagram for idea capture
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          New tools and updates pushed to you as they drop
+        </li>
+      </ul>
+
+      <div class="callout callout-gold">
+        <strong>90-min onboarding call</strong> to map your business, set goals, and build the first 90 days. Included in month one.
+      </div>
+
+      <a href="#" class="cta cta-gold">Apply for Advisory</a>
+    </div>
+
+    <!-- 3 ── Online Workshop ── -->
+    <div class="card reveal">
+      <div class="card-label">Workshop</div>
+      <h2>Online Workshop</h2>
+      <p class="subtitle">Two focused half-days online, a week apart. You build the system — and leave with content ready to publish.</p>
+
+      <div class="price-block">
+        <div class="price-main">$1,500<span class="price-suffix">+ GST</span></div>
+        <div class="price-note">Payment plan: 3 × $500 + GST</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="features-title">What's included</div>
+      <ul class="features">
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Brand DNA and voice bank built on Day 1
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          20+ video ideas scripted using the Money 7 framework
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          First videos filmed — camera confidence covered
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Editing and publishing — 10 videos ready to go live
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Proprietary digital workbook — lifetime access
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.5 3L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          30 days WhatsApp access to Sev post-workshop
+        </li>
+      </ul>
+
+      <div class="callout callout-blue">
+        <strong>Week between sessions</strong> is intentional — homework assigned so Day 2 is pure execution, not catch-up.
+      </div>
+
+      <button class="cta cta-blue" onclick="document.getElementById('workshopModal').classList.add('active')">Book the Online Workshop</button>
+    </div>
+
+  </div>
+
+  <!-- Shared inclusions -->
+  <div class="shared reveal">
+    <h3>Included across every engagement</h3>
+    <div class="shared-grid">
+      <div class="shared-item"><span class="dot"></span>Money 7 video framework</div>
+      <div class="shared-item"><span class="dot"></span>Proprietary content workbook</div>
+      <div class="shared-item"><span class="dot"></span>Searchability-first strategy</div>
+      <div class="shared-item"><span class="dot"></span>Assignment selling training</div>
+      <div class="shared-item"><span class="dot"></span>DM and engagement templates</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     FUTURE PACING — 90 days from now
+     ───────────────────────────────────────────────────────── -->
+<section class="future-section">
+  <div class="future-grid">
+
+    <!-- FUTURE PHOTO PLACEHOLDER -->
+    <div class="ph ph-tall reveal">
+      <div class="ph-tag">
+        <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M4 6h2l1.5-2h5L14 6h2a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+        Photo · Outcome shot
+      </div>
+      <svg class="ph-icon" width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M3 17l5-5 4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8h6v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="ph-title">Sev or a client — focused, mid-action, looking at content metrics or a published video</div>
+      <p class="ph-suggest">
+        <strong>Idea:</strong> over-the-shoulder of someone reviewing analytics, OR Sev pointing at a screen on a Zoom advisory call, OR a client smiling at their published Money 7 video on YouTube.
+        <br><br>
+        <strong>Why:</strong> visualises the outcome the visitor is now imagining themselves getting. Makes the future tangible, not abstract.
+      </p>
+      <div class="ph-spec"><span>3:4 portrait</span> or 4:5</div>
+    </div>
+
+    <div class="future-text reveal">
+      <div class="eyebrow"><span class="num">08</span> Imagine</div>
+      <h2>Ninety days from now, here's what's different.</h2>
+      <p>You stop opening Instagram with that low-grade dread of "I should be posting." You have a list. You film. You publish. You see it work.</p>
+      <ul class="future-bullets">
+        <li>You publish without spiralling about "is this good enough"</li>
+        <li>Your inbox has inquiries from people who've already watched 3 of your videos</li>
+        <li>You stop comparing yourself to louder competitors — yours is converting</li>
+        <li>Your team can run the system without you in the room</li>
+        <li>You stop paying retainers for content that disappears when the agency does</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     FAQ — objection handling
+     ───────────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq">
+  <div class="container-narrow">
+    <div class="faq-head reveal">
+      <div class="eyebrow"><span class="num">09</span> Honest answers</div>
+      <h2>The questions everyone <em>actually</em> asks before booking.</h2>
+      <p class="lede">No marketing-speak. Same answers I give on a sales call.</p>
+    </div>
+
+    <div class="faq-list reveal">
+
+      <details class="faq-item">
+        <summary>I'm not on camera. Will this still work for me?</summary>
+        <p>Yes — but I'll be honest, the operators who film themselves outperform the ones who don't, every time. The workshop covers camera fear directly. By Day 1 lunch you'll have filmed your first one. Most people who say "I'm not on camera" walk out with three videos already shot.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How is this different from hiring an agency?</summary>
+        <p>An agency builds something they own. When the contract ends, the system goes with them. I build something <strong>you</strong> own — your voice, your scripts, your videos, your workbook. If we stop working together tomorrow, your content keeps running.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>I've done courses before and never finished them. Why is this different?</summary>
+        <p>This isn't a course. The workshop is two scheduled days where you build the system in real time, with me on the call. There's nothing to finish on your own. You leave with the work done — not a folder of unwatched videos.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How do I know if I should do the session, the workshop, or the advisory?</summary>
+        <p>Session if you want clarity before committing money. Workshop if you want the system built in two days and the confidence to run it. Advisory if you want someone in your corner every week and you'd rather have a CMO than figure it out yourself. Most people start with the session and self-select into one of the other two.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What if I'm in a niche you haven't worked with?</summary>
+        <p>The Money 7 isn't industry-specific — it's prospect-specific. The questions your prospects Google before calling you are structurally the same as the ones every prospect Googles. The answers change. The framework doesn't.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What does "results" actually look like in 90 days?</summary>
+        <p>Realistic baseline: a published library of 10–20 videos, a system your team can run, and a measurable lift in qualified inquiries. Some clients see leads in week three. Some see them in week ten. What's consistent: by 90 days you have something you can point at and say "this is working."</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I pay in instalments?</summary>
+        <p>Workshop: yes — three payments of $500 + GST. Session: not needed at $350. Advisory: monthly billing on the three-month minimum, then month-to-month, cancel anytime.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What if I book and it's not the right fit?</summary>
+        <p>If we get on the strategy session and I genuinely don't think I'm the right person to help you — I'll say so on the call and refund you. I'd rather lose $350 than have someone in the workshop who shouldn't be there.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────────────────────────────────────
+     FINAL CTA — scarcity + close
+     ───────────────────────────────────────────────────────── -->
+<section class="final-section">
+  <div class="final-inner reveal">
+    <div class="eyebrow"><span class="num">10</span> Last thing</div>
+    <h2>The system works. <em>The only question is when you start.</em></h2>
+    <p class="lede">If you've read this far, something here is landing. Don't bookmark it. Bookmarks don't film videos. Book the session — worst case, you walk away with a clearer plan than you came in with.</p>
+
+    <div class="final-cohort">
+      <span class="dot-fill">
+        <span class="d lit"></span><span class="d lit"></span><span class="d lit"></span>
+        <span class="d lit"></span><span class="d lit"></span><span class="d lit"></span>
+        <span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span>
+      </span>
+      <span><strong>Next workshop cohort: May 12.</strong> 6 of 10 spots filled.</span>
+    </div>
+
+    <div class="final-ctas">
+      <a href="#pricing" class="btn btn-primary">Book a strategy session <span class="btn-arrow">→</span></a>
+      <a href="#pricing" class="btn btn-ghost">See all three options</a>
+    </div>
+
+    <p class="final-fineprint">All prices + GST. Payment plans available on the workshop. 30-day fit guarantee on the strategy session.</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Talk to Sev</strong> · @talktosev · sev@sevspics.com</p>
+  <p>Content systems for service businesses that actually want clients.</p>
+</footer>
+
+<!-- Mobile sticky CTA -->
+<div class="mobile-cta">
+  <a href="#story" class="mc-ghost">Read the story</a>
+  <a href="#pricing" class="mc-primary">Book now</a>
+</div>
+
+<!-- Session Modal -->
+<div class="modal-overlay" id="sessionModal" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('sessionModal').classList.remove('active')">&times;</button>
+    <h3>Strategy Session</h3>
+    <p class="modal-sub">Single session or commit to four and save $200</p>
+
+    <a href="#" class="modal-option">
+      <div class="opt-row">
+        <span class="opt-label">Single Session</span>
+        <span class="opt-price">$350</span>
+      </div>
+      <div class="opt-note">+ GST · 1 hour via Zoom · recorded and sent</div>
+    </a>
+
+    <div class="modal-divider"><span>or</span></div>
+
+    <a href="#" class="modal-option">
+      <div class="opt-row">
+        <span class="opt-label">4-Session Pack</span>
+        <span class="opt-price">$1,200</span>
+      </div>
+      <div class="opt-badge">Save $200</div>
+      <div class="opt-note">+ GST · 4 × 1-hour sessions · best for ongoing accountability</div>
+    </a>
+  </div>
+</div>
+
+<!-- Workshop Modal -->
+<div class="modal-overlay" id="workshopModal" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('workshopModal').classList.remove('active')">&times;</button>
+    <h3>Online Workshop</h3>
+    <p class="modal-sub">Choose your payment option</p>
+
+    <a href="#" class="modal-option">
+      <div class="opt-row">
+        <span class="opt-label">Pay in Full</span>
+        <span class="opt-price">$1,500</span>
+      </div>
+      <div class="opt-note">+ GST · best value · secures your spot immediately</div>
+    </a>
+
+    <div class="modal-divider"><span>or</span></div>
+
+    <a href="#" class="modal-option">
+      <div class="opt-row">
+        <span class="opt-label">Payment Plan</span>
+        <span class="opt-price">$500</span>
+      </div>
+      <div class="opt-badge">3 payments</div>
+      <div class="opt-note">+ GST per payment · first deposit locks your spot · then $500/mo × 2</div>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Reveal-on-scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

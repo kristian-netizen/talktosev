@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The GEO Checklist · Talk to Sev</title>
+<meta name="description" content="A 30-action checklist to get your business cited by AI search engines (ChatGPT, Gemini, Perplexity) in 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=DM+Sans:opsz,wght@9..40,300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EDE6D6;
+  --paper: #F6F1E4;
+  --ink: #16140F;
+  --ink-soft: #4A453B;
+  --ink-mute: #8A8270;
+  --accent: #7C2D2D;
+  --accent-bright: #A23838;
+  --highlight: #C97B3F;
+  --sage: #8A9579;
+  --rule: #CFC5AC;
+  --rule-soft: #E1D9C2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.paper {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px 56px 100px;
+  background: var(--paper);
+  min-height: 100vh;
+  box-shadow: 0 0 80px rgba(20, 16, 8, 0.06);
+  position: relative;
+}
+
+.paper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .paper { padding: 48px 24px 72px; }
+  body { font-size: 16px; }
+}
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 48px;
+  margin-bottom: 56px;
+}
+
+.meta-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+}
+
+.meta-line .accent { color: var(--accent); font-weight: 500; }
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.subtitle {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  color: var(--ink-soft);
+  line-height: 1.35;
+  margin-bottom: 28px;
+  letter-spacing: -0.005em;
+}
+
+.byline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+.lede {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 1.18rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  letter-spacing: -0.005em;
+}
+
+/* PULL QUOTE */
+.pullquote {
+  margin: 64px 0;
+  padding: 0 0 0 28px;
+  border-left: 3px solid var(--accent);
+}
+
+.pullquote blockquote {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
+  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+/* SECTION LABELS */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  color: var(--accent);
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-weight: 500;
+}
+
+/* THE NUMBERS */
+.numbers { margin-bottom: 64px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px 32px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.stat {
+  border-left: 2px solid var(--accent);
+  padding-left: 18px;
+}
+
+.stat .big {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
+  font-weight: 400;
+  font-variation-settings: "opsz" 144;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.stat .big .x { font-style: italic; color: var(--accent); font-weight: 300; }
+
+.stat .caption {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.footnote {
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+  margin-top: 12px;
+}
+
+/* HOW TO USE */
+.how-to {
+  margin-bottom: 64px;
+  padding: 28px 32px;
+  background: var(--bg);
+  border-radius: 4px;
+  border: 1px solid var(--rule-soft);
+}
+
+.how-to p {
+  margin-bottom: 22px;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.progress-bar { flex: 1; min-width: 200px; }
+
+.progress-track {
+  height: 6px;
+  background: var(--rule-soft);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progress-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+.reset-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  padding: 9px 14px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.reset-btn:hover {
+  background: var(--paper);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* PILLARS */
+.pillar {
+  margin-bottom: 64px;
+}
+
+.pillar-header {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.pillar-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(2.4rem, 5vw, 3rem);
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 0.85;
+  flex-shrink: 0;
+  font-variation-settings: "opsz" 144;
+}
+
+.pillar-titles { flex: 1; padding-top: 4px; }
+
+.pillar-titles h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 4vw, 2.1rem);
+  line-height: 1.05;
+  margin-bottom: 8px;
+  color: var(--ink);
+  letter-spacing: -0.018em;
+  font-variation-settings: "opsz" 60;
+}
+
+.pillar-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.pillar-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-mute);
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+
+/* CHECKLIST */
+.checklist { list-style: none; }
+
+.checklist li { margin-bottom: 2px; }
+
+.checklist label {
+  display: flex;
+  gap: 18px;
+  padding: 16px 18px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s;
+  align-items: flex-start;
+  position: relative;
+}
+
+.checklist label:hover { background: var(--bg); }
+
+.checklist input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid var(--ink-soft);
+  border-radius: 3px;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3px;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.check::after {
+  content: '';
+  width: 6px;
+  height: 11px;
+  border: solid var(--paper);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px) scale(0);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+input[type="checkbox"]:checked + .check {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+input[type="checkbox"]:checked + .check::after {
+  transform: rotate(45deg) translate(-1px, -1px) scale(1);
+}
+
+.checklist .text {
+  flex: 1;
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 0.97rem;
+}
+
+.checklist .text strong {
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.checklist .text small {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+  display: block;
+  margin-top: 4px;
+}
+
+input[type="checkbox"]:checked ~ .text {
+  color: var(--ink-mute);
+}
+
+input[type="checkbox"]:checked ~ .text strong {
+  text-decoration: line-through;
+  text-decoration-color: var(--rule);
+}
+
+/* TODAY / BLACK CARD */
+.today {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 44px 36px;
+  margin: 64px 0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.today::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--highlight);
+}
+
+.today .section-label {
+  color: var(--highlight);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  margin-bottom: 16px;
+}
+
+.today h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  line-height: 1.1;
+  margin-bottom: 8px;
+  color: var(--paper);
+  letter-spacing: -0.015em;
+}
+
+.today .today-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(246, 241, 228, 0.7);
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.today-list {
+  list-style: none;
+  counter-reset: today;
+}
+
+.today-list li {
+  counter-increment: today;
+  padding: 16px 0 16px 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  line-height: 1.5;
+  font-size: 0.96rem;
+  color: rgba(246, 241, 228, 0.92);
+}
+
+.today-list li:last-child { border-bottom: none; }
+
+.today-list li::before {
+  content: counter(today, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 16px;
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--highlight);
+  font-variation-settings: "opsz" 144;
+}
+
+.today-list label {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.today-list .check {
+  border-color: rgba(246, 241, 228, 0.4);
+  background: transparent;
+  margin-top: 2px;
+}
+
+.today-list .check::after { border-color: var(--ink); }
+
+.today-list input[type="checkbox"]:checked + .check {
+  background: var(--highlight);
+  border-color: var(--highlight);
+}
+
+.today-list input[type="checkbox"]:checked ~ .text {
+  text-decoration: line-through;
+  text-decoration-color: rgba(246, 241, 228, 0.3);
+  color: rgba(246, 241, 228, 0.5);
+}
+
+/* TOOLS */
+.tools { margin-bottom: 56px; }
+
+.tools dl { margin-top: 4px; }
+
+.tools dt {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+  margin-top: 24px;
+  font-weight: 500;
+}
+
+.tools dt:first-of-type { margin-top: 0; }
+
+.tools dd {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.tools dd a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.tools dd a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* CTA */
+.cta {
+  margin-top: 80px;
+  padding-top: 56px;
+  border-top: 2px solid var(--ink);
+}
+
+.cta h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  line-height: 1.1;
+  margin-bottom: 22px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.cta p {
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.cta-link {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 16px 32px;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  border-radius: 3px;
+  transition: all 0.18s;
+  font-weight: 500;
+}
+
+.cta-link:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 45, 45, 0.25);
+}
+
+/* FOOTER */
+footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+footer .meta-line {
+  font-size: 0.62rem;
+  margin-bottom: 0;
+  color: var(--ink-mute);
+}
+
+footer .meta-line .accent { color: var(--ink-mute); }
+
+/* PRINT */
+@media print {
+  body { background: white; font-size: 11pt; }
+  .paper { box-shadow: none; padding: 24px; max-width: 100%; }
+  .paper::before { display: none; }
+  .reset-btn, .cta-link, .how-to { display: none; }
+  .today {
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    page-break-inside: avoid;
+  }
+  .today h3, .today-sub, .today-list li { color: var(--ink); }
+  .today-list .check { border-color: var(--ink); }
+  .pillar { page-break-inside: avoid; }
+  .checklist label:hover { background: transparent; }
+}
+
+/* INTRO ANIMATION */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.masthead, .pullquote, .numbers, .how-to, .pillar, .today, .tools, .cta {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.masthead { animation-delay: 0s; }
+.pullquote { animation-delay: 0.08s; }
+.numbers { animation-delay: 0.14s; }
+.how-to { animation-delay: 0.2s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* CHECK-IN MODAL */
+.check-in-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 16, 8, 0.62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+  animation: checkInFade 0.32s ease;
+}
+
+.check-in-overlay[hidden] { display: none; }
+
+@keyframes checkInFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes checkInRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.check-in-card {
+  background: var(--paper);
+  max-width: 480px;
+  width: 100%;
+  padding: 44px 40px 36px;
+  border-radius: 4px;
+  box-shadow: 0 30px 80px rgba(20, 16, 8, 0.4);
+  position: relative;
+  animation: checkInRise 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.check-in-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+}
+
+.check-in-card .check-in-label {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.68rem;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.check-in-card h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 4vw, 1.7rem);
+  line-height: 1.25;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 28px;
+}
+
+.check-in-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.check-in-btn {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  padding: 16px 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-weight: 500;
+  border: 1px solid transparent;
+  width: 100%;
+}
+
+.check-in-btn-secondary {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--rule);
+}
+
+.check-in-btn-secondary:hover {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
+
+.check-in-btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.check-in-btn-primary:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 45, 45, 0.25);
+}
+
+@media (max-width: 480px) {
+  .check-in-card { padding: 32px 24px 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .check-in-overlay, .check-in-card { animation: none !important; }
+}
+</style>
+</head>
+<body>
+<main class="paper">
+
+  <header class="masthead">
+    <div class="meta-line">
+      <span class="accent">Talk to Sev</span>
+      <span>Briefing No. 01 / 2026</span>
+    </div>
+    <h1>The <em>GEO</em> Checklist</h1>
+    <p class="subtitle">How to get cited by AI search engines in 2026, without rebuilding your website.</p>
+    <div class="byline">By Sev Mozhaev</div>
+    <p class="lede">Twelve months ago, the rules of how customers find your business changed. AI search engines now answer questions directly, and the brands cited inside those answers become the shortlist. This is the exact setup I run for any service business that wants to be one of them.</p>
+  </header>
+
+  <div class="pullquote">
+    <blockquote>"Eighty percent of pages cited inside ChatGPT and Perplexity don't even rank in Google's top 100 for the same query. Different game. Different rules."</blockquote>
+  </div>
+
+  <section class="numbers">
+    <h2 class="section-label">The Numbers</h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="big">527%</div>
+        <div class="caption">Year-on-year growth in AI referral traffic across 400+ websites studied.</div>
+      </div>
+      <div class="stat">
+        <div class="big">4.4 to 23<span class="x">×</span></div>
+        <div class="caption">Conversion rate of AI-referred visitors versus Google organic search.</div>
+      </div>
+      <div class="stat">
+        <div class="big">80%</div>
+        <div class="caption">Of pages cited by AI engines do not rank in Google's top 100 for the same query.</div>
+      </div>
+      <div class="stat">
+        <div class="big">2028</div>
+        <div class="caption">Year AI search visitors are projected to overtake traditional search visitors.</div>
+      </div>
+    </div>
+    <p class="footnote">Sources: Conductor, Similarweb, Ahrefs, BrightEdge, SE Ranking · 2026 reports.</p>
+  </section>
+
+  <section class="how-to">
+    <h2 class="section-label">How to use this</h2>
+    <p>Five sections. Thirty actions. Tick them as you go, your progress saves automatically. Don't try to do all of it this week. The point is direction, not perfection. Start with the five Today actions to figure out where you stand, then work pillar by pillar.</p>
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text"><span id="progressCount">0</span> of <span id="progressTotal">35</span> complete</div>
+      </div>
+      <button class="reset-btn" onclick="resetProgress()">Reset progress</button>
+    </div>
+  </section>
+
+  <!-- TODAY: do these first -->
+  <section class="today">
+    <div class="section-label">Start Here</div>
+    <h3>Five things to do today</h3>
+    <p class="today-sub">Thirty minutes. No setup required. These tell you where you stand before you spend money fixing anything.</p>
+    <ol class="today-list">
+      <li>
+        <label>
+          <input type="checkbox" data-id="t1">
+          <span class="check"></span>
+          <span class="text">Open ChatGPT, Gemini, and Perplexity. Ask each one "best [your service category] in [your area]." Screenshot who gets cited. That is your real competitive set in 2026.</span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="t2">
+          <span class="check"></span>
+          <span class="text">Run your homepage through Google's Rich Results Test (search.google.com/test/rich-results). Note which schemas are missing. Most service business sites have none.</span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="t3">
+          <span class="check"></span>
+          <span class="text">Check your robots.txt at yourdomain.com/robots.txt. Confirm GPTBot, ClaudeBot, and PerplexityBot are not blocked. If they are, you are invisible to AI search by default.</span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="t4">
+          <span class="check"></span>
+          <span class="text">Pick one specific question your sales team gets asked every week. Draft a page that answers it directly, no fluff. This is your first AI-cited page.</span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="t5">
+          <span class="check"></span>
+          <span class="text">Send this checklist to whoever owns your website. Get the implementation booked into their calendar this month, not next quarter.</span>
+        </label>
+      </li>
+    </ol>
+  </section>
+
+  <!-- PILLAR I: FOUNDATION -->
+  <section class="pillar">
+    <div class="pillar-header">
+      <div class="pillar-num">I.</div>
+      <div class="pillar-titles">
+        <h2>Foundation</h2>
+        <p class="pillar-sub">Technical setup so AI engines can read you in the first place.</p>
+        <span class="pillar-time">2 to 4 hours</span>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>
+        <label>
+          <input type="checkbox" data-id="f1">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Allow AI crawlers in robots.txt.</strong>
+            Add explicit allow rules for GPTBot, ClaudeBot, PerplexityBot, Google-Extended, OAI-SearchBot, and anthropic-ai. Many CMS defaults block these silently.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="f2">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Add Article schema to every blog post and content page.</strong>
+            This is the structured data AI engines parse first. No schema, no easy citation.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="f3">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Add FAQPage schema to every page with question and answer content.</strong>
+            Sites with FAQ schema see 44% more AI citations.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="f4">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Add Person and Author schema with sameAs links.</strong>
+            Connect your name to your LinkedIn, your X profile, your YouTube channel. Pages with author schema are 3 times more likely to be cited.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="f5">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Pass Core Web Vitals.</strong>
+            Largest Contentful Paint under 2.5 seconds. Mobile responsive. AI builders often fail this test by default.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="f6">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Set canonical URLs on every page.</strong>
+            Stops duplicate content confusion and helps AI engines know which version to cite.
+          </span>
+        </label>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PILLAR II: CONTENT -->
+  <section class="pillar">
+    <div class="pillar-header">
+      <div class="pillar-num">II.</div>
+      <div class="pillar-titles">
+        <h2>Content</h2>
+        <p class="pillar-sub">What to publish so you actually get cited.</p>
+        <span class="pillar-time">2 to 3 weeks</span>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>
+        <label>
+          <input type="checkbox" data-id="c1">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Build out the Big 5 page types.</strong>
+            Cost and pricing, problems your service solves, comparisons, reviews, and best-of lists. These are the buyer-intent topics AI search engines pull from most.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="c2">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Write head-to-head comparison content.</strong>
+            X vs Y format. Listicles cite at a 25% rate, opinion pieces at 11%. Format matters.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="c3">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Publish at least three real case studies.</strong>
+            Real client names. Real numbers. Real outcomes. Case studies and pricing pages drive the highest AI referral traffic of any page type.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="c4">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Add a transparent pricing page.</strong>
+            Even if it is "starts from" or "ranges between." AI engines reward pricing clarity because users ask for it constantly.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="c5">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Answer the questions buyers actually ask before they buy.</strong>
+            Mine Reddit, Quora, your sales call transcripts, and your inbox. Each question becomes one page.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="c6">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Update your top 5 pages with current statistics.</strong>
+            Pages updated within 60 days are 1.9 times more likely to be cited. Freshness beats authority for AI.
+          </span>
+        </label>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PILLAR III: FORMAT -->
+  <section class="pillar">
+    <div class="pillar-header">
+      <div class="pillar-num">III.</div>
+      <div class="pillar-titles">
+        <h2>Format</h2>
+        <p class="pillar-sub">How to structure pages so AI can extract the answer cleanly.</p>
+        <span class="pillar-time">1 week</span>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>
+        <label>
+          <input type="checkbox" data-id="fm1">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Lead with the answer in the first 30% of the page.</strong>
+            44.2% of all AI citations come from page intros. Burying the lede makes you uncitable.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="fm2">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Use H2 and H3 headings as actual questions.</strong>
+            "What is X?" not "About X." Question headings match how users prompt AI.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="fm3">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Add an FAQ block to every commercial page.</strong>
+            Five buyer questions, five clean answers. Easiest single change you can make.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="fm4">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Use bullet lists, numbered lists, and tables liberally.</strong>
+            AI engines extract these formats first because they are pre-structured for citation.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="fm5">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Include statistics, data points, and direct quotations.</strong>
+            Content with these gets 30 to 40% higher AI visibility. Numbers travel.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="fm6">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Bold the key sentence in each section.</strong>
+            One bolded line per section makes the takeaway extractable in a single read.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="fm7">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Keep paragraphs to three sentences or fewer.</strong>
+            Density kills extraction. Short paragraphs make every claim a clean citation candidate.
+          </span>
+        </label>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PILLAR IV: AUTHORITY -->
+  <section class="pillar">
+    <div class="pillar-header">
+      <div class="pillar-num">IV.</div>
+      <div class="pillar-titles">
+        <h2>Authority</h2>
+        <p class="pillar-sub">The signals AI engines weight when deciding who to cite.</p>
+        <span class="pillar-time">1 to 2 weeks</span>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>
+        <label>
+          <input type="checkbox" data-id="a1">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Add an author bio with credentials, photo, and bylines on every piece.</strong>
+            Authority is now per-author, not per-domain. AI engines weight individual expertise.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="a2">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Implement Author schema with verified social profiles.</strong>
+            sameAs links from your site to your LinkedIn, X, and YouTube. Lets AI confirm you are who you say you are.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="a3">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Show first-hand evidence on every page.</strong>
+            Process photos. Video walkthroughs. Behind-the-scenes shots of real work. AI engines now distinguish lived experience from copy-pasted summaries.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="a4">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Cite credible external sources within your content.</strong>
+            Outbound citations to research, government data, and recognised authorities raise your own citation likelihood.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="a5">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Display real testimonials with full names, dates, and where possible, video.</strong>
+            Anonymous testimonials are invisible. Verifiable ones become AI citations.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="a6">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Build a YouTube and podcast presence.</strong>
+            YouTube and Reddit combined account for 78.2% of all AI social citations. Audio and video are the new backlinks.
+          </span>
+        </label>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PILLAR V: MEASUREMENT -->
+  <section class="pillar">
+    <div class="pillar-header">
+      <div class="pillar-num">V.</div>
+      <div class="pillar-titles">
+        <h2>Measurement</h2>
+        <p class="pillar-sub">How to track your visibility and keep improving it.</p>
+        <span class="pillar-time">1 to 2 hours setup, ongoing</span>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>
+        <label>
+          <input type="checkbox" data-id="m1">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Set up referrer tracking for AI domains.</strong>
+            chatgpt.com, perplexity.ai, gemini.google.com, claude.ai, copilot.microsoft.com. Most analytics platforms do not filter for these by default.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="m2">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Run a self-audit weekly.</strong>
+            Ask each major AI engine 5 buyer-intent questions in your niche. Screenshot who gets cited. Track your name appearing or not.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="m3">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Use a dedicated AI citation tracker.</strong>
+            Profound, Otterly, AirOps, and Superlines all do this. Cost is similar to a basic SEO tool.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="m4">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Document which of your pages get cited.</strong>
+            Find the format and topic angle that works, then double down. Most wins come from doing more of what already worked.
+          </span>
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="checkbox" data-id="m5">
+          <span class="check"></span>
+          <span class="text">
+            <strong>Re-audit every 30 days.</strong>
+            Only 30% of brands stay visible week-to-week in AI responses. Citations rotate fast. Static sites lose ground silently.
+          </span>
+        </label>
+      </li>
+    </ul>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="tools">
+    <h2 class="section-label">Tools and Resources</h2>
+    <dl>
+      <dt>Schema Generators</dt>
+      <dd>schema.org/docs/schemas, merkle.com/structured-data-tester. Use these to generate Article, FAQPage, and Author schemas. Paste the output into your site head.</dd>
+
+      <dt>Schema Validation</dt>
+      <dd>search.google.com/test/rich-results. Confirms whether AI engines and Google can read your structured data correctly.</dd>
+
+      <dt>AI Citation Trackers</dt>
+      <dd>profound.so, otterly.ai, superlines.io, airops.com. Monitor where your brand gets cited across ChatGPT, Gemini, Perplexity, and Copilot.</dd>
+
+      <dt>Performance Testing</dt>
+      <dd>pagespeed.web.dev, gtmetrix.com. Verify Core Web Vitals and page speed before assuming the work is done.</dd>
+
+      <dt>Robots.txt Reference</dt>
+      <dd>Allow GPTBot, ClaudeBot, PerplexityBot, Google-Extended, OAI-SearchBot, anthropic-ai, ccbot, and FacebookBot. Block only what you genuinely need to keep private.</dd>
+
+      <dt>Buyer Question Mining</dt>
+      <dd>reddit.com/r/[your industry], answerthepublic.com, alsoasked.com. Find the actual questions your buyers type before they buy.</dd>
+    </dl>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>You don't want to do this yourself, and you don't need to.</h2>
+    <p>You got through it. That's more than most. The 15-minute call is where I tell you exactly who to hire.</p>
+    <a href="connect.html" class="cta-link">Book the 15-minute call</a>
+  </section>
+
+  <footer>
+    <div class="meta-line">
+      <span>Talk to Sev</span>
+      <span>The GEO Checklist</span>
+      <span>2026</span>
+    </div>
+  </footer>
+
+</main>
+
+<div class="check-in-overlay" id="checkInOverlay" role="dialog" aria-modal="true" aria-labelledby="checkInTitle" hidden>
+  <div class="check-in-card">
+    <div class="check-in-label">A quick check in</div>
+    <h2 id="checkInTitle">Does any of this make sense to you?</h2>
+    <div class="check-in-actions">
+      <button type="button" class="check-in-btn check-in-btn-secondary" id="checkInYes">Yes, let me read it</button>
+      <button type="button" class="check-in-btn check-in-btn-primary" id="checkInNo">Not at all!</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+  const total = checkboxes.length;
+  const countEl = document.getElementById('progressCount');
+  const totalEl = document.getElementById('progressTotal');
+  const fillEl = document.getElementById('progressFill');
+  const STORAGE_PREFIX = 'geo-checklist-v1-';
+
+  totalEl.textContent = total;
+
+  function updateProgress() {
+    const checked = document.querySelectorAll('input[type="checkbox"][data-id]:checked').length;
+    countEl.textContent = checked;
+    fillEl.style.width = (checked / total * 100) + '%';
+  }
+
+  function loadProgress() {
+    checkboxes.forEach(function(cb) {
+      try {
+        const saved = localStorage.getItem(STORAGE_PREFIX + cb.dataset.id);
+        if (saved === 'true') cb.checked = true;
+      } catch (e) { /* localStorage unavailable */ }
+    });
+    updateProgress();
+  }
+
+  checkboxes.forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      try {
+        localStorage.setItem(STORAGE_PREFIX + cb.dataset.id, cb.checked);
+      } catch (e) { /* localStorage unavailable */ }
+      updateProgress();
+    });
+  });
+
+  window.resetProgress = function() {
+    if (!confirm('Reset all checkboxes? This cannot be undone.')) return;
+    checkboxes.forEach(function(cb) {
+      cb.checked = false;
+      try { localStorage.removeItem(STORAGE_PREFIX + cb.dataset.id); } catch (e) {}
+    });
+    updateProgress();
+  };
+
+  loadProgress();
+})();
+
+(function() {
+  var overlay = document.getElementById('checkInOverlay');
+  var yesBtn = document.getElementById('checkInYes');
+  var noBtn = document.getElementById('checkInNo');
+  if (!overlay || !yesBtn || !noBtn) return;
+
+  var STORAGE_KEY = 'geo-checklist-checkin-shown-v1';
+  var DELAY = 10000;
+
+  try {
+    if (sessionStorage.getItem(STORAGE_KEY) === 'true') return;
+  } catch (e) { /* sessionStorage unavailable, proceed anyway */ }
+
+  function show() {
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    if (typeof yesBtn.focus === 'function') yesBtn.focus();
+    try { sessionStorage.setItem(STORAGE_KEY, 'true'); } catch (e) {}
+  }
+
+  function close() {
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  yesBtn.addEventListener('click', close);
+
+  noBtn.addEventListener('click', function() {
+    close();
+    var cta = document.querySelector('.cta');
+    if (cta && typeof cta.scrollIntoView === 'function') {
+      cta.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !overlay.hidden) close();
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) close();
+  });
+
+  setTimeout(show, DELAY);
+})();
+</script>
+</body>
+</html>

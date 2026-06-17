@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/compound", "destination": "/login", "permanent": false },
+    { "source": "/compound/", "destination": "/login", "permanent": false }
+  ]
 }

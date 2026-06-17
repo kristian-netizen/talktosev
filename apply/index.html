@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Apply to get on camera with Sev · Talk To Sev</title>
+<meta name="description" content="A 2-minute application to work on camera with Sev. I send a free 60-second confidence audit back to everyone who fills it out.">
+<meta name="robots" content="noindex, follow">
+
+<meta property="og:title" content="Apply to get on camera with Sev">
+<meta property="og:description" content="2 minutes. Free 60-second confidence audit on the other side.">
+<meta property="og:url" content="https://talktosev.com/apply">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-0: #000;
+  --bg-1: #0a0a0a;
+  --bg-2: #161616;
+  --bg-3: #1f1f1f;
+  --fg-0: #ffffff;
+  --fg-1: #e8e8e8;
+  --fg-2: #8a8a8a;
+  --fg-3: #5a5a5a;
+  --accent: #f5a524;
+  --accent-hover: #ffb742;
+  --border: #1d1d1d;
+  --border-strong: #2a2a2a;
+  --danger: #ef4444;
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Monaco, monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg-0);
+  color: var(--fg-0);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+button { font-family: inherit; cursor: pointer; }
+input, textarea { font-family: inherit; }
+a { color: var(--accent); text-decoration: none; }
+
+/* ============================================================ */
+/* Layout                                                       */
+/* ============================================================ */
+
+.stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 28px 80px;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.step {
+  width: 100%;
+  max-width: 720px;
+  display: none;
+  animation: stepIn 0.45s var(--ease) backwards;
+}
+.step.is-active { display: block; }
+.step.is-leaving {
+  animation: stepOut 0.25s var(--ease) forwards;
+}
+
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes stepOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-20px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step { animation: none !important; }
+  .step.is-leaving { animation: none !important; opacity: 0; }
+}
+
+/* ============================================================ */
+/* Intro step                                                   */
+/* ============================================================ */
+
+.intro {
+  text-align: center;
+}
+.intro h1 {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.intro p.lede {
+  color: var(--fg-2);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  max-width: 36ch;
+  margin: 0 auto 36px;
+  line-height: 1.45;
+}
+.intro .btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #1a1100;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 16px 28px;
+  border: none;
+  border-radius: 10px;
+  transition: background 140ms var(--ease), transform 140ms var(--ease);
+}
+.intro .btn-cta:hover, .intro .btn-cta:focus-visible {
+  background: var(--accent-hover);
+  outline: none;
+  transform: translateY(-1px);
+}
+.intro .meta {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg-2);
+  font-size: 0.92rem;
+}
+.intro .meta svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+}
+
+/* ============================================================ */
+/* Question step                                                */
+/* ============================================================ */
+
+.q-num {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--fg-0);
+  margin-bottom: 14px;
+}
+.q-num .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--fg-0);
+  color: var(--bg-0);
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+.q-num .arrow {
+  color: var(--fg-2);
+  font-size: 0.85rem;
+}
+.q-title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--fg-0);
+}
+.q-title .req { color: var(--fg-2); font-weight: 400; }
+.q-help {
+  color: var(--fg-2);
+  font-size: 1rem;
+  margin-bottom: 28px;
+}
+
+/* Option list (multiple choice) */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-0);
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 400;
+  transition: background 120ms var(--ease), border-color 120ms var(--ease), transform 120ms var(--ease);
+}
+.option:hover, .option:focus-visible {
+  background: var(--bg-3);
+  border-color: var(--accent);
+  outline: none;
+}
+.option.is-selected {
+  border-color: var(--accent);
+  background: rgba(245, 165, 36, 0.08);
+}
+.option .letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--fg-1);
+  flex-shrink: 0;
+  transition: background 120ms var(--ease), color 120ms var(--ease);
+}
+.option:hover .letter, .option.is-selected .letter {
+  background: var(--accent);
+  color: var(--bg-0);
+  border-color: var(--accent);
+}
+
+/* Text inputs (Typeform underline style) */
+.field-group { margin-bottom: 20px; }
+.field-label {
+  display: block;
+  color: var(--fg-0);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+.field-label .req { color: var(--fg-2); }
+
+.field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-strong);
+  padding: 10px 0;
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+  color: var(--fg-0);
+  outline: none;
+  transition: border-color 120ms var(--ease);
+}
+.field::placeholder { color: var(--fg-3); }
+.field:focus { border-bottom-color: var(--accent); }
+
+textarea.field {
+  resize: none;
+  min-height: 70px;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  line-height: 1.4;
+}
+
+/* Phone field with country prefix */
+.phone-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+}
+.country-picker {
+  position: relative;
+  flex-shrink: 0;
+  width: 78px;
+}
+.country-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-strong);
+  padding: 10px 0;
+  font-size: 1.2rem;
+  color: var(--fg-0);
+  width: 100%;
+}
+.country-trigger:hover, .country-trigger:focus-visible {
+  border-bottom-color: var(--accent);
+  outline: none;
+}
+.country-trigger .flag { font-size: 1.5rem; line-height: 1; }
+.country-trigger .chev { color: var(--fg-2); font-size: 0.7rem; }
+.country-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 6px;
+  min-width: 180px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  padding: 4px;
+  display: none;
+  z-index: 10;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+.country-menu.is-open { display: block; }
+.country-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--fg-1);
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.country-menu button:hover, .country-menu button:focus-visible {
+  background: var(--bg-3);
+  outline: none;
+}
+.country-menu .flag { font-size: 1.1rem; }
+.country-menu .dial { color: var(--fg-2); margin-left: auto; font-family: var(--font-mono); font-size: 0.85rem; }
+.phone-input-wrap { flex: 1; min-width: 0; }
+
+/* Submit / next button row */
+.advance {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #1a1100;
+  font-size: 0.98rem;
+  font-weight: 600;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  transition: background 140ms var(--ease), transform 140ms var(--ease);
+}
+.btn-next:hover, .btn-next:focus-visible {
+  background: var(--accent-hover);
+  outline: none;
+  transform: translateY(-1px);
+}
+.btn-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-next .arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+.enter-hint {
+  color: var(--fg-3);
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+}
+.enter-hint kbd {
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: inherit;
+  font-size: 0.78rem;
+}
+.field-error {
+  display: none;
+  color: var(--danger);
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+.field-error.is-visible { display: block; }
+
+/* Other-input revealer (Q10) */
+.other-reveal {
+  margin-top: -2px;
+  margin-bottom: 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 220ms var(--ease);
+}
+.other-reveal.is-open { max-height: 100px; }
+.other-reveal .field { font-size: 1.1rem; }
+
+/* ============================================================ */
+/* Progress bar + header                                        */
+/* ============================================================ */
+
+.top-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  z-index: 5;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+}
+.top-bar .mark {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-0);
+}
+.top-bar .mark::after { content: "."; color: var(--accent); }
+.top-bar .step-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--fg-1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: border-color 120ms var(--ease), color 120ms var(--ease);
+}
+.top-bar .step-back:hover, .top-bar .step-back:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+.top-bar .step-back[disabled] { opacity: 0.3; cursor: not-allowed; }
+
+.progress {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--bg-2);
+  z-index: 5;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0;
+  transition: width 0.4s var(--ease);
+}
+
+/* Hide progress + back on intro */
+body[data-step="intro"] .progress,
+body[data-step="intro"] .top-bar .step-back { display: none; }
+
+/* ============================================================ */
+/* Success screens                                              */
+/* ============================================================ */
+
+.success {
+  text-align: center;
+}
+.success h1 {
+  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.success p {
+  color: var(--fg-2);
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  max-width: 48ch;
+  margin: 0 auto 32px;
+  line-height: 1.5;
+}
+.success .btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #1a1100;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 10px;
+  transition: background 140ms var(--ease), transform 140ms var(--ease);
+}
+.success .btn-cta:hover, .success .btn-cta:focus-visible {
+  background: var(--accent-hover);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+/* Submitting overlay */
+.submit-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--fg-1);
+}
+.submit-overlay.is-visible { display: flex; }
+.spinner {
+  width: 36px; height: 36px;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================ */
+/* Mobile tweaks                                                */
+/* ============================================================ */
+@media (max-width: 540px) {
+  .stage { padding: 80px 20px 80px; }
+  .option { padding: 13px 14px; gap: 10px; font-size: 1rem; }
+  .option .letter { width: 22px; height: 22px; font-size: 0.72rem; }
+  .q-num { font-size: 0.85rem; }
+  .top-bar { padding: 12px 16px; }
+}
+</style>
+</head>
+<body data-step="intro">
+
+<header class="top-bar">
+  <a class="mark" href="/">Talk To Sev</a>
+  <button class="step-back" id="back-btn" type="button" disabled aria-label="Previous question">
+    <span aria-hidden="true">←</span>
+    <span>Back</span>
+  </button>
+</header>
+
+<main class="stage" id="stage">
+
+  <!-- Intro -->
+  <section class="step intro is-active" data-step="intro">
+    <h1>Apply to get on camera with Sev</h1>
+    <p class="lede">I work with a small group at a time, so I can actually give you real feedback on camera. No fluff, no theory dumps = just reps.</p>
+    <button class="btn-cta" type="button" data-action="start">Let's hit record</button>
+    <p class="meta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+      Takes 2 minutes
+    </p>
+  </section>
+
+  <!-- Q1 -->
+  <section class="step" data-step="1" data-question="record_blocker" data-type="choice" data-required="true">
+    <div class="q-num"><span class="chip">1</span></div>
+    <h2 class="q-title">What stops you from hitting record?<span class="req">*</span></h2>
+    <p class="q-help">Pick the biggest one, we'll work on it together</p>
+    <div class="options" role="radiogroup" aria-label="What stops you from hitting record?">
+      <button class="option" type="button" data-value="sound_awkward"        role="radio"><span class="letter">A</span> I sound awkward</button>
+      <button class="option" type="button" data-value="dont_know_what_to_say" role="radio"><span class="letter">B</span> I don't know what to say</button>
+      <button class="option" type="button" data-value="hate_how_i_look"       role="radio"><span class="letter">C</span> I hate how I look on camera</button>
+      <button class="option" type="button" data-value="freeze_up"             role="radio"><span class="letter">D</span> I freeze up the second the camera's on</button>
+    </div>
+  </section>
+
+  <!-- Q2 -->
+  <section class="step" data-step="2" data-question="six_month_vision" data-type="choice" data-required="true">
+    <div class="q-num"><span class="chip">2</span></div>
+    <h2 class="q-title">When you picture yourself crushing it on camera in 6 months, what are you using it for?<span class="req">*</span></h2>
+    <p class="q-help">Dream big, no wrong answers</p>
+    <div class="options" role="radiogroup" aria-label="6-month vision">
+      <button class="option" type="button" data-value="grow_business"     role="radio"><span class="letter">A</span> Growing my business</button>
+      <button class="option" type="button" data-value="build_brand"       role="radio"><span class="letter">B</span> Building a personal brand</button>
+      <button class="option" type="button" data-value="sell_course"       role="radio"><span class="letter">C</span> Selling a course, product or workshop of my own</button>
+      <button class="option" type="button" data-value="face_of_industry"  role="radio"><span class="letter">D</span> Becoming the face of my industry</button>
+    </div>
+  </section>
+
+  <!-- Q3 -->
+  <section class="step" data-step="3" data-question="video_history" data-type="choice" data-required="true">
+    <div class="q-num"><span class="chip">3</span></div>
+    <h2 class="q-title">Have you tried posting video content before?<span class="req">*</span></h2>
+    <p class="q-help">Either way is fine, no judgement</p>
+    <div class="options" role="radiogroup" aria-label="Video history">
+      <button class="option" type="button" data-value="post_regularly" role="radio"><span class="letter">A</span> Yes, I post regularly</button>
+      <button class="option" type="button" data-value="gave_up"        role="radio"><span class="letter">B</span> Yes, but I gave up</button>
+      <button class="option" type="button" data-value="never"          role="radio"><span class="letter">C</span> Never, the camera scares me!</button>
+    </div>
+  </section>
+
+  <!-- Q4 (the qualifier) -->
+  <section class="step" data-step="4" data-question="revenue_bracket" data-type="choice" data-required="true">
+    <div class="q-num"><span class="chip">4</span></div>
+    <h2 class="q-title">Is your business doing more or less than 20k per month?<span class="req">*</span></h2>
+    <p class="q-help">I'll still help either way!</p>
+    <div class="options" role="radiogroup" aria-label="Revenue bracket">
+      <button class="option" type="button" data-value="over_20k"  role="radio"><span class="letter">A</span> Over 20k p/m</button>
+      <button class="option" type="button" data-value="under_20k" role="radio"><span class="letter">B</span> Under 20k p/m</button>
+    </div>
+  </section>
+
+  <!-- Q5: Name -->
+  <section class="step" data-step="5" data-question="name" data-type="name" data-required="true">
+    <div class="q-num"><span class="chip">5</span></div>
+    <h2 class="q-title">Before we keep going, what should I call you?<span class="req">*</span></h2>
+    <p class="q-help">I refuse to keep calling you "user"</p>
+
+    <div class="field-group">
+      <label class="field-label" for="first-name">First name<span class="req"> *</span></label>
+      <input class="field" type="text" id="first-name" name="first_name" autocomplete="given-name" placeholder="Jane" maxlength="60" required>
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="last-name">Last name<span class="req"> *</span></label>
+      <input class="field" type="text" id="last-name" name="last_name" autocomplete="family-name" placeholder="Smith" maxlength="60" required>
+    </div>
+
+    <div class="advance">
+      <button class="btn-next" type="button" data-action="advance">OK <span class="arrow">↵</span></button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+    <p class="field-error" id="err-5">Add your name so I know what to call you.</p>
+  </section>
+
+  <!-- Q6: Instagram -->
+  <section class="step" data-step="6" data-question="instagram_handle" data-type="text" data-required="true">
+    <div class="q-num"><span class="chip">6</span></div>
+    <h2 class="q-title">Drop your Instagram so I can see what I'm working with<span class="req">*</span></h2>
+    <p class="q-help">I'll send you a camera confidence starter pack and an audit just for filling out this form</p>
+
+    <input class="field" type="text" name="instagram_handle" placeholder="@yourhandle" autocomplete="off" maxlength="80" required>
+
+    <div class="advance">
+      <button class="btn-next" type="button" data-action="advance">OK <span class="arrow">↵</span></button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+    <p class="field-error" id="err-6">I need your Instagram handle to send you the audit.</p>
+  </section>
+
+  <!-- Q7: Business detail (OPTIONAL) -->
+  <section class="step" data-step="7" data-question="business_detail" data-type="textarea" data-required="false">
+    <div class="q-num"><span class="chip">7</span></div>
+    <h2 class="q-title">Tell me more about your business, how long you've been around, who do you service most and what is your current goal?</h2>
+    <p class="q-help">This helps me tailor your advice</p>
+
+    <textarea class="field" name="business_detail" placeholder="Type your answer here..." maxlength="2000" rows="3"></textarea>
+
+    <div class="advance">
+      <button class="btn-next" type="button" data-action="advance">OK <span class="arrow">↵</span></button>
+      <span class="enter-hint"><kbd>Shift</kbd>+<kbd>Enter</kbd> for newline · <kbd>Enter</kbd> to continue</span>
+    </div>
+  </section>
+
+  <!-- Q8: Email -->
+  <section class="step" data-step="8" data-question="email" data-type="email" data-required="true">
+    <div class="q-num"><span class="chip">8</span></div>
+    <h2 class="q-title">I'll need your email so I can send you that starter pack<span class="req">*</span></h2>
+
+    <input class="field" type="email" name="email" placeholder="name@example.com" autocomplete="email" maxlength="120" required>
+
+    <div class="advance">
+      <button class="btn-next" type="button" data-action="advance">OK <span class="arrow">↵</span></button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+    <p class="field-error" id="err-8">That doesn't look like a valid email — try again.</p>
+  </section>
+
+  <!-- Q9: Phone -->
+  <section class="step" data-step="9" data-question="phone" data-type="phone" data-required="true">
+    <div class="q-num"><span class="chip">9</span></div>
+    <h2 class="q-title">Drop your number too, my voice memo is faster than email<span class="req">*</span></h2>
+    <p class="q-help">I'll text you that audit</p>
+
+    <div class="phone-row">
+      <div class="country-picker">
+        <button class="country-trigger" type="button" id="country-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="flag" id="country-flag">🇦🇺</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="country-menu" id="country-menu" role="listbox">
+          <button type="button" data-cc="AU" data-dial="+61"><span class="flag">🇦🇺</span> Australia <span class="dial">+61</span></button>
+          <button type="button" data-cc="US" data-dial="+1"><span class="flag">🇺🇸</span> United States <span class="dial">+1</span></button>
+          <button type="button" data-cc="GB" data-dial="+44"><span class="flag">🇬🇧</span> United Kingdom <span class="dial">+44</span></button>
+          <button type="button" data-cc="CA" data-dial="+1"><span class="flag">🇨🇦</span> Canada <span class="dial">+1</span></button>
+          <button type="button" data-cc="NZ" data-dial="+64"><span class="flag">🇳🇿</span> New Zealand <span class="dial">+64</span></button>
+        </div>
+      </div>
+      <div class="phone-input-wrap">
+        <input class="field" type="tel" name="phone" id="phone-input" placeholder="0412 345 678" autocomplete="tel" maxlength="30" required>
+      </div>
+    </div>
+
+    <div class="advance" style="margin-top: 20px;">
+      <button class="btn-next" type="button" data-action="advance">OK <span class="arrow">↵</span></button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+    <p class="field-error" id="err-9">Your phone number doesn't look right — try again.</p>
+  </section>
+
+  <!-- Q10: How found -->
+  <section class="step" data-step="10" data-question="how_found" data-type="choice-other" data-required="true">
+    <div class="q-num"><span class="chip">10</span></div>
+    <h2 class="q-title">Last one… how did you find me?<span class="req">*</span></h2>
+
+    <div class="options" role="radiogroup" aria-label="How found Sev">
+      <button class="option" type="button" data-value="ig_content" role="radio"><span class="letter">A</span> Your content on IG</button>
+      <button class="option" type="button" data-value="friend"     role="radio"><span class="letter">B</span> A friend sent me</button>
+      <button class="option" type="button" data-value="ad"         role="radio"><span class="letter">C</span> An ad</button>
+      <button class="option" type="button" data-value="other"      role="radio"><span class="letter">D</span> Other</button>
+    </div>
+
+    <div class="other-reveal" id="other-reveal" aria-hidden="true">
+      <input class="field" type="text" name="how_found_other" placeholder="Where did you find me?" maxlength="120">
+    </div>
+
+    <div class="advance">
+      <button class="btn-next" type="button" data-action="submit">Submit <span class="arrow">↵</span></button>
+      <span class="enter-hint">press <kbd>Enter</kbd></span>
+    </div>
+    <p class="field-error" id="err-10">Pick how you found me before sending.</p>
+  </section>
+
+  <!-- Success: qualified ($20k+) -->
+  <section class="step success" data-step="success-qualified">
+    <h1>You're in. Let's get you on camera.</h1>
+    <p>Check your inbox — your free 60-second confidence review lands within 48 hours. You're past the 20k mark, so I'd rather skip the wait and just hop on a quick call. Pick a time that suits you.</p>
+    <a class="btn-cta" href="https://calendly.com/sevamozhaev/ask-me-anything" target="_blank" rel="noopener">Book a call with Sev <span aria-hidden="true">→</span></a>
+  </section>
+
+  <!-- Success: nurture (under 20k) — matches the original slide 12 -->
+  <section class="step success" data-step="success-nurture">
+    <h1>You're in. Now go hit record.</h1>
+    <p>Check your inbox, your free 60-second confidence review lands within 48 hours. While you wait, go follow @sevspics and tag me in something. I want to see it.</p>
+    <a class="btn-cta" href="https://instagram.com/sevspics" target="_blank" rel="noopener">Follow @sevspics <span aria-hidden="true">→</span></a>
+  </section>
+
+  <!-- Error -->
+  <section class="step success" data-step="error">
+    <h1>Something broke on my end.</h1>
+    <p>Your form didn't send. Try again, or just email me directly at <a href="mailto:sev@sevspics.com">sev@sevspics.com</a> and I'll get back to you.</p>
+    <button class="btn-cta" type="button" onclick="location.reload()">Try again <span aria-hidden="true">↻</span></button>
+  </section>
+
+</main>
+
+<div class="progress" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+
+<div class="submit-overlay" id="submit-overlay" aria-live="polite">
+  <div class="spinner" aria-hidden="true"></div>
+  <p>Sending…</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // -------------------------------------------------------------
+  // Config
+  // -------------------------------------------------------------
+  const STEP_ORDER = ['intro', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  const TOTAL_QUESTIONS = 10;
+  const SUBMIT_URL = '/api/submit-lead';
+
+  // -------------------------------------------------------------
+  // State
+  // -------------------------------------------------------------
+  const state = {
+    currentIdx: 0,                    // index in STEP_ORDER
+    answers: {},                      // collected answers
+    phoneCountry: 'AU',
+    phoneDial: '+61',
+    history: []                       // for back button
+  };
+
+  // -------------------------------------------------------------
+  // Helpers
+  // -------------------------------------------------------------
+  const $  = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const stepByName = (name) => document.querySelector('[data-step="' + name + '"].step');
+  const currentStep = () => stepByName(STEP_ORDER[state.currentIdx]);
+
+  function setBodyStep(name) {
+    document.body.setAttribute('data-step', name);
+  }
+
+  function updateProgress() {
+    const fill = $('#progress-fill');
+    if (!fill) return;
+    if (state.currentIdx === 0) { fill.style.width = '0%'; return; }
+    const pct = (state.currentIdx / TOTAL_QUESTIONS) * 100;
+    fill.style.width = pct + '%';
+  }
+
+  function updateBackBtn() {
+    const btn = $('#back-btn');
+    btn.disabled = state.history.length === 0;
+  }
+
+  function goToStep(name, opts = {}) {
+    const current = currentStep();
+    const next = stepByName(name);
+    if (!next) return;
+
+    if (current && current !== next) {
+      current.classList.add('is-leaving');
+      setTimeout(() => {
+        current.classList.remove('is-active', 'is-leaving');
+      }, 250);
+    }
+
+    const newIdx = STEP_ORDER.indexOf(name);
+    if (newIdx >= 0 && !opts.skipHistory) {
+      state.history.push(state.currentIdx);
+      state.currentIdx = newIdx;
+    } else if (newIdx >= 0) {
+      state.currentIdx = newIdx;
+    }
+
+    next.classList.add('is-active');
+    setBodyStep(name);
+    updateProgress();
+    updateBackBtn();
+
+    // Autofocus the first input or option
+    setTimeout(() => {
+      const focusEl = next.querySelector('input:not([type=hidden]), textarea, .option, .btn-cta');
+      if (focusEl) focusEl.focus({ preventScroll: true });
+    }, 280);
+  }
+
+  function goBack() {
+    if (state.history.length === 0) return;
+    const prevIdx = state.history.pop();
+    const current = currentStep();
+    if (current) {
+      current.classList.add('is-leaving');
+      setTimeout(() => current.classList.remove('is-active', 'is-leaving'), 250);
+    }
+    state.currentIdx = prevIdx;
+    const prev = currentStep();
+    if (prev) {
+      prev.classList.add('is-active');
+      setBodyStep(STEP_ORDER[prevIdx]);
+    }
+    updateProgress();
+    updateBackBtn();
+  }
+
+  function advanceFromStep(stepName) {
+    const idx = STEP_ORDER.indexOf(stepName);
+    if (idx < 0 || idx >= STEP_ORDER.length - 1) {
+      // Last step — submit instead
+      submitForm();
+      return;
+    }
+    goToStep(STEP_ORDER[idx + 1]);
+  }
+
+  function showError(stepNum, msg) {
+    const err = document.getElementById('err-' + stepNum);
+    if (!err) return;
+    if (msg) err.textContent = msg;
+    err.classList.add('is-visible');
+  }
+  function hideError(stepNum) {
+    const err = document.getElementById('err-' + stepNum);
+    if (err) err.classList.remove('is-visible');
+  }
+
+  // -------------------------------------------------------------
+  // Validation
+  // -------------------------------------------------------------
+  function validateStep(stepEl) {
+    const stepNum  = stepEl.dataset.step;
+    const type     = stepEl.dataset.type;
+    const required = stepEl.dataset.required === 'true';
+    const question = stepEl.dataset.question;
+    hideError(stepNum);
+
+    if (type === 'choice' || type === 'choice-other') {
+      if (!state.answers[question]) {
+        showError(stepNum, 'Pick one to continue.');
+        return false;
+      }
+      if (type === 'choice-other' && state.answers[question] === 'other') {
+        const other = (state.answers.how_found_other || '').trim();
+        if (!other) {
+          showError(stepNum, 'Tell me where you found me.');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    if (type === 'name') {
+      const f = (stepEl.querySelector('input[name=first_name]').value || '').trim();
+      const l = (stepEl.querySelector('input[name=last_name]').value  || '').trim();
+      if (!f || !l) { showError(stepNum); return false; }
+      state.answers.first_name = f;
+      state.answers.last_name  = l;
+      return true;
+    }
+
+    if (type === 'text' || type === 'textarea') {
+      const inp = stepEl.querySelector('input, textarea');
+      const v = (inp.value || '').trim();
+      if (required && !v) { showError(stepNum); return false; }
+      state.answers[question] = v;
+      return true;
+    }
+
+    if (type === 'email') {
+      const inp = stepEl.querySelector('input');
+      const v = (inp.value || '').trim();
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!v || !re.test(v)) { showError(stepNum); return false; }
+      state.answers.email = v.toLowerCase();
+      return true;
+    }
+
+    if (type === 'phone') {
+      const inp = stepEl.querySelector('input[name=phone]');
+      const raw = (inp.value || '').trim();
+      const digits = raw.replace(/\D/g, '');
+      if (digits.length < 6 || digits.length > 15) { showError(stepNum); return false; }
+      state.answers.phone = state.phoneDial + ' ' + raw;
+      state.answers.phone_country = state.phoneCountry;
+      return true;
+    }
+
+    return true;
+  }
+
+  // -------------------------------------------------------------
+  // Multiple-choice handling
+  // -------------------------------------------------------------
+  function handleOptionClick(btn) {
+    const stepEl = btn.closest('.step');
+    const question = stepEl.dataset.question;
+    const value = btn.dataset.value;
+    const type = stepEl.dataset.type;
+
+    // Toggle selected state visually
+    $$('.option', stepEl).forEach(b => {
+      b.classList.toggle('is-selected', b === btn);
+      b.setAttribute('aria-checked', b === btn ? 'true' : 'false');
+    });
+
+    state.answers[question] = value;
+
+    // Q10 "Other" → reveal text input, don't auto-advance
+    if (type === 'choice-other') {
+      const reveal = $('#other-reveal');
+      if (value === 'other') {
+        reveal.classList.add('is-open');
+        reveal.setAttribute('aria-hidden', 'false');
+        setTimeout(() => reveal.querySelector('input').focus(), 200);
+      } else {
+        reveal.classList.remove('is-open');
+        reveal.setAttribute('aria-hidden', 'true');
+        state.answers.how_found_other = '';
+      }
+      return;
+    }
+
+    // Auto-advance after a short beat so user sees their selection
+    setTimeout(() => advanceFromStep(stepEl.dataset.step), 280);
+  }
+
+  // -------------------------------------------------------------
+  // Submission
+  // -------------------------------------------------------------
+  async function submitForm() {
+    const last = stepByName('10');
+    if (!validateStep(last)) return;
+
+    $('#submit-overlay').classList.add('is-visible');
+
+    const payload = {
+      record_blocker:   state.answers.record_blocker,
+      six_month_vision: state.answers.six_month_vision,
+      video_history:    state.answers.video_history,
+      revenue_bracket:  state.answers.revenue_bracket,
+      first_name:       state.answers.first_name,
+      last_name:        state.answers.last_name,
+      instagram_handle: state.answers.instagram_handle,
+      business_detail:  state.answers.business_detail || null,
+      email:            state.answers.email,
+      phone:            state.answers.phone,
+      phone_country:    state.answers.phone_country,
+      how_found:        state.answers.how_found,
+      how_found_other:  state.answers.how_found_other || null,
+      referrer:         document.referrer || null,
+      user_agent:       navigator.userAgent || null
+    };
+
+    try {
+      const res = await fetch(SUBMIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Submit failed: ' + res.status);
+
+      // Route to the right success screen based on Q4
+      const successStep = payload.revenue_bracket === 'over_20k'
+        ? 'success-qualified'
+        : 'success-nurture';
+      $('#submit-overlay').classList.remove('is-visible');
+      showFinalStep(successStep);
+    } catch (err) {
+      console.error(err);
+      $('#submit-overlay').classList.remove('is-visible');
+      showFinalStep('error');
+    }
+  }
+
+  function showFinalStep(name) {
+    const current = currentStep();
+    if (current) current.classList.remove('is-active');
+    const next = document.querySelector('[data-step="' + name + '"]');
+    if (next) next.classList.add('is-active');
+    setBodyStep(name);
+    $('#progress-fill').style.width = '100%';
+    $('#back-btn').style.display = 'none';
+    // Disable scroll restoration
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // -------------------------------------------------------------
+  // Country picker
+  // -------------------------------------------------------------
+  function setupCountryPicker() {
+    const trigger = $('#country-trigger');
+    const menu = $('#country-menu');
+    const flag = $('#country-flag');
+    const phoneInput = $('#phone-input');
+
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = menu.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && !trigger.contains(e.target)) {
+        menu.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    $$('button', menu).forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.phoneCountry = btn.dataset.cc;
+        state.phoneDial    = btn.dataset.dial;
+        flag.textContent = btn.querySelector('.flag').textContent;
+        menu.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        // Update placeholder
+        const placeholders = {
+          AU: '0412 345 678',
+          US: '(555) 123-4567',
+          GB: '07911 123456',
+          CA: '(555) 123-4567',
+          NZ: '021 123 4567'
+        };
+        phoneInput.placeholder = placeholders[state.phoneCountry] || '';
+        phoneInput.focus();
+      });
+    });
+  }
+
+  // -------------------------------------------------------------
+  // Wire everything up
+  // -------------------------------------------------------------
+  function init() {
+    // Intro CTA
+    $$('[data-action="start"]').forEach(btn => {
+      btn.addEventListener('click', () => goToStep('1'));
+    });
+
+    // Option clicks
+    $$('.option').forEach(btn => {
+      btn.addEventListener('click', () => handleOptionClick(btn));
+      btn.setAttribute('aria-checked', 'false');
+    });
+
+    // Advance / submit buttons
+    $$('[data-action="advance"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const stepEl = btn.closest('.step');
+        if (validateStep(stepEl)) advanceFromStep(stepEl.dataset.step);
+      });
+    });
+    $$('[data-action="submit"]').forEach(btn => {
+      btn.addEventListener('click', submitForm);
+    });
+
+    // Back button
+    $('#back-btn').addEventListener('click', goBack);
+
+    // Keyboard nav
+    document.addEventListener('keydown', (e) => {
+      const step = currentStep();
+      if (!step) return;
+      const stepName = STEP_ORDER[state.currentIdx];
+
+      // Intro: Enter starts
+      if (stepName === 'intro' && e.key === 'Enter') {
+        e.preventDefault();
+        goToStep('1');
+        return;
+      }
+
+      // Letter shortcuts for multiple-choice
+      if (step.dataset.type === 'choice' || step.dataset.type === 'choice-other') {
+        const key = e.key.toUpperCase();
+        if (/^[A-E]$/.test(key) && document.activeElement.tagName !== 'INPUT') {
+          const idx = key.charCodeAt(0) - 65;
+          const opts = $$('.option', step);
+          if (opts[idx]) { e.preventDefault(); opts[idx].click(); }
+        }
+      }
+
+      // Enter advances on text/email/phone/textarea
+      if (e.key === 'Enter' && !e.shiftKey) {
+        const tag = (document.activeElement.tagName || '').toLowerCase();
+        if (tag === 'textarea' || tag === 'input' || tag === 'button') {
+          if (tag === 'textarea' && e.shiftKey) return;
+          if (step.dataset.type && ['name', 'text', 'textarea', 'email', 'phone'].includes(step.dataset.type)) {
+            e.preventDefault();
+            if (validateStep(step)) advanceFromStep(stepName);
+          }
+        }
+      }
+
+      // Escape closes country menu
+      if (e.key === 'Escape') {
+        $('#country-menu')?.classList.remove('is-open');
+      }
+    });
+
+    setupCountryPicker();
+    updateProgress();
+    updateBackBtn();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

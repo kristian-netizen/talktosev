@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>In Your Corner / Talk To Sev</title>
+  <meta name="description" content="Sev as your ongoing marketing mind. $2,500 per month. Weekly call, WhatsApp access, content pipeline managed, ideas every week. Built for service businesses doing $5k–$15k/mo.">
+
+  <meta property="og:title" content="In Your Corner / Talk To Sev">
+  <meta property="og:description" content="Sev as your ongoing marketing mind. $2,500 per month. Weekly call, WhatsApp, content pipeline, ideas every week.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <style>
+    /* Page-specific: In Your Corner */
+
+    .iyc-hero {
+      padding-top: var(--space-xxxl);
+      padding-bottom: var(--space-section);
+      border-bottom: 1px solid var(--border);
+    }
+    .iyc-tag { color: var(--accent); margin-bottom: var(--space-l); }
+    .iyc-hero h1 { max-width: 18ch; margin-bottom: var(--space-xl); }
+    .iyc-hero-sub {
+      font-size: 1.25rem;
+      max-width: 52ch;
+      color: var(--fg-2);
+      margin-bottom: var(--space-xl);
+      line-height: 1.5;
+    }
+    .price-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-m);
+      padding: var(--space-s) var(--space-m);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-block {
+      padding-top: var(--space-section);
+      padding-bottom: var(--space-section);
+      border-bottom: 1px solid var(--border);
+    }
+    .section-tag { color: var(--accent); margin-bottom: var(--space-l); }
+    .section-h2 { max-width: 22ch; margin-bottom: var(--space-xl); }
+    .section-body {
+      max-width: 60ch;
+      font-size: 1.125rem;
+      color: var(--fg-1);
+    }
+    .section-body p { margin-bottom: var(--space-m); }
+
+    .who-list {
+      list-style: none;
+      padding: 0;
+      max-width: 60ch;
+      margin: 0;
+    }
+    .who-list li {
+      padding: var(--space-m) 0;
+      border-top: 1px solid var(--border-strong);
+      color: var(--fg-1);
+      font-size: 1.0625rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-m);
+      line-height: 1.5;
+    }
+    .who-list li:last-child { border-bottom: 1px solid var(--border-strong); }
+    .who-list li::before {
+      content: "→";
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .deliverables-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .deliverable {
+      padding: var(--space-xl) 0;
+      border-top: 1px solid var(--border-strong);
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-l);
+    }
+    .deliverable:last-child { border-bottom: 1px solid var(--border-strong); }
+    .deliverable-num {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 1.125rem;
+      letter-spacing: 0.05em;
+      padding-top: 0.25rem;
+    }
+    .deliverable h3 {
+      font-size: 1.5rem;
+      margin: 0 0 var(--space-s);
+      letter-spacing: -0.015em;
+    }
+    .deliverable p {
+      max-width: 60ch;
+      margin: 0;
+      color: var(--fg-1);
+    }
+
+    .pricing-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-m);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-l);
+    }
+    .pricing-num {
+      font-family: var(--font-sans);
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--fg-0);
+      line-height: 1;
+    }
+    .pricing-period {
+      font-family: var(--font-mono);
+      color: var(--fg-2);
+      font-size: 0.9375rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .pricing-fineprint {
+      max-width: 56ch;
+      font-size: 1.0625rem;
+      color: var(--fg-1);
+      margin-bottom: var(--space-xl);
+    }
+
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-of-type { border-top: 1px solid var(--border-strong); }
+    .faq-item:last-of-type { border-bottom: 1px solid var(--border-strong); }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 1.125rem;
+      color: var(--fg-0);
+      font-weight: 500;
+      padding: var(--space-l) 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-m);
+      transition: color 120ms ease;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item summary:hover { color: var(--accent); }
+    .faq-item > p {
+      max-width: 60ch;
+      margin: 0;
+      padding-bottom: var(--space-l);
+      color: var(--fg-1);
+    }
+
+    @media (max-width: 720px) {
+      .iyc-hero-sub { font-size: 1.0625rem; }
+      .pricing-num { font-size: 2.75rem; }
+      .deliverable { grid-template-columns: 1fr; gap: var(--space-s); padding: var(--space-l) 0; }
+      .deliverable-num { padding-top: 0; }
+      .deliverable h3 { font-size: 1.25rem; }
+      .iyc-hero, .section-block {
+        padding-top: var(--space-xxxl);
+        padding-bottom: var(--space-xxxl);
+      }
+      .btn { padding: 0.875rem 1.5rem; font-size: 0.875rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="brand-mark" href="index.html">Talk To Sev</a>
+      <a class="mono" href="index.html" style="color: var(--fg-2); border-bottom: none;">← Back</a>
+    </div>
+  </header>
+
+  <section class="iyc-hero container">
+    <p class="mono iyc-tag">TALK TO SEV / IN YOUR CORNER</p>
+    <h1>Get me directly inside your business as your ongoing marketing mind.</h1>
+    <p class="iyc-hero-sub">Most business owners know they need better marketing. The problem isn't awareness. It's not having someone senior enough to hold the strategy, push the team, and stay front-of-mind on opportunities every week.</p>
+    <p class="price-bar">$2,500 / Month / No lock-in</p>
+    <div>
+      <a class="btn" href="https://sevspics.github.io/run-claude-with-me/" target="_blank" rel="noopener">Start with a session</a>
+    </div>
+  </section>
+
+  <section class="section-block container">
+    <p class="mono section-tag">WHO THIS IS FOR</p>
+    <h2 class="section-h2">Established service businesses, $5k–$15k/month, ready to scale.</h2>
+    <ul class="who-list">
+      <li><div>You're producing content or have a team that does. Output isn't the problem. Direction is.</div></li>
+      <li><div>You've got proof of concept. People are paying you. You're not scaling because no clear system runs without you feeding it.</div></li>
+      <li><div>You've tried agencies and freelancers. You're tired of strategy decks that don't land in the real world.</div></li>
+      <li><div>You want a senior strategic mind in your corner, not another vendor.</div></li>
+    </ul>
+  </section>
+
+  <section class="section-block container">
+    <p class="mono section-tag">WHAT'S INSIDE</p>
+    <h2 class="section-h2">Six things you get every month.</h2>
+    <ol class="deliverables-list">
+      <li class="deliverable">
+        <span class="deliverable-num">01</span>
+        <div>
+          <h3>Weekly 1-hour call</h3>
+          <p>Strategy, reviews, decisions, direction. You always know what to do next. We use the call to make calls, not gather information.</p>
+        </div>
+      </li>
+      <li class="deliverable">
+        <span class="deliverable-num">02</span>
+        <div>
+          <h3>WhatsApp access</h3>
+          <p>Ideas, fast feedback, tactical pivots between calls. No waiting a week to act on an opportunity. Weekday business hours, 24-hour response window.</p>
+        </div>
+      </li>
+      <li class="deliverable">
+        <span class="deliverable-num">03</span>
+        <div>
+          <h3>Content pipeline management</h3>
+          <p>I work alongside your editing team to improve output quality, fix what's underperforming, and evolve the content to do more work for the business.</p>
+        </div>
+      </li>
+      <li class="deliverable">
+        <span class="deliverable-num">04</span>
+        <div>
+          <h3>Fresh ideas every week</h3>
+          <p>Not recycled playbooks. New angles, new formats, new hooks relevant to your business right now. Ideas hit the WhatsApp the moment they land.</p>
+        </div>
+      </li>
+      <li class="deliverable">
+        <span class="deliverable-num">05</span>
+        <div>
+          <h3>Accountability and feedback loop</h3>
+          <p>Progress tracked, commitments held, execution monitored. The system runs because someone is making sure it does.</p>
+        </div>
+      </li>
+      <li class="deliverable">
+        <span class="deliverable-num">06</span>
+        <div>
+          <h3>Learning Hub strategy</h3>
+          <p>I build out your content architecture using the Endless Customers methodology, turning your existing knowledge into a searchable, trust-building asset that attracts and pre-sells the right clients.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section-block container">
+    <p class="mono section-tag">WHY NOW</p>
+    <h2 class="section-h2">Search is moving inside AI. The brands cited there own the next decade.</h2>
+    <div class="section-body">
+      <p>Google is losing the front door. People ask the AI now. The AI cites YouTube and podcast audio more than anything else.</p>
+      <p>The Learning Hub is the long-term play. We turn your knowledge into the most cited, most trusted resource in your industry. So when your prospect asks the AI a question, you're the answer.</p>
+      <p>This isn't theoretical. I've done it on my own brands (1.6M followers, 500M views) and on clients (one to 220k followers, another to top organic voice in their field).</p>
+    </div>
+  </section>
+
+  <section class="section-block container">
+    <p class="mono section-tag">PRICING</p>
+    <div class="pricing-row">
+      <span class="pricing-num">$2,500</span>
+      <span class="pricing-period">Per month / no lock-in</span>
+    </div>
+    <p class="pricing-fineprint">Start with a Claude With Me session ($350) so we both know what we're walking into. If In Your Corner is the right next step, you keep going. If not, we don't.</p>
+    <a class="btn" href="https://sevspics.github.io/run-claude-with-me/" target="_blank" rel="noopener">Book Claude With Me first</a>
+  </section>
+
+  <section class="section-block container">
+    <p class="mono section-tag">FAQ</p>
+    <h2 class="section-h2">The questions you're probably already asking.</h2>
+
+    <details class="faq-item">
+      <summary>How is this different from an agency?</summary>
+      <p>It's me. Not a junior account manager. Not a team you've never met. Strategy, calls, WhatsApp messages, content reviews are all me. When you work with Sev, you work with Sev.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What if I'm not posting much yet?</summary>
+      <p>Doesn't matter. Most clients aren't. We start with what you've got and what you actually know. The Learning Hub strategy is designed to turn the knowledge already in your head into content that pulls clients in.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do I have to commit for a year?</summary>
+      <p>No. Month-to-month. If it's not working, you cancel. The reason most clients stay is that the marketing actually starts working.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do I need to do Claude With Me first?</summary>
+      <p>Yes. It's how we both decide whether In Your Corner is the right move. $350 to find out is cheap insurance for a $2,500/mo decision.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What does week one look like?</summary>
+      <p>Onboarding call to map your current presence, your team, your goals. Audit of what's working and what's leaking. First batch of ideas in WhatsApp by the end of the week. Weekly cadence starts immediately.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Can I bring my marketing team on the calls?</summary>
+      <p>Yes, and you should. Most of the value is them learning how to think the way I think, so the system runs even when I'm not in the room.</p>
+    </details>
+  </section>
+
+  <section class="section-block container">
+    <p class="mono section-tag">START</p>
+    <h2 class="section-h2">$350 to find out if this is right for you.</h2>
+    <p class="section-body" style="margin-bottom: var(--space-xl);">Book Claude With Me. We'll spend an hour on your business. If In Your Corner is the right next step, we go from there. If not, you've still got a strategy you can run yourself.</p>
+    <a class="btn" href="https://sevspics.github.io/run-claude-with-me/" target="_blank" rel="noopener">Book the session</a>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container site-header-inner">
+      <a class="brand-mark" href="index.html">Talk To Sev</a>
+      <p style="margin: 0;">
+        <a href="mailto:sev@sevspics.com">sev@sevspics.com</a>
+        <span class="footer-sep">/</span>
+        <a href="https://instagram.com/talktosev" target="_blank" rel="noopener">@talktosev</a>
+        <span class="footer-sep">/</span>
+        <a href="https://instagram.com/sevspics" target="_blank" rel="noopener">@sevspics</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
